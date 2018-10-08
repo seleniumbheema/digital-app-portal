@@ -6,13 +6,13 @@ node_js:
 services:
     - docker
 #env:
-#  global:
+  global:
 #    - CORE_ACCOUNT_ID=319701921293
 #    - DEV_ACCOUNT_ID=050690872663
 #    - TEST_ACCOUNT_ID=375857942905
 #    - REGION=eu-west-1
 #    - DOCS_S3_BUCKET=s3-ec-ext-dev-all-digital-app-docs
-#    - APP_BUCKET_FOLDER=digital-app-portal
+    - APP_BUCKET_FOLDER=digital-app-portal
 
 jobs:
   include:
@@ -29,8 +29,8 @@ jobs:
 #      if: (type IN (pull_request) OR branch = master)
 #      env: BUILD_SCRIPT="ci:docs"
 
-before_install:
-  - npm install -g npm@6.1.0
+#before_install:
+#  - npm install -g npm@6.1.0
 #
 #before_script:
 #  - export DISPLAY=:99.0
