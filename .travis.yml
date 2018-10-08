@@ -1,0 +1,112 @@
+sudo:             required
+dist:             trusty
+language:         node_js
+node_js:
+    - "8.11.2"
+services:
+    - docker
+#env:
+#  global:
+#    - CORE_ACCOUNT_ID=319701921293
+#    - DEV_ACCOUNT_ID=050690872663
+#    - TEST_ACCOUNT_ID=375857942905
+#    - REGION=eu-west-1
+#    - DOCS_S3_BUCKET=s3-ec-ext-dev-all-digital-app-docs
+#    - APP_BUCKET_FOLDER=digital-app-portal
+
+jobs:
+  include:
+    - # Build esure job for push and pull request
+      if: type IN (push, pull_request)
+      env: BUILD_SCRIPT="ci:es" APP_NAME="digital-app-portal"
+#    - # Build Sheilas Wheels job for push and pull request
+#      if: type IN (push, pull_request)
+#      env: BUILD_SCRIPT="ci:sw" APP_NAME="sw-digital-app-portal"
+#    - # Build First Alternative job for pull request or a tagged build or branch is master
+#      if: (type IN (pull_request) OR tag IS present OR branch = master)
+#      env: BUILD_SCRIPT="ci:fa" APP_NAME="fa-digital-app-portal"
+#    - # Build documentation job if branch is master or for pull request
+#      if: (type IN (pull_request) OR branch = master)
+#      env: BUILD_SCRIPT="ci:docs"
+
+before_install:
+  - npm install -g npm@6.1.0
+#
+#before_script:
+#  - export DISPLAY=:99.0
+#  - sh -e /etc/init.d/xvfb start
+#  - sleep 3
+#  # Get the latest ebextensions from Git project, this is before_script rather than before_deploy as we only want it to run once
+#  - git clone -b master git@github.com:esure-dev/aws-beanstalk-ebextensions.git .ebextensions
+#  - rm -rf .ebextensions/.git
+
+addons:
+  sonarcloud:
+    organization: "seleniumbheema"
+
+#script:
+#  - npm run $BUILD_SCRIPT
+#  - if [ $BUILD_SCRIPT == "ci:es" ]; then
+#      sonar-scanner;
+#    fi
+#
+#cache:
+#  directories:
+#    - node_modules
+#
+#before_deploy:
+#    - git add -f dist .ebextensions
+#    - git log --oneline >CHANGES
+#    - git add            CHANGES
+#    - echo $TRAVIS_TAG  >VERSION
+#    - git add            VERSION
+#    - git commit -q -m 'Distribution built by Travis'
+#    - export ELASTIC_BEANSTALK_LABEL="${TRAVIS_TAG:-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER}"
+#
+#deploy:
+#  # Deploys to DEV bucket if build has been tagged
+#  - provider:     elasticbeanstalk
+#    on:
+#      tags:       true
+#      condition:  $BUILD_SCRIPT != ci:docs
+#    access_key_id: $DEV_AWS_ACCESS_KEY_ID
+#    secret_access_key: $DEV_AWS_SECRET_ACCESS_KEY
+#    region:       $REGION
+#    app:          $APP_NAME
+#    bucket_path:  $APP_NAME
+#    bucket_name:  "elasticbeanstalk-$REGION-$DEV_ACCOUNT_ID"
+#    skip_cleanup: true
+#    only_create_app_version: true
+#
+#  # Delete the zip file after first deployment, this is needed to be able to deploy to multiple buckets
+#  - provider:     script
+#    on:
+#      tags:       true
+#      condition:  $BUILD_SCRIPT != ci:docs
+#    script:       find . -type f -name "*.zip" -exec rm -f {} +
+#    skip_cleanup: true
+#
+#  # Deploys to TEST bucket if build has been tagged
+#  - provider:     elasticbeanstalk
+#    on:
+#      tags:       true
+#      condition:  $BUILD_SCRIPT != ci:docs
+#    access_key_id: $TEST_AWS_ACCESS_KEY_ID
+#    secret_access_key: $TEST_AWS_SECRET_ACCESS_KEY
+#    region:       $REGION
+#    app:          $APP_NAME
+#    bucket_path:  $APP_NAME
+#    bucket_name:  "elasticbeanstalk-$REGION-$TEST_ACCOUNT_ID"
+#    skip_cleanup: true
+#    only_create_app_version: true
+#
+#  # Deploy documentation to S3 bucket
+#  - provider:     script
+#    on:
+#      branch: master
+#      condition: $BUILD_SCRIPT = ci:docs
+#    script: ./scripts/deploy_docs.sh
+#    skip_cleanup: true
+#
+#after_deploy:
+#  - echo "Completed deployment of $APP_NAME using ELASTIC_BEANSTALK_LABEL - $ELASTIC_BEANSTALK_LABEL"
