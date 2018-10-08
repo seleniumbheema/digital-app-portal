@@ -1,0 +1,25 @@
+es-help-text {
+  padding-top: 0 !important;
+  margin-top: -1rem;
+  .message.is-help {
+    background-color: transparent;
+    &.help-icon {
+      margin-top: 25px;
+    }
+    .message-body {
+      border-radius: 0;
+      border: 0;
+      border-left: 8px solid $grey-light;
+    }
+  }
+  p a:not(.button):not(.tag) {
+    border-bottom: 0;
+    &:hover {
+      border-bottom: 0;
+    }
+  }
+}
+
+.columns.is-gapless.addons es-help-text {
+  margin-bottom: 1rem;
+}

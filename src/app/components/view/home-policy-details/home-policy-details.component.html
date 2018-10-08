@@ -1,0 +1,473 @@
+<h3 class="title is-3 policy-identifier">
+  <span class="house-name" *ngIf="policy.riskAddress.houseName">{{ policy.riskAddress?.houseName }}, </span>
+  <span class="house-number">{{ policy.riskAddress?.number }}</span> <span class="street">{{ policy.riskAddress.street }}</span>
+</h3>
+<div class="subtitle is-4">
+  <ng-container *ngIf="policy.riskAddress.town">
+    {{ policy.riskAddress.town }} <br>
+  </ng-container>
+  <ng-container *ngIf="policy.riskAddress.city">
+    {{ policy.riskAddress.city }} <br>
+  </ng-container>
+  <ng-container *ngIf="policy.riskAddress.county">
+    {{ policy.riskAddress.county }} <br>
+  </ng-container>
+  <ng-container *ngIf="policy.riskAddress.postcode">
+    <span class="postcode">{{ policy.riskAddress.postcode }}</span>
+  </ng-container>
+</div>
+
+<hr><h3 class="is-size-4 has-text-weight-bold">Your cover dates</h3>
+<div class="columns is-mobile">
+  <div class="column">Cover start date</div>
+  <div class="column start-date has-text-weight-light">{{ policy.startDate | date:'EEE d, MMM y' }}</div>
+</div>
+<div class="columns is-mobile">
+  <div class="column">Cover end date</div>
+  <div class="column end-date has-text-weight-light">{{ policy.endDate | date:'EEE d, MMM y' }}</div>
+</div>
+<hr><h3 class="is-size-4 has-text-weight-bold">Policyholder details</h3>
+<div class="columns is-mobile">
+  <div class="column">Policy holder</div>
+  <div class="column policyholder has-text-weight-light">{{ policy.holder?.forename }} {{ policy.holder?.surname }}
+  </div>
+</div>
+<div class="columns is-mobile" *ngIf="policy.jointPolicyHolder">
+  <div class="column">Joint policy holder</div>
+  <div class="column joint-policyholder has-text-weight-light">{{ policy.jointPolicyHolder.forename }} {{ policy.jointPolicyHolder.surname
+    }}
+  </div>
+</div>
+<div class="columns is-mobile" *ngIf="policy.children !== 'None'">
+  <div class="column">Children (under 16)</div>
+  <div class="column children has-text-weight-light">{{ policy.children }}</div>
+</div>
+
+<hr><h3 class="is-size-4 has-text-weight-bold">What's covered</h3>
+<div class="columns is-mobile">
+  <div class="column">Type of cover</div>
+  <div class="policy-cover-type column has-text-weight-light">{{ policy.coverType }}</div>
+</div>
+<ng-container *ngIf="policy.coverType != 'Contents Only' ">
+  <div class="columns is-multiline is-mobile">
+    <div class="column">
+      Buildings Cover
+    </div>
+    <div class="column building-sum has-text-weight-light">
+      {{ policy.buildingSumInsured }}
+    </div>
+    <es-help-text>
+      <p>Buildings insurance covers the structural aspects of your home, which includes permanent fixtures and fittings,
+        such as the roof, walls, ceilings, floors, and fitted kitchens.</p>
+    </es-help-text>
+  </div>
+  <div class="columns is-multiline is-mobile">
+    <div class="column">
+      Accidental Damage (Buildings)
+    </div>
+    <div *ngIf="policy.accidentalDamageBuildings === 'N'" class="column acc-dam-building has-text-weight-light">
+      No
+    </div>
+    <div *ngIf="policy.accidentalDamageBuildings === 'Y'" class="column acc-dam-building has-text-weight-light">
+      Yes
+    </div>
+    <!--<div *ngIf="policy.accidentalDamageBuildings === 'N'; then no else yes" class="column has-text-weight-light"></div>-->
+    <!--<ng-template #no>NO</ng-template>-->
+    <!--<ng-template #yes>YES</ng-template>-->
+    <es-help-text>
+      <p>Accidental Damage is designed to cover one-off unexpected events, such as hammering a nail into a water pipe
+        while making a small home improvement.</p>
+    </es-help-text>
+  </div>
+</ng-container>
+<ng-container *ngIf="policy.coverType != 'Buildings Only'">
+
+  <div class="columns is-multiline is-mobile">
+    <div class="column">
+      Contents Cover
+    </div>
+    <div class="column content-sum has-text-weight-light">
+      {{ policy.contentsSumInsured | currency:'GBP':'symbol-narrow':'1.0' }}
+    </div>
+    <es-help-text>
+      <p>Contents insurance is designed to protect your belongings. This could include precious possessions like
+        jewellery, and furniture for example sofas and dining tables.</p>
+    </es-help-text>
+  </div>
+  <div class="columns is-multiline is-mobile">
+    <div class="column">
+      Household Goods Cover
+    </div>
+    <div class="column household-sum has-text-weight-light">
+      {{ policy.householdGoods | currency:'GBP':'symbol-narrow':'1.0' }}
+    </div>
+    <es-help-text>
+      <p>Household Goods Cover insures all goods kept in the home (including clothing). Some things are excluded though
+        such as High Risk Items, and any appliance that is part of a fitted unit, for example a dishwasher.</p>
+    </es-help-text>
+  </div>
+  <div class="columns is-multiline is-mobile">
+    <div class="column">
+      High Risk Items Cover
+    </div>
+    <div class="column high-risk-sum has-text-weight-light">
+      {{ policy.highValueItemsSum | currency:'GBP':'symbol-narrow':'1.0' }}
+    </div>
+    <es-help-text>
+      <p>An item that is more likely to be stolen is classed as a High Risk Item. This can include jewellery, laptops,
+        and mobile phones.</p>
+    </es-help-text>
+  </div>
+  <div class="columns is-multiline is-mobile">
+    <div class="column">
+      Accidental Damage (Contents)
+    </div>
+    <div *ngIf="policy.accidentalDamageContents === 'N'" class="column  acc-dam-content has-text-weight-light">
+      No
+    </div>
+    <div *ngIf="policy.accidentalDamageContents === 'Y'" class="column acc-dam-content has-text-weight-light">
+      Yes
+    </div>
+    <es-help-text>
+      <p>Accidental Damage is designed to cover one-off unexpected events, such as spilling a glass of red wine on your
+        carpet.</p>
+    </es-help-text>
+  </div>
+  <div class="columns is-mobile" *ngIf="brandCode === 'SW'">
+    <div class="column">
+      No claim discount protection
+    </div>
+    <div class="column ncd-years has-text-weight-light">
+      <ng-container *ngIf="policy.ncdProtected">Yes ({{ policy.ncdYears }})</ng-container>
+      <ng-container *ngIf="!policy.ncdProtected">No</ng-container>
+    </div>
+  </div>
+</ng-container>
+
+<hr>
+
+<ng-container *ngIf="policy.coverType !== 'Buildings Only'">
+  <h3 class="title is-4 personal-possessions has-text-weight-bold">Your Personal Possessions Cover</h3>
+  <p class="subtitle is-5 has-text-weight-light">
+    Your personal belongings are insured against loss, accidental damage, or theft when you temporarily remove them from
+    your home. Cover is worldwide, for up to 60 consecutive days.</p>
+  <div class="columns is-mobile">
+    <div class="column">Sum insured</div>
+    <div class="column has-text-weight-light personal-value">
+      {{ policy.personalPossessions.coverIncluded === 'Y'
+          ? (policy.personalPossessions.sumInsured | currency:'GBP':'symbol-narrow':'1.0')
+          : 'None'
+      }}
+    </div>
+  </div>
+  <hr>
+</ng-container>
+
+<ng-container *ngIf="policy.coverType != 'Buildings Only' && policy.highValueItems?.length > 0">
+  <h3 class="title is-4 high-value-items has-text-weight-bold">Your Specified Items</h3>
+  <p class="subtitle is-5 has-text-weight-light">
+    Your Specified Items are listed below. These should include any bicycle worth more than &pound;500 or any High Risk
+    Items or Household Goods with a replacement value of &pound;1500 or more when bought as new.</p>
+  <div class="columns is-mobile">
+    <div class="column is-hidden-mobile">Description</div>
+    <div class="column is-hidden-mobile">Value</div>
+  </div>
+
+  <div class="columns is-mobile" *ngFor="let item of policy.highValueItems">
+    <div class="column">
+      {{ item.itemDescription }}
+    </div>
+    <div class="column has-text-weight-light">
+      {{ item.itemValue  | currency:'GBP':'symbol-narrow':'1.0' }}
+    </div>
+  </div>
+
+  <hr>
+</ng-container>
+
+<h3 class="is-size-4 has-text-weight-bold">Your Optional Extras</h3>
+
+<div class="columns addons is-multiline is-mobile" *ngFor="let addon of policy.addOns">
+
+  <ng-container *ngIf="addon.code === 'HEC'">
+    <div class="column">
+      Home Emergency Cover
+    </div>
+    <div class="column purchased hec has-text-weight-light" *ngIf="addon.purchased">
+      <i class="fa fa-check has-text-success" aria-hidden="true"></i> Cover included, free in your first year
+    </div>
+
+    <div class="column not-purchased hec has-text-weight-light" *ngIf="!addon.purchased">
+      <i class="fa fa-times has-text-danger" aria-hidden="true"></i> Not taken, add cover
+    </div>
+    <es-help-text>
+      <p>
+        No more ringing around out of hours, we do all the hard work. Should an emergency occur like your boiler
+        breaking down, or you accidentally smashing a window. Just call our helpline and we’ll cover the repairs up to
+        &pound;500 including VAT.</p>
+      <p *ngIf="!addon.purchased">To add Home Emergency Cover to your policy please
+        call <a href="tel:{{ phoneNumbers.homeEmergency }}">{{ phoneNumbers.homeEmergency }}</a>.</p>
+      <p *ngIf="!addon.purchased">Lines are open Mon to Fri 8am&ndash;8pm, Sat 9am&ndash;5pm, Sun 9am&ndash;2pm</p>
+    </es-help-text>
+  </ng-container>
+
+  <ng-container *ngIf="addon.code === 'FLP'">
+    <div class="column">
+      Family Legal Protection
+    </div>
+    <div class="column purchased flp has-text-weight-light" *ngIf="addon.purchased">
+      <i class="fa fa-check has-text-success" aria-hidden="true"></i> Cover included, free in your first year
+    </div>
+    <div class="column not-purchased flp has-text-weight-light" *ngIf="!addon.purchased">
+      <i class="fa fa-times has-text-danger" aria-hidden="true"></i> Not taken, add cover
+    </div>
+    <es-help-text>
+      <p>
+        Get covered for a variety of situations that may require legal assistance, from employment tribunals to getting
+        back your money after buying something faulty online.</p>
+      <p *ngIf="!addon.purchased">To add Family Legal Protection to your policy please
+        call <a href="tel:{{ phoneNumbers.homeLegal }}">{{ phoneNumbers.homeLegal }}</a>.</p>
+      <p *ngIf="!addon.purchased">Lines are open Mon to Fri 8am&ndash;8pm, Sat 9am&ndash;5pm, Sun 9am&ndash;2pm</p>
+    </es-help-text>
+  </ng-container>
+
+  <ng-container *ngIf="addon.code === 'PES'">
+    <div class="column">
+      Pest Cover
+    </div>
+    <div class="column purchased pes has-text-weight-light" *ngIf="addon.purchased">
+      <i class="fa fa-check has-text-success" aria-hidden="true"></i> Cover included
+    </div>
+    <div class="column not-purchased pes has-text-weight-light" *ngIf="!addon.purchased">
+      <i class="fa fa-times has-text-danger" aria-hidden="true"></i> Not taken, add cover
+    </div>
+    <es-help-text>
+      <p>
+        Pest cover is often a neglected add-on, but it can save you a lot of time, hassle, and stress should you find an
+        infestation in your home. We cover exterminations up to &pound;200 for bedbugs, and up to &pound;150 for wasps, hornet
+        nests, mice, rats, and squirrels.</p>
+      <p *ngIf="!addon.purchased">To add Pest Cover to your policy please
+        call <a href="tel:{{ phoneNumbers.homePest }}">{{ phoneNumbers.homePest }}</a>.</p>
+      <p *ngIf="!addon.purchased">Lines are open Mon to Fri 8am&ndash;8pm, Sat 9am&ndash;5pm, Sun 9am&ndash;2pm</p>
+    </es-help-text>
+  </ng-container>
+
+  <ng-container *ngIf="addon.code === 'ATV'">
+    <div class="column">
+      Annual Travel Insurance
+    </div>
+    <div class="column purchased atv has-text-weight-light" *ngIf="addon.purchased">
+      <i class="fa fa-check has-text-success" aria-hidden="true"></i> Cover included
+    </div>
+    <div class="column not-purchased atv has-text-weight-light" *ngIf="!addon.purchased">
+      <i class="fa fa-times has-text-danger" aria-hidden="true"></i> Not taken, add cover
+    </div>
+    <es-help-text>
+      <p>
+        When you insure your holiday with esure you get access to a 24/7 emergency helpline, and can choose between 3
+        levels of cover. Annual or single trip options are available.</p>
+    </es-help-text>
+  </ng-container>
+
+  <ng-container *ngIf="addon.code === 'WIN'">
+    <div class="column">
+      Winter Sports Cover
+    </div>
+    <div class="column purchased win has-text-weight-light" *ngIf="addon.purchased">
+      <i class="fa fa-check has-text-success" aria-hidden="true"></i> Cover included
+    </div>
+    <div class="column not-purchased win has-text-weight-light" *ngIf="!addon.purchased">
+      <i class="fa fa-times has-text-danger" aria-hidden="true"></i> Not taken, add cover
+    </div>
+    <es-help-text>
+      <p>
+        Cover is provided for skiing, snowboarding and off-piste skiing activities only in areas considered safe by
+        local resort management. There is also cover for ski equipment and piste closure.</p>
+      <p *ngIf="!addon.purchased">To add Winter Sports Cover to your policy please call <a [href]="'tel:' + phoneNumbers.homeWinter">{{ phoneNumbers.homeWinter }}</a>.</p>
+      <p *ngIf="!addon.purchased">Lines are open Mon to Fri 8am–8pm, Sat 9am–5pm, Sun 9am–2pm</p>
+    </es-help-text>
+  </ng-container>
+</div>
+
+<!-- Your Excesses --><h3 class="is-size-4 has-text-weight-bold">Your excess</h3>
+
+<p class="subtitle is-5">Your excess is the amount you must pay towards a claim. See below for a breakdown of your
+  excesses. You can also find out more in your insurance schedule.</p>
+
+<div class="columns excess is-gapless is-hidden-mobile table-head">
+  <div class="column">
+    <p>Type of excess</p>
+  </div>
+  <div class="column">
+    <p>Compulsory excess</p>
+  </div>
+  <div class="column">
+    <p>Voluntary excess</p>
+  </div>
+  <div class="column">
+    <p>Total</p>
+  </div>
+</div>
+<div class="columns is-gapless excess" *ngIf="policy.coverType != 'Contents Only'">
+  <div class="column">
+    <p class="excess-type">
+      Buildings </p>
+  </div>
+  <div class="column">
+    <div class="columns is-mobile is-gapless">
+      <div class="column is-hidden-tablet is-three-quarters-mobile">
+        <p>
+          Compulsory excess </p>
+      </div>
+      <div class="column is-one-quarter-mobile">
+        <p>
+          {{ policy.excessBuildingsCompulsory  | currency:'GBP':'symbol-narrow':'1.0' }} </p>
+      </div>
+
+    </div>
+  </div>
+  <div class="column">
+    <div class="columns is-mobile is-gapless">
+      <div class="column is-hidden-tablet is-three-quarters-mobile">
+        <p>
+          Voluntary excess </p>
+      </div>
+      <div class="column is-one-quarter-mobile">
+        <p>
+          {{ policy.excessBuildingsVoluntary  | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="columns is-mobile is-gapless">
+      <div class="column is-hidden-tablet is-three-quarters-mobile">
+        <p>Total</p>
+      </div>
+      <div class="column is-one-quarter-mobile">
+        <p class="total-ex">
+          {{ (policy.excessBuildingsCompulsory + policy.excessBuildingsVoluntary) | currency:'GBP':'symbol-narrow':'1.0' }} </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="columns excess is-gapless" *ngIf="policy.coverType != 'Buildings Only'">
+  <div class="column">
+    <p class="excess-type">
+      Contents </p>
+  </div>
+  <div class="column">
+    <div class="columns is-mobile is-gapless">
+      <div class="column is-three-quarters-mobile is-hidden-tablet">
+        <p>
+          Compulsory excess </p>
+      </div>
+      <div class="column is-one-quarter-mobile">
+        <p>
+          {{ policy.excessContentsCompulsory | currency:'GBP':'symbol-narrow':'1.0' }} </p>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="columns is-mobile is-gapless">
+      <div class="column is-three-quarters-mobile is-hidden-tablet">
+        <p>
+          Voluntary excess </p>
+      </div>
+      <div class="column is-one-quarter-mobile">
+        <p>
+          {{ policy.excessContentsVoluntary | currency:'GBP':'symbol-narrow':'1.0' }} </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="columns is-mobile is-gapless">
+      <div class="column is-three-quarters-mobile is-hidden-tablet">
+        <p>Total</p>
+      </div>
+      <div class="column is-one-quarter-mobile">
+        <p class="total-ex">{{ (policy.excessContentsCompulsory + policy.excessContentsVoluntary) | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<div class="columns excess is-gapless">
+  <div class="column">
+    <p class="excess-type">Subsidence</p>
+  </div>
+  <div class="column">
+    <div class="columns is-mobile is-gapless">
+      <div class="column is-three-quarters-mobile is-hidden-tablet">
+        <p> Compulsory excess</p>
+      </div>
+      <div class="column is-one-quarter-mobile">
+        <p>{{ policy.excessSubsidence | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="columns is-mobile is-gapless">
+      <div class="column is-three-quarters-mobile is-hidden-tablet">
+        <p>Voluntary excess</p>
+      </div>
+      <div class="column is-one-quarter-mobile">
+        <p>N/A</p>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="columns is-mobile is-gapless">
+      <div class="column is-three-quarters-mobile is-hidden-tablet">
+        <p>Total</p>
+      </div>
+      <div class="column is-one-quarter-mobile">
+        <p class="total-ex">{{ policy.excessSubsidence | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="columns excess is-gapless">
+  <div class="column">
+    <p class="excess-type">Escape of water</p>
+  </div>
+  <div class="column">
+    <div class="columns is-mobile is-gapless">
+      <div class="column is-three-quarters-mobile is-hidden-tablet">
+        <p>Compulsory excess</p>
+      </div>
+      <div class="column is-one-quarter-mobile">
+        <p>{{ policy.excessWater | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="columns is-mobile is-gapless">
+      <div class="column is-three-quarters-mobile is-hidden-tablet">
+        <p>Voluntary excess</p>
+      </div>
+      <div class="column is-one-quarter-mobile">
+        <p>N/A</p>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="columns is-mobile is-gapless">
+      <div class="column is-three-quarters-mobile is-hidden-tablet">
+        <p>Total</p>
+      </div>
+      <div class="column is-one-quarter-mobile">
+        <p class="total-ex">{{ policy.excessWater | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+      </div>
+    </div>
+  </div>
+</div><h3 class="is-size-4 has-text-weight-bold">Your endorsements</h3><p class="subtitle is-5">When insuring your home,
+  we may think you need to take extra steps to ensure it's adequately protected &ndash; this is known as an endorsement.
+  An example of this could be installing a security alarm.</p>
+<p>
+  <a routerLink="../documents">View your policy schedule</a>
+</p>
+
+<hr>

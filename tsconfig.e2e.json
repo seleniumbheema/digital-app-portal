@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig",
+  "include": [
+    "src/e2e/**/*.e2e.ts"
+  ],
+  "compilerOptions": {
+    "outDir": "src/e2e/lib",
+    "skipLibCheck": true
+  },
+  "types": [
+    "cucumber",
+    "node",
+    "selenium-webdriver"
+  ]
+}

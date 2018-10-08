@@ -1,0 +1,38 @@
+<div id="{{ controlName }}-container" class="field" [formGroup]="parentFormGroup">
+  <label class="label" for="{{ controlName }}">{{ label }}</label>
+  <p class="help" *ngIf="helpText">
+    {{ helpText }}
+  </p>
+  <div class="field" [class.has-addons]="leftText || rightText">
+
+    <div *ngIf="leftText" class="control">
+      <a class="button is-static">{{ leftText }}</a>
+    </div>
+
+    <div class="control has-icons-right is-expanded is-fullwidth">
+      <input id="{{ controlName }}" class="input is-uppercase" [class.is-success]="vehicleRegControl.valid" [class.is-danger]="vehicleRegControl.dirty && vehicleRegControl.touched && !vehicleRegControl.valid"
+             type="text" placeholder="{{ label }}" autocomplete="{{ autocomplete }}" maxlength="8" formControlName="{{ controlName }}">
+      <span class="icon is-small is-right" [class.is-success]="vehicleRegControl.dirty || !vehicleRegControl.pristine" *ngIf="vehicleRegControl.valid">
+        <i class="fa fa-check"></i>
+      </span>
+      <span class="icon is-small is-right" [class.is-danger]="vehicleRegControl.dirty || !vehicleRegControl.pristine" *ngIf="vehicleRegControl.dirty && vehicleRegControl.touched && !vehicleRegControl.valid">
+        <i class="fa fa-times"></i>
+      </span>
+
+    </div>
+
+    <div *ngIf="rightText" class="control">
+      <a (click)="clickedIcon()" class="button help-icon" title="Help">{{ rightText }}</a>
+    </div>
+  </div>
+
+  <div *ngIf="(submitted && !vehicleRegControl.valid) || (!vehicleRegControl.valid && vehicleRegControl.dirty && vehicleRegControl.touched)">
+    <p *ngIf="vehicleRegControl.hasError('required')" class="help is-danger">
+      {{ requiredMessage }}
+    </p>
+    <p *ngIf="vehicleRegControl.hasError('pattern')" class="help is-danger">
+      You have entered an invalid vehicle registration
+    </p>
+  </div>
+
+</div>

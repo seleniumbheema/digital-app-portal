@@ -1,0 +1,194 @@
+<div id="mta" class="columns">
+  <div class="column" [class.is-10-tablet]="!convictionFormSent">
+    <ng-container *ngIf="!convictionFormSent; else confirmation">
+      <h2 class="is-size-3">Tell us about a motoring conviction</h2>
+      <div class="message is-info">
+        <div class="message-body">
+          If it's a recent motoring conviction, in most cases we'll store the details and add them
+          at your next renewal. If we can't do this we'll let you know by email.
+        </div>
+      </div>
+
+      <ng-template #call>
+        <div id="call-msg" class="message is-danger">
+          <div class="message-body">
+            Sorry, we'll need to speak to you over the phone about this. Please call us
+            on <a href="tel:{{ phoneNumbers.motorMtaAddConviction }}">{{
+            phoneNumbers.motorMtaAddConviction }}</a> for a quote.
+          </div>
+        </div>
+      </ng-template>
+
+      <div>
+        <p>Before you start, can we just check...</p>
+
+        <form id="add-conviction-form" [formGroup]="convictionForm" (ngSubmit)="submitChanges()">
+          <es-global-messages [messages]="messages"></es-global-messages>
+
+          <es-radio
+            (change)="handlePolicyHolderOrNamedChange()"
+            class="field-wrapper"
+            [parentFormGroup]="convictionForm"
+            negative="mta-related-negative"
+            negativeLabel="Another driver on the policy"
+            negativeValue="OTHER"
+            affirmative="mta-related-affirmative"
+            affirmativeLabel="You (the policyholder)"
+            affirmativeValue="ME"
+            controlName="relatesTo"
+            [submitted]="convictionFormSubmitted"
+            label="Who does this conviction relate to?"
+            [longLabels]="true"></es-radio>
+
+          <ng-container
+            *ngIf="convictionForm.value.relatesTo === 'OTHER' || convictionForm.value.relatesTo === 'ME'">
+            <ng-container *ngIf="convictionForm.value.relatesTo === 'OTHER'">
+
+              <es-firstname
+                class="field-wrapper"
+                [parentFormGroup]="convictionForm"
+                [submitted]="convictionFormSubmitted"
+                controlName="namedDriverFirstName"
+                label="Driver's first name"></es-firstname>
+
+              <es-lastname
+                class="field-wrapper"
+                [parentFormGroup]="convictionForm"
+                [submitted]="convictionFormSubmitted"
+                controlName="namedDriverLastName"
+                label="Driver's surname"></es-lastname>
+
+            </ng-container>
+
+            <es-radio
+              class="field-wrapper"
+              [parentFormGroup]="convictionForm"
+              negative="mta-suspended-negative"
+              affirmative="mta-suspended-affirmative"
+              controlName="licenceSuspended"
+              [submitted]="convictionFormSubmitted"
+              label="Has {{ convictionForm.value.relatesTo === 'OTHER' ? 'their' : 'your' }} licence been suspended?"></es-radio>
+
+            <ng-container *ngIf="convictionForm.value.licenceSuspended !== 'Y'; else call">
+              <es-radio
+                *ngIf="convictionForm.value.licenceSuspended === 'N'"
+                class="field-wrapper"
+                [parentFormGroup]="convictionForm"
+                negative="mta-many-convictions-negative"
+                affirmative="mta-many-convictions-affirmative"
+                controlName="moreThanOneConviction"
+                [submitted]="convictionFormSubmitted"
+                label="Do you have more than one conviction to notify us of?"></es-radio>
+            </ng-container>
+
+            <ng-container *ngIf="convictionForm.value.licenceSuspended !== 'Y'">
+              <ng-container *ngIf="convictionForm.value.moreThanOneConviction === 'N'">
+                <es-select
+                  (emitClickIcon)="conCodeHelp.toggleHelpText()"
+                  class="field-wrapper"
+                  [parentFormGroup]="convictionForm"
+                  [submitted]="convictionFormSubmitted"
+                  [controlArray]="convictionCodes"
+                  controlName="convictionCode"
+                  label="Conviction code"
+                  rightText="i"></es-select>
+                <es-help-text #conCodeHelp [helpIcon]="true">
+                  The code for your motoring conviction (e.g SP30) as shown on your driving licence.
+                  You can view your driving licence information on the
+                  <a href="https://www.gov.uk/view-driving-licence"
+                     class="text-link--brand-primary" target="_blank">DVLA website</a>.
+                </es-help-text>
+              </ng-container>
+
+              <ng-container
+                *ngIf="convictionForm.value.moreThanOneConviction !== 'Y'; else call"></ng-container>
+
+              <ng-container
+                *ngIf="convictionForm.value.convictionCode !== '' && convictionForm.value.moreThanOneConviction !== 'Y'">
+                <ng-container *ngIf="convictionForm.value.convictionCode.length === 4; else call">
+                  <es-date-field
+                    (emitClickIcon)="conDateHelp.toggleHelpText()"
+                    class="field-wrapper"
+                    [parentFormGroup]="dateFormGroup"
+                    [submitted]="convictionFormSubmitted"
+                    controlName="Day-Month-Year"
+                    label="Date of conviction"
+                    autocomplete="conviction"
+                    rightText="i"
+                    minMessage="Conviction date should be within the last year"
+                    maxMessage="Conviction date cannot be in the future" prependInputId="conDate"></es-date-field>
+                  <es-help-text #conDateHelp [helpIcon]="true">
+                    This is the conviction date as shown on your driving licence. You can view your
+                    driving licence information on the
+                    <a href="https://www.gov.uk/view-driving-licence"
+                       class="text-link--brand-primary" target="_blank">DVLA website</a>.
+                  </es-help-text>
+
+                  <es-number-field
+                    (emitClickIcon)="conPointsHelp.toggleHelpText()"
+                    class="field-wrapper"
+                    [parentFormGroup]="convictionForm"
+                    [submitted]="convictionFormSubmitted"
+                    controlName="penaltyPoints"
+                    label="Number of penalty points"
+                    maxlength="2"
+                    rightText="i"
+                    validationMessage="Please enter a value from 1 to 11."></es-number-field>
+                  <es-help-text #conPointsHelp [helpIcon]="true">
+                    The number of penalty points for this conviction as shown on your driving
+                    licence. You can view your driving licence information on the
+                    <a href="https://www.gov.uk/view-driving-licence"
+                       class="text-link--brand-primary" target="_blank">DVLA website</a>.
+                  </es-help-text>
+
+
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+
+
+          <div class="columns is-mobile">
+            <div class="column is-half">
+              <a class="button is-rounded is-outlined is-link" routerLink="../">Back</a>
+            </div>
+            <div class="column has-text-right">
+              <button type="submit"
+                id="submit-button"
+                data-tooltip="Please check form fields are valid"
+                [class.tooltip]="!convictionForm.valid"
+                [class.es-is-disabled]="!convictionForm.valid || disableSubmit"
+                class="button is-link is-rounded is-success is-tooltip-bottom-mobile is-tooltip-left">Submit</button>
+            </div>
+          </div>
+
+        </form>
+
+        <es-data-layer [vars]="{ 'pageName': 'Portal MTA Add Conviction' }">
+        </es-data-layer>
+      </div>
+
+
+    </ng-container>
+
+    <ng-template #confirmation>
+      <h2 class="is-size-3">Thank you</h2>
+
+      <div class="message is-success mta-conf">
+        <div class="message-body">
+          You'll receive an email to confirm we've received your request and it will be
+          dealt with within 72 hours.
+        </div>
+      </div>
+
+      <div class="has-text-right">
+        <a class="button is-link is-rounded" routerLink="../../">Back to your policy</a>
+      </div>
+
+      <es-data-layer [vars]="{ 'pageName': 'Portal MTA Add Conviction Confirmation' }">
+      </es-data-layer>
+    </ng-template>
+
+  </div>
+</div>
+

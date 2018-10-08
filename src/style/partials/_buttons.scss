@@ -1,0 +1,89 @@
+a[href^='tel:'] {
+  text-decoration: none !important;
+}
+
+a.help-icon {
+  background-color: $prim-alt;
+  border: 0;
+  color: $white;
+  border-radius: 50% !important;
+  width: 32px;
+  height: 32px !important;
+  margin-left: 10px;
+  margin-top: 5px;
+  font-weight: 700;
+  &:hover {
+    color: $white;
+  }
+}
+
+es-global-messages .notification p {
+  a[href^='tel:'] {
+    border-bottom: 0 !important;
+  }
+}
+
+button, a {
+  &.is-primary {
+    .es-icon {
+      fill: $base;
+    }
+  }
+  &.is-success {
+    .es-icon {
+      fill: $base;
+      height: 100%;
+    }
+  }
+}
+
+// Fix for text only buttons
+.button.is-text {
+  &:focus {
+    box-shadow: none;
+  }
+  &:active {
+    background-color: transparent;
+  }
+}
+
+es-nav-bar .button {
+  border-radius: 20px !important;
+  &.is-text {
+    text-decoration: none;
+    color: $primary;
+    padding-left: 0;
+    &:hover {
+      text-decoration: underline;
+      color: $primary;
+      background-color: transparent;
+    }
+  }
+}
+
+#cookieBanner {
+  button {
+    background-color: $secondary;
+  }
+}
+
+// Fix for full width buttons on IOS10
+.button.is-fullwidth {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+}
+
+#back-to-top {
+  padding: 18px 18px 24px;
+  position: fixed;
+  opacity: 1;
+  bottom: 12px;
+  transition: bottom .5s, opacity .5s;
+  right: 12px;
+  border-radius: 3px;
+  z-index: 5;
+  &.hide-scroll {
+    opacity: 0;
+    bottom: -100px;
+  }
+}

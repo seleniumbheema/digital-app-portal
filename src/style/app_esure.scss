@@ -1,0 +1,44 @@
+// font-awesome
+@import '~font-awesome/css/font-awesome.css';
+// Import Bulma initial variables
+// @import '~bulma/sass/utilities/initial-variables';
+// Override initial variables is settings_<brand>
+@import './modules/settings_esure';
+@import './modules/settings_shared';
+@import './modules/mixins';
+// Fonts
+@import './fonts/es/fonts.css';
+// Bulma all
+@import '~bulma/bulma';
+@import '~bulma-tooltip';
+@import 'partials_shared';
+
+// Jank
+.logo {
+  @include svg-bg('../public/brand/esure/images/logos/logo_alt');
+  height: 40px;
+  width: 140px;
+  background-size: 100%;
+}
+
+.invert {
+  .logo {
+    @include svg-bg('../public/brand/esure/images/logos/logo');
+    height: 40px;
+    width: 140px;
+    background-size: 100%;
+  }
+}
+
+// override for multicar icon colour
+//.icon-multicar {
+//  color: $es-orange;
+//}
+
+header.info {
+  background-color: $primary;
+}
+
+.accident-support {
+  background-image: url('../public/brand/esure/images/BumpCar_Orange.png');
+}

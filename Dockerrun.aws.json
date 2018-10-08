@@ -1,0 +1,95 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "App",
+      "host": {
+        "sourcePath": "/var/app/current"
+      }
+    },
+    {
+      "name": "NginxConf",
+      "host": {
+        "sourcePath": "/var/app/current/nginx.conf"
+      }
+    },
+    {
+      "name": "NginxRoot",
+      "host": {
+        "sourcePath": "/var/app/current/dist"
+      }
+    },
+    {
+      "name": "Health",
+      "host": {
+        "sourcePath": "/var/log/nginx/healthd"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "image": "319701921293.dkr.ecr.eu-west-1.amazonaws.com/nginx:1.13.12-esure-awscli",
+      "name": "digital-app-portal",
+      "essential": true,
+      "memory": 512,
+      "mountPoints": [
+        {
+          "sourceVolume": "App",
+          "containerPath": "/usr/src/app1"
+        },
+        {
+          "sourceVolume": "NginxConf",
+          "containerPath": "/etc/nginx/nginx.conf"
+        },
+        {
+          "sourceVolume": "NginxRoot",
+          "containerPath": "/etc/nginx/html"
+        },
+        {
+          "sourceVolume": "Health",
+          "containerPath": "/var/log/nginx/healthd"
+        }
+      ],
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "environment": [
+        {
+          "name": "XAPI_URL",
+          "value": "/portal-xapi"
+        },
+        {
+          "name": "TAG_MANAGER_URL",
+          "value": ""
+        },
+        {
+          "name": "OPTIMIZELY_URL",
+          "value": ""
+        },
+        {
+          "name": "SITE_CAT_ACCOUNT",
+          "value": ""
+        },
+        {
+          "name": "BRAND_URL",
+          "value": ""
+        },
+        {
+          "name": "LIVECHAT_URL",
+          "value": ""
+        },
+        {
+          "name": "IOVATION_URL",
+          "value": ""
+        }
+      ],
+      "workingDirectory": "/usr/src/app1",
+      "command": [
+        "./docker/compose.sh"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+#loading-indicator {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: $black;
+  position: fixed;
+  opacity: .7;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.loader,
+.loader::after {
+  border-radius: 50%;
+  width: 8em;
+  height: 8em;
+}
+
+.loader {
+  // sass-lint:disable-block no-color-literals
+  margin: -4em auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba(255, 255, 255, .2);
+  border-right: 1.1em solid rgba(255, 255, 255, .2);
+  border-bottom: 1.1em solid rgba(255, 255, 255, .2);
+  border-left: 1.1em solid $white;
+  transform: translateZ(0);
+  animation: load8 1.1s infinite linear;
+  top: 50%;
+}
+
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

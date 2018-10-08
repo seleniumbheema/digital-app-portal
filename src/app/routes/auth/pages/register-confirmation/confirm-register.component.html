@@ -1,0 +1,54 @@
+<div id="register-conf" class="column">
+  <div class="columns">
+    <div class="column is-12">
+
+      <div class="box">
+        <ng-container *ngIf="accountExists; then accountExist else noExistingAccount"></ng-container>
+      </div>
+
+      <ng-template #accountExist>
+        <h1 class="title is-1">Thank you</h1>
+        <p class="block sub-title">
+          It looks like you already have an account set up with the following email address: <br />
+          <span class="is-size-4 has-text-weight-bold">{{ emailFromToken }}</span> <br />
+          If you have forgotten your password, go to the sign in page and use the forgotten password link.
+        </p>
+        <p class="block">
+          If you need to change this email address please call our helpful customer service team on<br />
+          <a href="tel:{{ phoneNumbers.motorCustomerService }}">{{ phoneNumbers.motorCustomerService }}.</a><br />
+          Lines are open Mon-Fri 8am-8pm, Sat 9am-5pm, Sun 9am-2pm.
+        </p>
+
+        <div class="field">
+          <a class="button is-rounded is-success is-large" routerLink="/auth/login/registered">
+            <span>Sign in</span>
+          </a>
+        </div>
+
+      </ng-template>
+
+      <ng-template #noExistingAccount>
+        <h1 class="title is-1">Thank you</h1>
+        <p class="block sub-title">
+          We have sent a temporary password to  <span class="is-size-4 has-text-weight-bold">{{ emailFromToken }}</span><br />
+          If you can't find the email in your inbox try checking your spam or junk folder.
+        </p>
+        <p class="block">
+          If you haven't received an email you can call our helpful customer service team on<br />
+          <a href="tel:{{ phoneNumbers.motorCustomerService }}">{{ phoneNumbers.motorCustomerService }}.</a><br />
+          Lines are open Mon-Fri 8am-8pm, Sat 9am-5pm, Sun 9am-2pm.
+        </p>
+
+        <div class="field">
+          <a class="button is-rounded is-success is-large" routerLink="/auth/login/registered">
+            <span>Sign in</span>
+          </a>
+        </div>
+
+      </ng-template>
+
+    </div>
+  </div>
+</div>
+
+<es-data-layer [vars]="{ 'pageName': pageName }"></es-data-layer>

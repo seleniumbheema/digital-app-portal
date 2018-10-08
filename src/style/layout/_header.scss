@@ -1,0 +1,266 @@
+// Cookiebar
+es-cookie-bar {
+  z-index: 97;
+  display: block;
+  top: 0;
+}
+
+.cookies {
+  overflow: hidden;
+  background-color: transparentize($black, .2);
+  h3, p {
+    color: $base;
+    margin: 0 .5rem;
+  }
+  p {
+    @include tablet {
+      font-size: 1rem;
+    }
+    font-size: .8rem;
+  }
+  a {
+    color: $secondary;
+    cursor: pointer;
+  }
+}
+
+// Header
+es-portal-header {
+  @include desktop {
+    box-shadow: none;
+    position: relative;
+  }
+  height: 65px;
+  display: block;
+  background-color: $white;
+  width: 100%;
+  top: 0;
+  overflow: hidden;
+  z-index: 97;
+  position: fixed;
+  padding-right: $gap;
+  &.login {
+    padding-right: 0;
+  }
+}
+
+#container {
+  .columns {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+#container es-portal-header {
+  position: relative;
+}
+
+#scroll-container es-portal-header {
+  box-shadow: 0 0 0 1px $grey-lighter;
+}
+
+// a.account-icon {
+//   display: block;
+//   height: auto;
+//   margin-top: -12px;
+//   margin-right: 10px;
+//   transition: opacity .2s;
+//   svg {
+//     display: inline;
+//   }
+// }
+
+// a.account-icon:hover {
+//   opacity: .5;
+// }
+
+header {
+  margin: 0 !important;
+  padding: 0;
+  height: 100%;
+  .customer-greet {
+    @include mobile {
+      opacity: 0;
+    }
+    &.visibility-hidden {
+      visibility: hidden !important;
+    }
+    font-weight: normal;
+    opacity: 1;
+    transition: opacity .2s;
+  }
+  .column {
+    padding: 0;
+  }
+  .column.login-status {
+    .bd-notification {
+      height: 100%;
+      padding: 1.3rem 0;
+      position: relative;
+    }
+  }
+  background-color: $white;
+  position: relative;
+  div.logo {
+    text-indent: -9999px;
+    margin: 12px 0 0 75px;
+    background-repeat: no-repeat !important;
+  }
+  &.invert div.logo {
+    @include desktop {
+      display: none;
+    }
+  }
+  div.logo:hover {
+    opacity: .8;
+  }
+  &.login {
+    color: $base;
+    background-color: $primary;
+    .logo {
+      margin: 16px auto auto;
+    }
+  }
+  &.info {
+    color: $base;
+    border-bottom: 32px solid $primary-light;
+    .logo {
+      margin: 1rem;
+    }
+  }
+  .icon {
+    transition: color .2s linear;
+    &:hover {
+      color: $secondary;
+    }
+  }
+}
+
+.login-status {
+  padding: 20px 20px 0 0;
+  .icon {
+    fill: $primary;
+  }
+  > span {
+    @include tablet {
+      color: $primary;
+      display: inline-block;
+      vertical-align: top;
+      padding-top: 11px;
+    }
+  }
+}
+
+// Hamburger
+.hamburger-btn {
+  @include desktop {
+    display: none;
+  }
+  outline: 0;
+  background: $primary;
+  display: inline-block;
+  cursor: pointer;
+  border: 0;
+  padding: 23px;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  height: 65px;
+  width: 65px;
+  z-index: 99999999;
+  .icon {
+    font-size: 36px;
+    color: $base;
+    padding: 5px;
+  }
+}
+
+.hamburger {
+  display: inline-block;
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: .15s;
+  transition-timing-function: linear;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible;
+}
+
+.hamburger:hover {
+  opacity: .9;
+}
+
+.hamburger-box {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  position: relative;
+}
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -2px;
+  text-indent: -9999px;
+}
+
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+  width: 18px;
+  height: 2px;
+  background-color: $base;
+  border-radius: 4px;
+  position: absolute;
+  transition-property: transform;
+  transition-duration: .15s;
+  transition-timing-function: ease;
+}
+
+.hamburger-inner::before, .hamburger-inner::after {
+  content: '';
+  display: block;
+}
+
+.hamburger-inner::before {
+  top: -7px;
+}
+
+.hamburger-inner::after {
+  bottom: -7px;
+}
+
+//spin
+.hamburger--spin .hamburger-inner {
+  transition-duration: .22s;
+  transition-timing-function: cubic-bezier(.55, .055, .675, .19);
+}
+
+.hamburger--spin .hamburger-inner::before {
+  transition: top .1s .25s ease-in, opacity .1s ease-in;
+}
+
+.hamburger--spin .hamburger-inner::after {
+  transition: bottom .1s .25s ease-in, transform .22s cubic-bezier(.55, .055, .675, .19);
+}
+
+.hamburger--spin.is-active .hamburger-inner {
+  transform: rotate(225deg);
+  transition-delay: .12s;
+  transition-timing-function: cubic-bezier(.215, .61, .355, 1);
+}
+
+.hamburger--spin.is-active .hamburger-inner::before {
+  top: 0;
+  opacity: 0;
+  transition: top .1s ease-out, opacity .1s .12s ease-out;
+}
+
+.hamburger--spin.is-active .hamburger-inner::after {
+  bottom: 0;
+  transform: rotate(-90deg);
+}

@@ -1,0 +1,4 @@
+// Background image fallback
+@mixin svg-bg($name, $extension: png, $color: transparent, $position: 0 0, $repeat: no-repeat) {
+  background: url('#{$name}.svg'), url('#{$name}@2x.#{$extension}') $color $position $repeat;
+}

@@ -1,0 +1,25 @@
+// Esure brand colors
+
+$es-base: hsl(214, 33%, 96%);
+$es-blue: #0971b0;
+$es-dark-blue: hsl(203, 90%, 26%);
+$es-light-blue: hsl(203, 91%, 86%);
+$es-orange: hsl(34, 93%, 54%);
+$es-light-orange: hsl(34, 93%, 54%);
+$es-green: hsl(82, 57%, 47%);
+$es-red: hsl(358, 100%, 64%);
+
+// Overrides
+
+$primary: $es-blue;
+$secondary: $es-orange;
+$prim-alt: $es-orange;
+$primary-light: $es-light-blue;
+$brand-secondary: $es-orange;
+
+// Typography
+
+$family-sans-serif: 'MuseoSansRounded', Helvetica, Arial, sans-serif;
+$family-monospace: monospace !default;
+$render-mode: optimizeLegibility !default;
+$body-family: 'Roboto', Helvetica, Arial, sans-serif;

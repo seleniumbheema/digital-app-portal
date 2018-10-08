@@ -1,0 +1,21 @@
+<ng-container *ngIf="hasMessages()">
+  <div *ngFor="let msg of messages; let i = index" class="notification messages-container is-{{ msg.severity }} media">
+    <div class="media-left">
+      <i *ngIf="msg.severity==='danger'" class="fa fa-times-circle fa-2x"></i>
+      <i *ngIf="msg.severity==='warning'" class="fa fa-info-circle fa-2x"></i>
+      <i *ngIf="msg.severity==='info'" class="fa fa-info-circle fa-2x"></i>
+      <i *ngIf="msg.severity==='success'"class="fa fa-check-circle fa-2x"></i>
+    </div>
+    <div class="media-content">
+    <h4 *ngIf="msg.heading" class="title is-4" [innerHTML]="msg.heading"></h4>
+    <p *ngIf="msg.summary" class="notification-text subtitle is-6" [innerHTML]="msg.summary"></p>
+    <!-- Assumes that if the summary was empty, we have some ng-content to display -->
+    <p *ngIf="!msg.summary" class="notification-text subtitle is-6">
+      <ng-content></ng-content>
+    </p>
+    </div>
+    <div class="media-right" *ngIf="msg.closable">
+      <button class="delete" (click)="closeMessage(i)" type="button"></button>
+    </div>
+  </div>
+</ng-container>

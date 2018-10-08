@@ -1,0 +1,23 @@
+<div class="box content">
+  <h1 class="title is-size-3 is-size-1-tablet">You've been signed out</h1>
+  <p>You haven’t been active for a while on My Account and we have automatically signed you out, so your personal
+    information is kept secure.
+  </p>
+  <p>
+    <a class="button is-success is-rounded" routerLink="../../auth/login">Sign in</a>
+  </p>
+</div>
+
+<div class="box content" *ngIf="offers.length > 0">
+  <div class="columns is-multiline">
+    <ng-container *ngFor="let offer of offers; last as last;">
+      <es-special-offer [offer]="offer" *ngIf="offer.enabled" class="column" [class.is-half-tablet]="!last" [class.is-one-third-desktop]="!last"></es-special-offer>
+    </ng-container>
+  </div>
+</div>
+<div class="container">
+  <es-portal-footer login="true"></es-portal-footer>
+</div>
+<es-data-layer [vars]="{ 'pageName': 'Portal Error Session Timeout' }"></es-data-layer>
+
+

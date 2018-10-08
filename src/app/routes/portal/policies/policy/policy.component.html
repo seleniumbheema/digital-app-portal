@@ -1,0 +1,76 @@
+<div class="content">
+  <div class="column">
+
+
+    <div *ngIf="!policy" class="notification messages-container is-warning">
+      <p>Unfortunately we could not find the requested policy, please return to
+        <a routerLink="../../../">My policies</a>
+        page to try again
+      </p>
+      <es-data-layer [vars]="{ 'pageName': 'Portal Policy Not Found' }"></es-data-layer>
+    </div>
+
+    <ng-container *ngIf="policy">
+      <div class="columns is-mobile is-vcentered">
+        <div class="column is-narrow is-hidden-desktop">
+          <a routerLink="../../../" class="is-hidden-desktop" ><span class="icon"><i class="fa fa-lg fa-arrow-left"></i></span></a>
+        </div>
+        <div class="column">
+          <h1 class="title cover-type is-size-1 is-size-2-mobile has-text-weight-bold">  {{ policy.type === 'motor' ? 'Car' : 'Home'}} insurance</h1>
+          <h2 class="subtitle has-text-weight-light policy-number is-size-3 is-size-4-mobile">Policy number: {{ policy.number }}</h2>
+        </div>
+      </div>
+      <div class="tabs is-boxed is-hidden-touch">
+        <ul class="columns is-gapless">
+          <li class="column" routerLinkActive="is-active">
+            <a class="view-details" routerLink="details">Cover details</a>
+          </li>
+          <li class="column" routerLinkActive="is-active">
+            <a class="view-docs" routerLink="documents">
+              My documents
+            </a>
+          </li>
+          <li *ngIf="!policy.lapsed" class="column" routerLinkActive="is-active">
+            <a class="make-change" routerLink="amendments">Make changes</a>
+          </li>
+          <li *ngIf="!policy.lapsed" class="column" routerLinkActive="is-active">
+            <a class="make-claim" routerLink="claim">Make a claim</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="box policy-card bordered shadow">
+        <div class="tabs is-hidden-desktop">
+          <ul class="columns is-gapless">
+            <li class="column" routerLinkActive="is-active">
+              <a class="view-details" routerLink="details">Details</a>
+            </li>
+            <li class="column" routerLinkActive="is-active">
+              <a class="view-docs" routerLink="documents">
+                <span class="is-hidden-mobile">Documents</span>
+                <span class="is-hidden-tablet">Docs</span>
+              </a>
+            </li>
+            <li *ngIf="!policy.lapsed" class="column" routerLinkActive="is-active">
+              <a class="make-change" routerLink="amendments">
+                <span class="is-hidden-tablet">Change</span> <span class="is-hidden-mobile">Make changes</span>
+              </a>
+            </li>
+            <li *ngIf="!policy.lapsed" class="column" routerLinkActive="is-active">
+              <a class="make-claim" routerLink="claim">
+                <span class="is-hidden-tablet">Claim</span> <span class="is-hidden-mobile">Make a claim</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <router-outlet></router-outlet>
+
+      </div>
+
+      <es-data-layer [vars]="{ 'policyNumber': policy.number, 'policyType': policy.type }"></es-data-layer>
+
+    </ng-container>
+
+  </div>
+</div>

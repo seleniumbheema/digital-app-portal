@@ -1,0 +1,42 @@
+<!-- Questionnaire modal -->
+<div class="modal surveyModal" [class.is-active]="showQuestionnaire">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">You've signed out</p>
+      <button class="delete" aria-label="close" (click)="showQuestionnaire = false"></button>
+    </header>
+    <section class="modal-card-body">
+      Has My Account saved you from phoning the call centre today?
+    </section>
+
+    <footer *ngIf="showThankYou" class="modal-card-foot">
+      <div class="field is-grouped">
+        <p class="control">Thank you for your feedback.</p>
+      </div>
+    </footer>
+    <footer *ngIf="!showThankYou" class="modal-card-foot">
+      <button id="answerYes" (click)="closeModal()" class="button is-rounded">Yes</button>
+      <button id="answerNo" (click)="closeModal()" class="button is-rounded">No</button>
+    </footer>
+  </div>
+</div>
+
+<div class="column">
+  <div class="box content">
+    <h1 class="is-size-1 signed-out-text">You've signed out</h1>
+    <p><a class="button is-success is-rounded sign-in" routerLink="../login/registered">Sign in</a></p>
+  </div>
+</div>
+
+<div class="column" *ngIf="offers.length > 0">
+  <div class="box">
+    <div class="columns is-multiline">
+      <ng-container *ngFor="let offer of offers; last as last;">
+        <es-special-offer [offer]="offer" [totalOffers]="offers.length" *ngIf="offer.enabled" class="column" [class.is-one-third]="!last"></es-special-offer>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<es-data-layer [vars]="{ 'pageName': 'Portal Logout' }"></es-data-layer>

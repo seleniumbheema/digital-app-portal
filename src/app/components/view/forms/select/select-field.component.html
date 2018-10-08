@@ -1,0 +1,40 @@
+<div id="{{ controlName }}-container" class="field" [formGroup]="parentFormGroup">
+  <label class="label" for="{{ controlName }}">{{ label }}</label>
+  <div class="field" [class.has-addons]="leftText || rightText">
+
+    <div *ngIf="leftText" class="control">
+      <a class="button is-static">{{ leftText }}</a>
+    </div>
+
+    <div class="control is-expanded select is-fullwidth">
+        <select id="{{ controlName }}" formControlName="{{ controlName }}"
+                [class.is-success]="selectcontent.valid"
+                [class.is-danger]="selectcontent.dirty && selectcontent.touched && !selectcontent.valid">
+          <ng-container *ngIf="controlArray">
+            <option *ngFor="let option of controlArray" [value]="option.code">{{ option.label }}</option>
+          </ng-container>
+          <ng-container *ngIf="controlString">
+            <option *ngFor="let option of controlString" [value]="option">{{ option }}</option>
+          </ng-container>
+        </select>
+
+    </div>
+    <div *ngIf="rightText" class="control">
+      <a (click)="clickedIcon()" class="help-icon button" title="Help">{{ rightText }}</a>
+    </div>
+  </div>
+
+  <div>
+    <ng-container *ngIf="(submitted && !selectcontent.valid) || (!selectcontent.valid && selectcontent.dirty && selectcontent.touched)">
+      <div [hidden]="!selectcontent.hasError('required')">
+        <p class="help is-danger">This field is required</p>
+      </div>
+      <div [hidden]="!selectcontent.hasError('rangeLength')">
+        <p class="help is-danger">Please enter at least 2 characters</p>
+      </div>
+      <div [hidden]="!selectcontent.hasError('pattern') || selectcontent.hasError('rangeLength')">
+        <p class="help is-danger">Field content is incorrect, it should only contain letters, point, single apostrophe and dashes</p>
+      </div>
+    </ng-container>
+  </div>
+</div>

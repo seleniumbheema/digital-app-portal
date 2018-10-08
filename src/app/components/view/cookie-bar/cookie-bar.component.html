@@ -1,0 +1,18 @@
+<div id="cookieBanner" class="columns notification is-dark is-radiusless is-mobile is-multiline is-marginless">
+
+  <div class="column is-12-mobile is-2-tablet is-offset-1-desktop">
+    <h3 class="title is-4 is-2-mobile">Cookies on <span class="nowrap">{{ brandName }}</span></h3>
+  </div>
+
+  <div class="column is-10-mobile is-8-tablet is-7-desktop">
+    <p>
+      We use cookies on this website - If you continue using our website we'll assume that you are happy to receive all cookies
+      <a href="/cookies-policy" title="Click for more details" rel="noopener" target="_blank">click for more details</a>
+    </p>
+  </div>
+
+  <div class="column is-2-mobile">
+    <button class="delete is-info" (click)="customerDataService.updateCookieBar()"></button>
+  </div>
+
+</div>

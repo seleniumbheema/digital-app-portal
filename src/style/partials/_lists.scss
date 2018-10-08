@@ -1,0 +1,12 @@
+ul.checklist li {
+  margin-top: 1rem;
+  &:first-child {
+    margin-top: 1.5rem;
+  }
+}
+
+ul.checklist li::before {
+  font: normal normal normal 1rem FontAwesome;
+  content: '\F00C';
+  padding: 0 .5rem 0 .25rem;
+}

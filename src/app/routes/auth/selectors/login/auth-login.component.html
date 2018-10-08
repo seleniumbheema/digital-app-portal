@@ -1,0 +1,36 @@
+<form id="auth-login" [formGroup]="form">
+
+  <h2 class="title is-2">Sign in</h2>
+
+  <es-global-messages [messages]="messages"></es-global-messages>
+
+  <!-- Auth messages have their own one to avoid polluting the other ones, as this one needs to use ng-content
+  in order to have a routerlink in the message -->
+  <es-global-messages [messages]="authMessages">
+    That's not working. Check that you've entered the correct email address and/or password.
+    <ng-container *ngIf="!hideRegister">
+      If you bought your policy before 20th May 2018 and have not signed in since, please upgrade <a class="has-text-weight-bold" routerLink="/auth/register">My Account</a>.
+    </ng-container>
+  </es-global-messages>
+
+  <es-email class="field-wrapper" [parentFormGroup]="form" [submitted]="submitted" controlName="Username"></es-email>
+
+  <es-password class="field-wrapper" [parentFormGroup]="form" [submitted]="submitted"
+               controlName="Password"></es-password>
+
+  <div class="field">
+    <a class="trouble-link" routerLink="/auth/trouble/password">Forgot password?</a>
+  </div>
+
+  <div class="field">
+    <button class="button is-rounded is-fullwidth is-success is-large" id="loginBtn" type="submit" (click)="onLogin()" [disabled]="disableSubmit">
+      <span>Sign in securely</span>
+    </button>
+  </div>
+  <div class="field has-text-centered	">
+    <a href="{{ '/retrieve' | esBrandUrl }}" target="_blank" rel="noopener" class="retrieve-quote">Retrieve quote</a><br />
+    <a *ngIf="ncdAvailable" rel="noopener" target="_blank" href="{{ '/request_proof_of_no_claims' | esBrandUrl:'customer':true }}" class="proof-ncd">Get proof of No Claim Discount</a>
+  </div>
+
+</form>
+

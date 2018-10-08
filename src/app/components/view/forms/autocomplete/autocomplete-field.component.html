@@ -1,0 +1,25 @@
+<div id="{{ controlName }}-container" class="field" [formGroup]="parentFormGroup">
+  <label class="label" for="{{ controlName }}">{{ label }}</label>
+  <div class="field" [class.has-addons]="leftText || rightText">
+
+    <div *ngIf="leftText" class="control">
+      <a class="button is-static">{{ leftText }}</a>
+    </div>
+
+    <div class="control is-expanded autocomplete is-fullwidth">
+      <ng2-completer inputClass="input" [inputId]="controlName" [placeholder]="label" maxChars="100"
+                     [formControlName]="controlName"
+                     [datasource]="controlArray" [minSearchLength]="minLength"
+                     (blur)="touched = true" [fillHighlighted]="false"></ng2-completer>
+      <div
+        *ngIf="(submitted && !autocompleteControl.valid) || (!autocompleteControl.valid && autocompleteControl.dirty && touched)">
+        <p class="help is-danger">We do need this information to progress. Please check you have
+          entered the details correctly for us to continue</p>
+      </div>
+    </div>
+
+    <div *ngIf="rightText" class="control">
+      <a (click)="clickedIcon()" class="button help-icon" title="Help">{{ rightText }}</a>
+    </div>
+  </div>
+</div>

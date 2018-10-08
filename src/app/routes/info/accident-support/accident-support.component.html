@@ -1,0 +1,87 @@
+<div class="content">
+
+  <section class="hero is-primary accident">
+    <div class="hero-body">
+      <div class="columns">
+        <div class="column is-three-fifths">
+          <h1 class="has-text-white">{{ brandName }} Accident Support </h1>
+          <h2 class="has-text-white">If you're ever involved in an accident, we're here to help.</h2>
+        </div>
+        <div class="column is-three-fifths is-hidden-mobile"></div>
+      </div>
+    </div>
+  </section>
+  <section class="hero">
+    <div class="hero-body" [ngClass]="{'has-text-primary': brandCode === 'ES'}"><p>We really hope you never have an accident, but if you do, we're here to help.</p>
+
+      <p>Above all, it's important that you and anyone you're travelling with are safe, so getting out of harm's way
+        should be your number one priority. Once it's ok to do so, please call us as soon as possible regardless of how
+        the accident was caused - the sooner you call us, the quicker we can resolve the situation for you.</p></div>
+  </section>
+  <section class="hero is-secondary s-a-m">
+    <div class="hero-body"><h3 class="has-text-primary has-text-weight-bold has-text-centered">If you're involved in an accident, follow our simple steps below and remember
+      S&#8209;A&#8209;M </h3>
+      <div class="columns">
+        <div class="column is-one-third has-text-white is-size-4 has-text-weight-bold">
+          S - Stay safe
+        </div>
+        <div class="column is-two-thirds" [ngClass]="{'has-text-primary': brandCode === 'ES'}">
+          <p>First of all, don't panic. Turn off your engine and put the hazard lights on. Check if you or anyone else
+            is hurt and if it is serious, call 999.</p>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-one-third has-text-white is-size-4 has-text-weight-bold">
+          A - Ask for information
+        </div>
+        <div class="column is-two-thirds" [ngClass]="{'has-text-primary': brandCode === 'ES'}">
+          <p>Once it's safe to do so, try to get as much information from the other driver as possible, including:</p>
+
+          <ul>
+            <li>Phone no.</li>
+            <li>Name</li>
+            <li>Address</li>
+            <li>Registration no.</li>
+          </ul>
+
+          <p>Taking photos of the scene, and collecting details from witnesses can make the claims process quicker. It
+            would also be helpful to give the other driver our phone number.</p>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-one-third has-text-white is-size-4 has-text-weight-bold">
+          M - Make a call
+        </div>
+        <div class="column is-two-thirds" [ngClass]="{'has-text-primary': brandCode === 'ES'}">
+          <p>Call us as soon as possible on
+            <a class="has-text-weight-bold" href="tel:{{ phoneNumbers.motorClaims }}">{{ phoneNumbers.motorClaims }}</a>.
+          </p>
+
+          <p>The sooner you call us, the quicker we can help.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="hero accident-support is-primary">
+    <div class="hero-body">
+      <div class="columns">
+        <div class="column is-three-fifths-desktop is-two-thirds-mobile">
+          <p class="is-size-3">Please call us as soon as you're safe</p>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <p class="is-size-3">Claims &amp; 24 hour Accident Support</p>
+          <p class="is-size-1 is-size-2-mobile has-text-link has-text-weight-bold">
+            <a href="tel:{{ phoneNumbers.motorClaims }}">{{ phoneNumbers.motorClaims }}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<es-data-layer [vars]="{ 'pageName': 'Portal Accident Support' }"></es-data-layer>
+
+
+

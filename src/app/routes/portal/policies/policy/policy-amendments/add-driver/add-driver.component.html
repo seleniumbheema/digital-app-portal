@@ -1,0 +1,327 @@
+<div id="mta" class="columns">
+  <div class="column" [class.is-10-tablet]="!changeFormSent">
+    <ng-template #confirmation>
+      <h2 class="is-size-2">Thank you</h2>
+
+      <div class="message is-success mta-conf">
+        <div class="message-body">
+          You'll receive an email to confirm we've received your request and we'll send you
+          a quote within 72 hours.
+        </div>
+      </div>
+
+      <div class="has-text-right">
+        <a class="button is-link is-rounded" routerLink="../../">Back to your policy</a>
+      </div>
+
+      <es-data-layer [vars]="{ 'pageName': 'Portal MTA Add Driver Confirmation' }">
+      </es-data-layer>
+    </ng-template>
+
+    <ng-container *ngIf="!changeFormSent; else confirmation">
+
+      <ng-template #tempDriver>
+        <ng-container *ngIf="typeOfCoverControl.value === 'T'">
+          <div class="message is-info">
+            <div class="message-body">
+              <p>Please choose a period of up to 7 weeks as this is the maximum amount of time we
+                can cover a temporary
+                driver.</p>
+            </div>
+          </div>
+
+          <es-date-field (emitClickIcon)="fromDateHelp.toggleHelpText()" class="field-wrapper"
+                         [parentFormGroup]="dateFromGroup"
+                         [submitted]="screeningFormSubmitted" controlName="Day-Month-Year"
+                         label="From" autocomplete="from" rightText="i"
+                         minMessage="Please enter a future date."
+                         maxMessage="Please enter a date within your current policy year."
+                         prependInputId="from"></es-date-field>
+
+          <es-help-text #fromDateHelp [helpIcon]="true">
+            It can take up to 72 hours for us to respond to this form, so if you need cover sooner
+            than this,
+            please call us on <a href="tel:{{ phoneNumbers.motorMtaAddDriver }}">{{
+            phoneNumbers.motorMtaAddDriver }}</a>.
+          </es-help-text>
+
+          <es-date-field class="field-wrapper" [parentFormGroup]="dateUntilGroup"
+                         [submitted]="screeningFormSubmitted"
+                         controlName="Day-Month-Year" label="Until" autocomplete="until"
+                         compareToOtherDateMessage="Please enter a valid date within 7 weeks of the 'From' date."
+                         minMessage="Please enter a future date."
+                         maxMessage="Please enter a date within your current policy year."
+                         prependInputId="until"></es-date-field>
+        </ng-container>
+      </ng-template>
+
+      <ng-template #confirm>
+        <h3 class="is-size-3">Can you confirm that the new driver:</h3>
+        <ul>
+          <li>hasn't had any motoring convictions in the last 5 years</li>
+          <li>hasn't had any claims, accidents or losses (regardless of fault) in the last 3 years
+          </li>
+          <li>doesn't have a restricted licence</li>
+          <li>isn’t going to be the main driver on the policy</li>
+          <li>has been a resident of the UK since birth</li>
+          <li>has a UK driving licence</li>
+        </ul>
+
+        <es-radio
+          class="field-wrapper"
+          [parentFormGroup]="screeningForm"
+          negative="agree-negative"
+          affirmative="agree-affirmative"
+          controlName="confirmAgree"
+          [submitted]="screeningFormSubmitted"
+          label="Do you agree?"></es-radio>
+      </ng-template>
+
+      <h2 class="is-size-3">Quote to add another driver to your policy</h2>
+
+      <div *ngIf="!showAddDriverForm; else driverDetailsFormTemplate">
+        <p>Submit this form and we'll send you a quote within 72 hours.</p>
+        <p>Before you start, can we just check...</p>
+
+        <form id="screening-form" [formGroup]="screeningForm" (ngSubmit)="submitScreening()">
+
+          <es-radio (change)="updateScreeningValidators()"
+                    class="field-wrapper"
+                    [parentFormGroup]="screeningForm"
+                    negative="cover-temporary"
+                    negativeLabel="Temporary"
+                    negativeValue="T"
+                    affirmative="cover-permanent"
+                    affirmativeLabel="Permanent"
+                    affirmativeValue="P"
+                    controlName="typeOfCover"
+                    [submitted]="screeningFormSubmitted"
+                    label="Type of cover needed"></es-radio>
+
+          <ng-container *ngIf="isPermanentCover(); else tempDriver">
+            <es-radio
+              class="field-wrapper"
+              [parentFormGroup]="screeningForm"
+              negative="numDrivers-negative"
+              affirmative="numDrivers-affirmative"
+              controlName="twoDriversAlready"
+              [submitted]="screeningFormSubmitted"
+              label="Are there already 2 additional drivers on your policy?"></es-radio>
+          </ng-container>
+
+          <ng-container *ngIf="isShowConfirmField()">
+            <ng-container *ngTemplateOutlet="confirm"></ng-container>
+          </ng-container>
+
+          <div *ngIf="isShowCallUsMessage()" id="call-msg" class="message is-danger">
+            <div class="message-body">
+              Sorry, we'll need to speak to you over the phone about this. Please call us
+              on <a href="tel:{{ phoneNumbers.motorMtaAddDriver }}">{{
+              phoneNumbers.motorMtaAddDriver }}</a> for a quote.
+            </div>
+          </div>
+
+          <div class="columns is-mobile">
+            <div class="column is-half">
+              <a class="button is-rounded is-outlined is-link" routerLink="../">Back</a>
+            </div>
+            <div class="column has-text-right">
+              <button type="submit" id="submitScreening"
+                class="button is-link is-rounded is-success is-tooltip is-tooltip-bottom-mobile is-tooltip-left"
+                type="submit"
+                [class.es-is-disabled]="!screeningForm.valid || isShowCallUsMessage() || disableSubmit"
+                [class.tooltip]="!screeningForm.valid && !isShowCallUsMessage()"
+                data-tooltip="Please check form fields are valid">Continue</button>
+            </div>
+          </div>
+        </form>
+
+        <es-data-layer [vars]="{ 'pageName': 'Portal MTA Add Driver Page 1' }">
+        </es-data-layer>
+
+      </div>
+
+      <ng-template #driverDetailsFormTemplate>
+        <p>Now we need the new driver's details</p>
+
+        <form id="driver-details-form" [formGroup]="driverDetailsForm"
+              (ngSubmit)="submitChanges()">
+          <es-global-messages [messages]="messages"></es-global-messages>
+
+          <es-select class="field-wrapper"
+                     [parentFormGroup]="driverDetailsForm"
+                     [submitted]="driverDetailsFormSubmitted"
+                     [controlArray]="refKeyLists.titlesArray"
+                     controlName="title"
+                     label="Title"></es-select>
+
+          <es-firstname class="field-wrapper" [parentFormGroup]="driverDetailsForm"
+                        [submitted]="driverDetailsFormSubmitted" controlName="firstName"
+                        label="First name"></es-firstname>
+
+          <es-lastname class="field-wrapper" [parentFormGroup]="driverDetailsForm"
+                       [submitted]="driverDetailsFormSubmitted" controlName="lastName"
+                       label="Surname"></es-lastname>
+
+          <es-select class="field-wrapper"
+                     [parentFormGroup]="driverDetailsForm"
+                     [submitted]="driverDetailsFormSubmitted"
+                     [controlArray]="refKeyLists.maritalStatusArray"
+                     controlName="maritalStatus"
+                     label="Marital status"></es-select>
+
+          <es-radio
+            class="field-wrapper"
+            [parentFormGroup]="driverDetailsForm"
+            negative="gender-negative"
+            negativeLabel="Female"
+            negativeValue="F"
+            affirmative="gender-affirmative"
+            affirmativeLabel="Male"
+            affirmativeValue="M"
+            controlName="gender"
+            [submitted]="driverDetailsFormSubmitted"
+            label="Gender"></es-radio>
+
+          <es-date-field class="field-wrapper" [parentFormGroup]="dateOfBirthGroup"
+                         [submitted]="driverDetailsFormSubmitted" controlName="Day-Month-Year"
+                         label="Date of birth"
+                         maxMessage="Please enter a value more than 16 years ago."
+                         prependInputId="dob"></es-date-field>
+
+          <es-select class="field-wrapper" (change)="updateOccupationValidators()"
+                     [parentFormGroup]="driverDetailsForm"
+                     [submitted]="driverDetailsFormSubmitted"
+                     [controlArray]="refKeyLists.employmentStatusArray"
+                     controlName="employmentStatus"
+                     label="Employment status"></es-select>
+
+          <ng-container *ngIf="isShowOccupation()">
+
+            <es-autocomplete
+              (emitClickIcon)="occHelp.toggleHelpText()"
+              class="field-wrapper" [parentFormGroup]="driverDetailsForm"
+              [submitted]="driverDetailsFormSubmitted"
+              controlName="occupation" [controlArray]="occupationsArray"
+              label="Occupation"
+              rightText="i"></es-autocomplete>
+            <es-help-text #occHelp [helpIcon]="true">
+              Please choose a title that best describes their occupation from the list provided. If
+              you can't see a suitable title,
+              please call us on <a href="tel:{{ phoneNumbers.motorMtaAddDriver }}">{{
+              phoneNumbers.motorMtaAddDriver }}</a>.
+            </es-help-text>
+
+
+            <es-autocomplete
+              (emitClickIcon)="industryHelp.toggleHelpText()"
+              class="field-wrapper" [parentFormGroup]="driverDetailsForm"
+              [submitted]="driverDetailsFormSubmitted"
+              controlName="industry" [controlArray]="industryArray"
+              label="Industry"
+              rightText="i"></es-autocomplete>
+            <es-help-text #industryHelp [helpIcon]="true">
+              If the industry they work in isn't listed, please select another business type that
+              most closely
+              reflects the industry they work in.
+            </es-help-text>
+
+            <es-radio (change)="updateSecondaryOccupationValidators()"
+                      class="field-wrapper"
+                      [parentFormGroup]="driverDetailsForm"
+                      negative="secondOcc-negative"
+                      affirmative="secondOcc-affirmative"
+                      controlName="secondaryOccYesNo"
+                      [submitted]="driverDetailsFormSubmitted"
+                      label="Secondary occupation?"></es-radio>
+
+            <ng-container *ngIf="isShowSecondaryOccupation()">
+              <es-autocomplete
+                (emitClickIcon)="secondOccHelp.toggleHelpText()"
+                class="field-wrapper"
+                [parentFormGroup]="driverDetailsForm"
+                [submitted]="driverDetailsFormSubmitted" controlName="secondaryOccupation"
+                [controlArray]="occupationsArray"
+                label="Secondary Occupation"
+                rightText="i"></es-autocomplete>
+              <es-help-text #secondOccHelp [helpIcon]="true">
+                Please choose a title that best describes their occupation from the list provided.
+                If you can't see a suitable title,
+                please call us on <a href="tel:{{ phoneNumbers.motorMtaAddDriver }}">{{
+                phoneNumbers.motorMtaAddDriver }}</a>.
+              </es-help-text>
+            </ng-container>
+
+          </ng-container>
+
+          <es-select class="field-wrapper"
+                     [parentFormGroup]="driverDetailsForm"
+                     [submitted]="driverDetailsFormSubmitted"
+                     [controlArray]="refKeyLists.relationshipArray"
+                     controlName="relationship"
+                     label="Relationship to you (the policyholder)"></es-select>
+
+          <es-select
+            (emitClickIcon)="licenceTypeHelp.toggleHelpText()"
+            class="field-wrapper"
+            [parentFormGroup]="driverDetailsForm"
+            [submitted]="driverDetailsFormSubmitted"
+            [controlArray]="refKeyLists.licenceTypeArray"
+            controlName="licenceType"
+            label="Licence type"
+            rightText="i"></es-select>
+          <es-help-text #licenceTypeHelp [helpIcon]="true">
+            This is the type of driving licence currently held.<br/>
+            If the driving licence was issued outside of the UK we’ll need to speak to you over the
+            phone about this.
+            Please call us on <a href="tel:{{ phoneNumbers.motorMtaAddDriver }}">{{
+            phoneNumbers.motorMtaAddDriver }}</a> for a quote.
+          </es-help-text>
+
+          <es-select
+            class="field-wrapper"
+            (emitClickIcon)="yearsLicenceHelp.toggleHelpText()"
+            (change)="updateMonthsLicenceHeldValidators()"
+            [parentFormGroup]="driverDetailsForm"
+            [submitted]="driverDetailsFormSubmitted"
+            [controlArray]="refKeyLists.yearsLicenceHeldArray"
+            controlName="yearsLicenceHeld"
+            label="Years licence held"
+            rightText="i"></es-select>
+          <es-help-text #yearsLicenceHelp [helpIcon]="true">
+            This is the length of time that the type of driving licence has been held. Please only
+            include the time
+            that the current type of driving licence has been held.<br/>
+            For example, if a driver held a driving licence which was issued outside the UK for 10
+            years and then
+            obtained a Full UK Licence 2 years ago then you should select '2 years'.
+          </es-help-text>
+
+          <es-select *ngIf="isShowLicenceMonths()" class="field-wrapper"
+                     [parentFormGroup]="driverDetailsForm"
+                     [submitted]="driverDetailsFormSubmitted"
+                     [controlArray]="refKeyLists.monthsLicenceHeldArray"
+                     controlName="monthsLicenceHeld"
+                     label="Months licence held"></es-select>
+
+          <div class="columns is-mobile">
+            <div class="column is-half">
+              <a (click)="backToScreening()" id="back-to-screening-button"
+                 class="button is-rounded is-outlined is-link">Back</a>
+            </div>
+            <div class="column has-text-right">
+              <button id="submit-button"
+                class="button is-link is-rounded is-success is-tooltip-bottom-mobile is-tooltip-left"
+                data-tooltip="Please check form fields are valid"
+                [class.tooltip]="!driverDetailsForm.valid"
+                [class.es-is-disabled]="!driverDetailsForm.valid || disableSubmit">Submit</button>
+            </div>
+          </div>
+        </form>
+
+        <es-data-layer [vars]="{ 'pageName': 'Portal MTA Add Driver Page 2' }">
+        </es-data-layer>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>

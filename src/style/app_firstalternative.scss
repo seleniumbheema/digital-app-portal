@@ -1,0 +1,42 @@
+// font-awesome
+@import '~font-awesome/css/font-awesome.css';
+// Import Bulma initial variables
+// @import '~bulma/sass/utilities/initial-variables';
+// Override initial variables is settings_<brand>
+@import './modules/settings_firstalternative';
+@import './modules/settings_shared';
+@import './modules/mixins';
+// Fonts
+@import './fonts/fa/fonts.css';
+// Bulma all
+@import '~bulma/bulma';
+@import '~bulma-tooltip';
+@import 'partials_shared';
+
+// Jank
+es-portal-header {
+  &.login {
+    height: 92px;
+  }
+}
+
+.logo {
+  @include svg-bg('../public/brand/firstalternative/images/logos/logo_alt');
+  height: 72px;
+  width: 150px;
+  background-size: 100%;
+}
+
+.invert {
+  .logo {
+    @include svg-bg('../public/brand/firstalternative/images/logos/logo');
+    height: 50px;
+    width: 220px;
+    background-size: 100%;
+    margin-top: 7px;
+  }
+}
+
+
+
+

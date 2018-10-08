@@ -1,0 +1,74 @@
+.policy-mta {
+  .message, .media {
+      background-color: lighten( $primary, 20% );
+    header {
+      background-color: inherit;
+    }
+    h2 {
+      margin-bottom: 0;
+    }
+    h2, h5, p  {
+      color: $white;
+    }
+    &:hover {
+      background-color: $primary;
+    }
+  }
+  .mta-changes {
+    .media {
+      background-color: lighten($primary, 20%);
+      .media-content {
+        p {
+          font-size: 1.5rem;
+          margin: 0;
+          &:last-child {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+    .column {
+      margin-bottom: .5rem;
+    }
+  }
+  .change-driver {
+    .media-content {
+      section {
+        text-align: center;
+      }
+    }
+    svg {
+      margin: 0 auto;
+    }
+  }
+  figure {
+    margin-left: 0;
+    margin-right: 1rem;
+    .icon {
+      fill: $white;
+      vertical-align: middle;
+      height: 100px;
+    }
+  }
+  figure:not(:last-child) {
+    margin-bottom: 0;
+  }
+  .change-address {
+    .find-address {
+      .button {
+        margin-top: 34px;
+      }
+    }
+  }
+}
+
+// important to control gaps on group select components
+.custom-form-group {
+  &.columns {
+    margin-bottom: 0;
+    .column {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+}

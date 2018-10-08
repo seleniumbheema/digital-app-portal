@@ -1,0 +1,84 @@
+
+ <div class="box policy-card">
+   <a class="is-overlay" routerLink="../{{ policy.type }}/{{ policy.number }}/{{ policy.sequenceNumber }}/details"></a>
+    <es-global-messages [messages]="messages"></es-global-messages>
+
+  <!-- Renewals/MTA has its own es global messages as we are using ng-content and don't want to pollute the other normal messages -->
+  <es-global-messages [messages]="renewalOrMtaMessages">
+      <ng-container [ngSwitch]="policy.renewalNotificationCode">
+        <ng-container *ngSwitchCase="'RENEWAL_AUTO'">
+          Your {{ policy.type === 'motor' ? 'car' : 'home'}} insurance will automatically renew on {{ policy.renewalDate | date:'EEE d, MMM y' }}
+          Please check your <a routerLink="../{{ policy.type }}/{{ policy.number }}/{{ policy.sequenceNumber }}/documents">documents.
+          </a>
+        </ng-container>
+        <ng-container *ngSwitchCase="'RENEWAL_NOT_DONE'">
+          Your {{ policy.type === 'motor' ? 'car' : 'home'}} insurance is due for renewal and will end on {{ policy.endDate | date:'EEE d, MMM y' }}
+          Please check your <a routerLink="../{{ policy.type }}/{{ policy.number }}/{{ policy.sequenceNumber }}/documents">renewal documents</a>
+          and call us on <a [href]="'tel:' + (policy.type === 'motor' ? phoneNumbers.motorRenewals : phoneNumbers.homeRenewals)">
+            {{ policy.type === 'motor' ? phoneNumbers.motorRenewals : phoneNumbers.homeRenewals }}
+        </a> if you would like to renew.
+        </ng-container>
+        <ng-container *ngSwitchCase="'RENEWAL_DONE'">
+          Your {{ policy.type === 'motor' ? 'car' : 'home'}} insurance will renew on {{ policy.renewalDate | date:'EEE d, MMM y' }}
+          <a routerLink="../{{ policy.type }}/{{ policy.number }}/{{ policy.sequenceNumber }}/documents">View
+            Documents
+          </a>
+        </ng-container>
+        <ng-container *ngSwitchCase="'RENEWAL_DECLINED'">
+          Unfortunately we are unable to renew your {{ policy.type === 'motor' ? 'car' : 'home'}} insurance and it will end on {{ policy.endDate |
+          date:'EEE d, MMM y' }}. We've sent you a letter to explain why.
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="policy.mtaNotificationCode">
+      The change you've made to your policy will come into effect on {{ policy.mtaStartDate | date:'EEE d, MMM y' }}
+      <a routerLink="../{{ policy.type }}/{{ policy.number }}/{{ policy.sequenceNumber }}/documents">View Documents</a>
+      </ng-container>
+    </es-global-messages>
+
+    <div class="media">
+      <div class="media-left">
+        <svg [ngClass]="icon.classes" class="image is-48x48">
+          <use [attr.xlink:href]="icon.path"></use>
+        </svg>
+      </div>
+      <div class="media-content">
+        <h2 class="cover-type title is-3 is-size-4-mobile">{{ policy.type === 'motor' ? 'Car' : 'Home'}} insurance</h2>
+        <h3 class="policy-number subtitle is-4 has-text-weight-light">Policy number: {{ policy.number }}</h3>
+      </div>
+    </div>
+
+    <div class="columns details">
+      <div class="column is-two-thirds">
+        <h3 class="title is-3 policy-identifier">{{ identifier.full }}</h3>
+        <div class="columns is-gapless is-mobile">
+          <div class="column is-half">{{ identifier.shortLabel }}</div>
+          <div class="column is-half has-text-weight-light">{{ identifier.short }}</div>
+        </div>
+        <div class="columns is-gapless is-mobile">
+          <div class="column is-half">Cover start date</div>
+          <div class="column is-half start-date has-text-weight-light">{{ policy.startDate | date:'EEE d, MMM y' }}
+          </div>
+        </div>
+        <div class="columns is-gapless is-mobile">
+          <div class="column is-half">Cover end date</div>
+          <div class="column is-half end-date has-text-weight-light"> {{ policy.endDate | date:'EEE d, MMM y' }}
+          </div>
+        </div>
+      </div>
+      <div class="column is-one-third card-links is-hidden-mobile">
+        <a class="button is-text view-details" routerLink="../{{ policy.type }}/{{ policy.number }}/{{ policy.sequenceNumber }}/details">
+          Cover details
+        </a>
+        <a class="button is-text view-docs" routerLink="../{{ policy.type }}/{{ policy.number }}/{{ policy.sequenceNumber }}/documents">
+          My documents
+        </a>
+        <a class="button is-text make-change" routerLink="../{{ policy.type }}/{{ policy.number }}/{{ policy.sequenceNumber }}/amendments" *ngIf="!policy.lapsed">
+          Make changes
+        </a>
+        <a class="button is-text make-claim" routerLink="../{{ policy.type }}/{{ policy.number }}/{{ policy.sequenceNumber }}/claim" *ngIf="!policy.lapsed">
+          Make a claim
+        </a>
+      </div>
+    </div>
+  </div>
+

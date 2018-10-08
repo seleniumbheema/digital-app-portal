@@ -1,0 +1,144 @@
+<div class="content" *ngIf="policy.isMotor">
+
+  <ng-container *ngIf="policy.mtaAvailable; else noMotorWebForm">
+    <div class="message">
+      <div class="message-body">
+        <h3 class="title is-4 has-text-weight-bold">Add another driver</h3>
+
+        <div class="columns">
+          <div class="column">Get a quote to find out how much it will cost to add another driver to your policy.
+          </div>
+          <div class="column is-3-tablet ">
+            <a id="ctaAddDriver" routerLink="./add-driver" class="button is-link is-rounded is-fullwidth">Add</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="message">
+      <div class="message-body">
+        <h3 class="title is-4 has-text-weight-bold">Change your car</h3>
+        <div class="columns">
+          <div class="column">Get a quote and find out how much it will cost to change your car on your policy.
+          </div>
+          <div class="column is-3-tablet ">
+            <a id="ctaChangeCar" routerLink="./change-car" class="button is-link is-rounded is-fullwidth">Change</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="message">
+      <div class="message-body">
+        <h3 class="title is-4 has-text-weight-bold">Change your registration number</h3>
+        <div class="columns">
+          <div class="column">If your registration number doesn’t match your documents, change it here.
+          </div>
+          <div class="column is-3-tablet ">
+            <a id="ctaChangeReg" routerLink="./change-registration" class="button is-link is-rounded is-fullwidth">Change</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="message">
+      <div class="message-body">
+        <h3 class="title is-4 has-text-weight-bold">Add a motoring conviction</h3>
+        <div class="columns">
+          <div class="column">If it's a recent motoring conviction, in most cases we'll save the details and add them at your next renewal.
+          </div>
+          <div class="column is-3-tablet ">
+            <a id="ctaAddCon" routerLink="./motor-conviction" class="button is-link is-rounded is-fullwidth">Add</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <h2 class="title is-4" >For all other policy changes you’ll need to give us a call</h2>
+  </ng-container>
+
+  <ng-template #noMotorWebForm>
+    <h2 class="title is-4">To make changes to your car insurance you'll need to give us a call.</h2>
+
+    <p>
+      Please be aware that changes made to your policy may affect your premium or whether we can still insure you.
+    </p>
+  </ng-template>
+
+  <div class="message">
+    <div class="message-body">
+      <div class="columns">
+        <div class="column">
+          <h3 class="title is-4 has-text-weight-bold">Phone our UK call centre</h3>
+          <p class="is-size-4 has-text-link">
+            <a href="tel:{{ phoneNumbers.motorCustomerService }}">
+              <span>
+                <i class="fa fa-phone"></i>
+              </span> {{ phoneNumbers.motorCustomerService }}
+            </a>
+          </p>
+        </div>
+        <div class="column ">
+          <div class="columns is-multiline is-gapless is-mobile">
+            <div class="column is-half">Mon to Fri</div>
+            <div class="column is-half">8am - 8pm</div>
+            <div class="column is-half">Sat</div>
+            <div class="column is-half">9am - 5pm</div>
+            <div class="column is-half">Sun</div>
+            <div class="column is-half">9am - 2pm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <p>If you have a hearing or speech impairment, you can also contact us by specialised text phone. Simply add the prefix 18001
+    to any of our telephone numbers to use the Text Relay service.</p>
+  <p class="is-size-7">Calls to 0345 numbers costs the same as a call to a normal home or business landline.
+  </p>
+
+</div>
+
+<div class="content" *ngIf="policy.isHome">
+
+  <p>To make changes to your home insurance you'll need to give us a call.</p>
+  <p>Please be aware an administration fee may apply to changes made to your policy. The changes could also affect your premium or whether we can still insure you at all.</p>
+
+  <div class="message">
+    <div class="message-body">
+      <div class="columns">
+        <div class="column">
+          <h3 class="title is-4 has-text-weight-bold">Phone our UK call centre</h3>
+          <p class="is-size-4 has-text-link">
+            <a href="tel:{{ phoneNumbers.homeCustomerService }}">
+              <span>
+                <i class="fa fa-phone"></i>
+              </span> {{ phoneNumbers.homeCustomerService }}
+            </a>
+          </p>
+        </div>
+
+        <div class="column ">
+          <div class="columns is-multiline is-gapless is-mobile">
+            <div class="column is-half">Mon to Fri</div>
+            <div class="column is-half">8am - 8pm</div>
+            <div class="column is-half">Sat</div>
+            <div class="column is-half">9am - 5pm</div>
+            <div class="column is-half">Sun</div>
+            <div class="column is-half">9am - 2pm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <p>If you have a hearing or speech impairment, you can also contact us by specialised text phone. Simply add the prefix 18001
+    to any of our telephone numbers to use the Text Relay service.</p>
+  <p class="is-size-7">Calls to 0345 numbers cost the same as a call to a normal home or business landline.
+  </p>
+
+</div>
+
+<es-data-layer [vars]="{ 'pageName': 'Portal Policy Amendments (' + policy.type + ')' }">
+</es-data-layer>

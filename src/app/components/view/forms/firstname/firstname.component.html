@@ -1,0 +1,28 @@
+<div id="{{ controlName }}-container" class="field" [formGroup]="parentFormGroup">
+  <label class="label" for="{{ controlName }}">{{ label }}</label>
+  <div class="control has-icons-right">
+    <input id="{{ controlName }}" class="input" [class.is-success]="firstname.valid" [class.is-danger]="firstname.dirty && firstname.touched && !firstname.valid"
+      type="text" placeholder="{{ label }}" maxlength="40" autocomplete="{{ autocomplete }}" formControlName="{{ controlName }}">
+
+
+    <span class="icon is-small is-right" [class.is-success]="firstname.dirty || !firstname.pristine" *ngIf="firstname.valid">
+      <i class="fa fa-check"></i>
+    </span>
+    <span class="icon is-small is-right" [class.is-danger]="firstname.dirty || !firstname.pristine" *ngIf="firstname.dirty && firstname.touched && !firstname.valid">
+      <i class="fa fa-times"></i>
+    </span>
+
+    <ng-container *ngIf="(submitted && !firstname.valid) || (!firstname.valid && firstname.dirty && firstname.touched)">
+      <div [hidden]="!firstname.hasError('required')">
+        <p class="help is-danger">We do need this information to progress. Please check you have entered the details correctly for us to continue.</p>
+      </div>
+      <div [hidden]="!firstname.hasError('rangeLength')">
+        <p class="help is-danger">Please enter at least 2 characters</p>
+      </div>
+      <div [hidden]="!firstname.hasError('pattern') || firstname.hasError('rangeLength')">
+        <p class="help is-danger">First name is not correct, it should only contain letters, point, single apostrophe, dashes and space</p>
+      </div>
+    </ng-container>
+  </div>
+
+</div>

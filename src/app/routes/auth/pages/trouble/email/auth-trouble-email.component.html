@@ -1,0 +1,57 @@
+<div class="column">
+  <div class="columns" [ngClass]="{'welcome': username}">
+    <div *ngIf="username; then revealUsername else detailForm"></div>
+  </div>
+
+  <ng-template #revealUsername>
+    <div class="column">
+      <div class="box">
+        <h2 class="title is-4">Hi {{ userDetails.firstName }},</h2>
+        <p class="block sub-title">The email address to use to sign in to your account is {{ username }}</p>
+
+        <div class="field">
+          <a class="button is-success is-rounded" [routerLink]="['../../']">
+            <span>Sign in</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #detailForm>
+    <div class="column">
+      <div class="box">
+        <h1 class="title is-1">Retrieve your username</h1>
+        <p class="block sub-title">To retrieve your username we need you to tell us the following information as it appears in your policy.</p>
+        <div class="columns">
+          <form id="auth-forgotten-email" class="column is-half-desktop" [formGroup]="form">
+
+            <es-global-messages [messages]="messages"></es-global-messages>
+
+            <es-firstname class="field-wrapper" [parentFormGroup]="form" [submitted]="submitted" controlName="Fname"></es-firstname>
+
+            <es-lastname class="field-wrapper" [parentFormGroup]="form" [submitted]="submitted" controlName="Lname"></es-lastname>
+
+            <es-postcode class="field-wrapper" [parentFormGroup]="form" [submitted]="submitted" controlName="Postcode"></es-postcode>
+
+            <es-date-field class="field-wrapper" [parentFormGroup]="dateOfBirthGroup" [submitted]="submitted" controlName="Day-Month-Year"
+              label="Date of Birth"></es-date-field>
+
+            <div class="field">
+              <button class="button is-success is-rounded" type="submit" (click)="onSubmit()" [disabled]="disableSubmit">
+                <span>Continue</span>
+              </button>
+            </div>
+
+            <div class="field">
+              <a class="back-link" [routerLink]="['../../']">Back to sign in</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+<es-data-layer [vars]="{ 'pageName': 'Portal Forgot Username' }"></es-data-layer>

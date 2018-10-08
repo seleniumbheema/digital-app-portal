@@ -1,0 +1,40 @@
+<div class="column">
+  <div class="columns login-help">
+  <div class="column">
+    <div class="box">
+
+      <h1 class="title is-1">Trouble signing in?</h1>
+      <p class="block sub-title">Click on the item below that you are having trouble with and we’ll help you resolve it quickly.
+      </p>
+
+      <div class="columns">
+        <div class="column is-half-desktop">
+
+          <div class="field">
+            <a class="button is-rounded is-success email-help" routerLink="./email">
+              <span>I don't know my email</span>
+              <span class="icon is-small">
+
+        </span>
+            </a>
+          </div>
+
+          <div class="field">
+            <a class="button is-success is-rounded password-help" routerLink="./password">
+              <span>I don't know my password</span>
+            </a>
+          </div>
+
+          <div class="field">
+            <a class="back-link" routerLink="../../">Back to sign in</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<es-data-layer [vars]="{ 'pageName': 'Portal Sign In Trouble' }"></es-data-layer>

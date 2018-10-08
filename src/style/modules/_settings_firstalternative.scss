@@ -1,0 +1,26 @@
+// FA brand colors
+
+$fa-base: hsl(33, 44%, 95%);
+$fa-purple: hsl(300, 20%, 50%);
+$fa-dark-purple: #7d1873;
+$fa-light-purple: hsl(298, 51%, 77%);
+$fa-grey: hsl(0, 0%, 27%);
+$fa-light-orange: hsl(41, 100%, 50%);
+$fa-green: hsl(82, 56%, 47%);
+$fa-red: hsl(8, 62%, 47%);
+
+// Overrides
+
+$base: $fa-base;
+$primary: $fa-dark-purple;
+$secondary: $fa-grey;
+$prim-alt: $fa-purple;
+$primary-light: $fa-light-purple;
+$brand-secondary: $fa-light-purple;
+
+// Typography
+
+$family-sans-serif: 'Helvetica', Arial, sans-serif;
+$family-monospace: monospace !default
+$render-mode: optimizeLegibility !default
+$body-family: 'Roboto', Helvetica, Arial, sans-serif;

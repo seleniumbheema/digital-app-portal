@@ -1,0 +1,100 @@
+<div id="mta" class="columns">
+  <div class="column" [class.is-10-tablet]="!changeFormSent">
+    <ng-container *ngIf="!changeFormSent; else confirmation">
+      <h2 class="is-size-3">Change your registration number</h2>
+      <div class="message is-info">
+        <div class="message-body">
+          Please note you can only change your car's registration number, and not the car itself.
+          If you would like to change your car you can do so <a routerLink="../change-car">here.</a>
+        </div>
+      </div>
+
+      <form id="change-registration-form" [formGroup]="changeForm" (ngSubmit)="submitChanges()">
+        <es-global-messages [messages]="messages"></es-global-messages>
+
+        <div class="message">
+          <div class="message-header">
+            Your car
+          </div>
+
+          <div class="message-body">
+            <div>
+              <div class="columns is-mobile">
+                <div class="column">Make</div>
+                <div class="column has-text-weight-light">{{ policy.vehicle.make }}</div>
+              </div>
+
+              <div class="columns is-mobile">
+                <div class="column">Model</div>
+                <div class="column has-text-weight-light">{{ policy.vehicle.model }}</div>
+              </div>
+
+              <div class="columns is-mobile">
+                <div class="column">Registration Number</div>
+                <div class="column has-text-weight-light">{{ policy.vehicle.reg }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <es-vehicle-reg-field
+          (emitClickIcon)="regHelp.toggleHelpText()"
+          class="field-wrapper"
+          [parentFormGroup]="changeForm"
+          [submitted]="changeFormSubmitted"
+          controlName="registration"
+          label="New registration number"
+          rightText="i"></es-vehicle-reg-field>
+        <es-help-text #regHelp [helpIcon]="true">
+          The new Vehicle Registration Number (number plate) of the car we insure.
+        </es-help-text>
+
+        <div id="call-msg" class="message is-info">
+          <div class="message-body">
+            We'll aim to update your policy within 72 hours. If you need your policy updated
+            sooner
+            so you can drive with your new plate, please call us on <a
+            href="tel:{{ phoneNumbers.motorMtaChangeReg }}">{{ phoneNumbers.motorMtaChangeReg }}</a>.
+          </div>
+        </div>
+
+        <div class="columns is-mobile">
+          <div class="column is-half">
+            <a routerLink="../" class="button is-rounded is-outlined is-link">Back</a>
+          </div>
+          <div class="column has-text-right">
+            <button id="submit-button"
+                    class="button is-link is-rounded is-success is-tooltip-bottom-mobile is-tooltip-left"
+                    type="submit"
+                    [class.es-is-disabled]="!changeForm.valid || disableSubmit"
+                    [class.tooltip]="!changeForm.valid"
+                    data-tooltip="Please check form fields are valid">Submit
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+      <es-data-layer [vars]="{ 'pageName': 'Portal MTA Change Registration' }">
+      </es-data-layer>
+    </ng-container>
+
+    <ng-template #confirmation>
+      <h2 class="is-size-3">Thank you</h2>
+
+      <div class="message is-success mta-conf">
+        <div class="message-body">
+          You'll receive an email to confirm we've received your request and it will be dealt with
+          within 72 hours.
+        </div>
+      </div>
+
+      <div class="has-text-right">
+        <a class="button is-link is-rounded" routerLink="../../">Back to your policy</a>
+      </div>
+
+      <es-data-layer [vars]="{ 'pageName': 'Portal MTA Change Registration Confirmation' }">
+      </es-data-layer>
+    </ng-template>
+  </div>
+</div>

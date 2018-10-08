@@ -1,0 +1,248 @@
+/* Highlight selections in branded colors? */
+h1, h2, h3, h4, h5, h6, p {
+  &::selection {
+    background-color: $grey-light;
+  }
+}
+
+h1, h2.policy-number {
+  font-family: $family-primary;
+  color: $primary !important;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: initial;
+  font-family: $body-family;
+}
+
+li {
+  margin-top: .5rem;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.input, .select, select, .text-area {
+  height: 2.5em !important;
+}
+
+es-app,
+es-portal {
+  display: block;
+  width: 100%;
+  height: 100vh;
+}
+
+div.logo {
+  color: transparent;
+}
+
+es-nav-bar {
+  display: block;
+  .logo {
+    @include touch {
+      display: none;
+    }
+  }
+}
+
+html {
+  background: $primary;
+}
+
+body {
+  margin: 0;
+  color: $body-color;
+  background: $primary;
+}
+
+header {
+  .container {
+    margin-left: 0;
+  }
+  @include desktop {
+    .container {
+      margin: 0 auto;
+    }
+  }
+}
+
+#container {
+  height: calc(100% - 65px);
+}
+
+#container main {
+  margin-top: 0;
+}
+
+.container {
+  width: 100%;
+}
+
+main {
+  @include tablet {
+    padding: 0 $column-gap;
+  }
+}
+
+main.columns {
+  @include desktop {
+    margin-top: 0;
+  }
+  display: block;
+  background: $base;
+  min-height: calc(100% - 65px - 110px);
+  margin: 65px 0 0;
+  &.columns:not(:last-child) {
+    margin-bottom: 0;
+  }
+}
+
+// Sidenav
+ng-sidebar aside {
+  width: 220px;
+}
+
+.ng-sidebar {
+  background: $primary;
+  padding: 0 1rem;
+  margin: 0;
+  z-index: 103 !important;
+  h2 {
+    color: $base;
+  }
+}
+
+.ng-sidebar__backdrop { // sass-lint:disable-line class-name-format
+  @include desktop {
+    display: none !important;
+  }
+  opacity: .25 !important;
+  top: 65px !important;
+  z-index: 102 !important;
+}
+
+ng-sidebar > aside {
+  @include desktop {
+    top: 0 !important;
+  }
+  div.logo {
+    background-position: center;
+    text-indent: -9999px;
+    opacity: 1;
+    transition: opacity .2s ease-in-out;
+    margin: 15px 0 0 10px;
+    background-repeat: no-repeat !important;
+  }
+  div.logo:hover {
+    opacity: .8;
+  }
+  top: 65px !important;
+  .icon {
+    fill: $base;
+    font-size: 28px;
+    top: 5px;
+    position: relative;
+  }
+  ul {
+    padding: .75rem 0 0;
+    list-style: none inside;
+    li {
+      margin: .5rem;
+      a {
+        padding: 5px 15px 12px;
+        margin-bottom: .5rem;
+        display: block;
+        color: $base;
+        border-radius: 40px;
+        text-decoration: none !important;
+        &.active, &:hover {
+          transition: background-color .5s;
+          background-color: $primary-inset;
+          color: $base;
+        }
+      }
+    }
+  }
+}
+
+[ng-sidebar-content]#scroll-container {
+  @include desktop {
+  width: calc(100% - 220px);
+  }
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: $base;
+  .container {
+    margin-left: 0;
+    max-width: 960px;
+  }
+}
+
+// dont remove fixes bulma container/header wid sidebar
+#scroll-container {
+  @include tablet {
+    .container {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+  @include desktop {
+    header {
+      max-width: 960px;
+    }
+  }
+}
+
+.ng-sidebar__content[_ngcontent-c0] { // sass-lint:disable-line class-name-format
+  @include desktop {
+    width: calc(100% - 220px);
+  }
+  position: relative !important;
+  width: 100%;
+  height: 100%;
+}
+
+.ng-sidebar--animate[_ngcontent-c1] {
+  transition: transform .3s cubic-bezier(0, 0, .3, 1) !important;
+}
+
+.media-content {
+  overflow: hidden; // FIXME: Needed for IE11 cross sell images on policy page, need to investigate why
+  .multi-offers {
+    @media screen and (min-width: 768px) {
+      .content {
+        min-height: 238px;
+      }
+    }
+  }
+
+  // Custom amends for icon offer(s)
+  .offer-icon {
+    border: 1px solid $primary;
+    border-radius: 8px;
+    min-height: 370px;
+
+    .icon-container {
+      background: $primary;
+
+      .image {
+        fill: $white;
+      }
+    }
+  }
+}
+
+// Fix for Recaptcha logo being obscured by footer
+re-captcha {
+  position: relative;
+  z-index: 1000;
+}
+
+.is-secondary {
+  background-color: $brand-secondary !important;
+}

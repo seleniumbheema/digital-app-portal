@@ -1,0 +1,50 @@
+<div id="{{ controlName }}-container" class="field" [formGroup]="parentFormGroup">
+  <label class="label" for="{{ controlName }}">{{ label }}</label>
+  <p class="help static">
+    This is usually an 8 digit number and can be found on your insurance certificate or insurance schedule documents.
+  </p>
+  <div class="field" [class.has-addons]="leftText || rightText">
+
+    <div *ngIf="leftText" class="control">
+      <a class="button is-static">{{ leftText }}</a>
+    </div>
+
+    <div class="control has-icons-right is-expanded">
+      <input id="{{ controlName }}" class="input" [class.is-success]="policyNumberControl.valid"
+             [class.is-danger]="policyNumberControl.dirty && policyNumberControl.touched && !policyNumberControl.valid"
+             type="tel" placeholder="{{ label }}" autocomplete="{{ autocomplete }}" maxlength="{{ maxlength }}"
+             formControlName="{{ controlName }}">
+      <span class="icon is-small is-right"
+            [class.is-success]="policyNumberControl.dirty || !policyNumberControl.pristine"
+            *ngIf="policyNumberControl.valid">
+        <i class="fa fa-check"></i>
+      </span>
+      <span class="icon is-small is-right"
+            [class.is-danger]="policyNumberControl.dirty || !policyNumberControl.pristine"
+            *ngIf="policyNumberControl.dirty && policyNumberControl.touched && !policyNumberControl.valid">
+        <i class="fa fa-times"></i>
+      </span>
+
+    </div>
+
+    <div *ngIf="rightText" class="control">
+      <a class="button is-static">{{ rightText }}</a>
+    </div>
+
+    <div>
+      <p class="help is-danger">
+        <ng-container
+          *ngIf="(policyNumberControl.hasError('required') && submitted && !policyNumberControl.valid) || (policyNumberControl.hasError('required') && !policyNumberControl.valid && policyNumberControl.dirty && policyNumberControl.touched)">
+          {{ requiredMessage }}
+        </ng-container>
+
+        <ng-container
+          *ngIf="(policyNumberControl.hasError('pattern') && submitted && !policyNumberControl.valid) || (policyNumberControl.hasError('pattern') && !policyNumberControl.valid && policyNumberControl.dirty && policyNumberControl.touched)">
+          You have entered an invalid policy number
+        </ng-container>
+      </p>
+    </div>
+
+  </div>
+
+</div>

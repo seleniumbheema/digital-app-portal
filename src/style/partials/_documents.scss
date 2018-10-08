@@ -1,0 +1,21 @@
+#scroll-container header.card-header {
+  width: 100%;
+}
+
+.card.documents {
+  box-shadow: none;
+  border-bottom: 1px solid $grey-lighter;
+  margin-bottom: 1rem;
+  .card-header {
+    background-color: $primary;
+    i, p {
+      margin-bottom: 0;
+      color: $white;
+    }
+  }
+  .card-content {
+    @include mobile {
+      padding: 1.5rem .75rem;
+    }
+  }
+}

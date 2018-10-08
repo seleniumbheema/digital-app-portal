@@ -1,0 +1,27 @@
+// Sheilas brand colors
+
+$sw-base: hsl(33, 44%, 95%);
+$sw-pink: hsl(335, 79%, 59%);
+$sw-light-pink: hsl(323, 71%, 70%); //temp
+$sw-grey: hsl(0, 0%, 20%);
+$sw-light-grey: hsl(0, 0%, 52%);
+$sw-green: hsl(82, 56%, 47%);
+$sw-red: hsl(8, 62%, 47%);
+$sw-light-blue: hsl(195, 73%, 74%);
+
+// Overrides
+
+$base: $sw-base;
+$primary: $sw-pink;
+$secondary: $sw-grey;
+$prim-alt: $sw-light-grey;
+$brand-secondary: $sw-light-blue;
+$primary-light: $sw-light-pink;
+
+// Typography
+
+$family-sans-serif: 'Futura-Book', Helvetica, Arial, sans-serif;
+$family-secondary: 'Airstream', Helvetica, Arial, sans-serif;
+$family-monospace: monospace !default
+$render-mode: optimizeLegibility !default
+$body-family: 'Roboto', Helvetica, Arial, sans-serif;

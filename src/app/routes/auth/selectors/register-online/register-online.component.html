@@ -1,0 +1,98 @@
+<div class="box">
+
+  <h1 class="title is-1">My Account</h1>
+  <p class="block">To update your password, we need a bit more information from you. Complete this
+    form and we'll send a temporary password to your email so you can get back up and running on My
+    Account.</p>
+
+  <div class="columns">
+    <form id="auth-create-acc" class="column is-9-tablet" [formGroup]="form">
+
+      <es-global-messages [messages]="messages"></es-global-messages>
+
+      <es-radio
+        (emitClickIcon)="policyRegHelp.toggleHelpText()"
+        (change)="handlePolicyOrRegChange()"
+        class="field-wrapper" [parentFormGroup]="form"
+        [submitted]="submitted"
+        affirmative="policy-reg-affirmative" affirmativeValue="PN" affirmativeLabel="Policy Number"
+        negative="policy-reg-negative" negativeValue="RN" negativeLabel="Car Registration"
+        controlName="policyOrReg"
+        label="Please provide one of the following:"
+        [longLabels]="true"
+        rightText="i"></es-radio>
+      <es-help-text #policyRegHelp [helpIcon]="true">
+        Your policy number can be found near the top of your Certificate of Motor Insurance, your
+        Car Insurance Schedule or your Home Insurance Schedule. It‘s usually 8 digits.
+        <br/>Alternatively, the Vehicle Registration Number (number plate) of the car we insure
+        for you.
+      </es-help-text>
+
+      <es-policy-number-field *ngIf="policyOrRegCtrl.value === 'PN'" class="field-wrapper"
+                              [parentFormGroup]="form"
+                              [submitted]="submitted"
+                              controlName="policyId" label="Please supply your policy number"
+                              maxlength="20"></es-policy-number-field>
+
+      <es-vehicle-reg-field *ngIf="policyOrRegCtrl.value === 'RN'" class="field-wrapper"
+                            [parentFormGroup]="form"
+                            [submitted]="submitted"
+                            controlName="vehicleReg"
+                            label="Please supply your car registration number"
+                            helpText="(for car insurance customers only)"></es-vehicle-reg-field>
+
+      <es-firstname class="field-wrapper" [parentFormGroup]="form" [submitted]="submitted"
+                    controlName="forename"></es-firstname>
+
+      <es-lastname class="field-wrapper" [parentFormGroup]="form" [submitted]="submitted"
+                   controlName="surname"></es-lastname>
+
+      <es-date-field class="field-wrapper" [parentFormGroup]="dateFormGroup" [submitted]="submitted"
+                     controlName="dayCtrl-monthCtrl-yearCtrl" label="Your date of birth"
+                     helpText="For example: 23/11/1972"
+                     prependInputId="custDate">
+      </es-date-field>
+
+      <es-postcode class="field-wrapper" [parentFormGroup]="form" [submitted]="submitted"
+                   controlName="postcode"
+                   label="And your postcode?"></es-postcode>
+
+      <div class="columns is-mobile">
+        <div class="column is-half">
+          <a class="button is-rounded is-outlined is-link" routerLink="/auth/login">Back to sign
+            in</a>
+        </div>
+        <div class="column has-text-right">
+          <ng-container *ngIf="recaptchaEnabled">
+            <re-captcha #captchaRef="reCaptcha"
+                        (resolved)="$event && onSubmit($event)"></re-captcha>
+
+            <!-- This button has to go inside the ng-container in order to have reference to the #captchaRef template var. This is due to the scope of
+            the vars being only available within their containing template, and due to using structural directive like *ngIf, that under the hood create a
+            template, the template var is only available within the ngIf -->
+            <button
+              class="button is-success is-rounded is-link is-tooltip-bottom-mobile is-tooltip-left"
+              id="submit-button"
+              type="button"
+              (click)="(form.valid && !disableSubmit) ? captchaRef.execute() : onSubmit()"
+              [class.tooltip]="!form.valid"
+              [class.es-is-disabled]="!form.valid || disableSubmit"
+              data-tooltip="Please check form fields are valid">Submit</button>
+          </ng-container>
+
+          <!-- Different button needed for when recaptcha is disabled -->
+          <button *ngIf="!recaptchaEnabled"
+            class="button is-success is-rounded is-link is-tooltip-bottom-mobile is-tooltip-left"
+            id="submit-button"
+            type="button"
+            (click)="onSubmit()"
+            [class.tooltip]="!form.valid"
+            [class.es-is-disabled]="!form.valid || disableSubmit"
+            data-tooltip="Please check form fields are valid">Submit</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</div>

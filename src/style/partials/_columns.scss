@@ -1,0 +1,16 @@
+.is-divided {
+  > .column {
+    @include tablet {
+      border-right: 1px solid $grey-lighter;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      &:first-child {
+        padding-left: 1rem;
+      }
+      &:last-child {
+        border-right: 0;
+        padding-right: 1rem;
+      }
+    }
+  }
+}

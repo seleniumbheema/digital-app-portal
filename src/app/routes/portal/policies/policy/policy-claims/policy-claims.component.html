@@ -1,0 +1,222 @@
+<div class="content" *ngIf="policy.type ==='motor'">
+  <div class="notification is-primary accident-support" *ngIf="brandCode !== 'FA'">
+    <div class="columns">
+      <div class="column is-four-fifths-tablet is-two-thirds-mobile">
+        <p class="is-size-3">If you're ever in an accident we're here to help</p>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-four-fifths-tablet">
+        <p class="is-size-3 has-text-link ">Find out more about {{ brandName }} Accident support
+          <a routerLink="/info/accident-support" target="_blank" class="has-text-weight-bold">here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <p> Please contact our claims helpline after you are involved in an incident that could result in a claim. The reason
+    we ask you to do this, is so that we can protect you from the beginning should anything develop further. </p>
+
+  <div class="message">
+    <div class="message-body">
+      <div class="columns">
+        <div class="column">
+          <h3 class="title is-4 has-text-weight-bold">Call car claims</h3>
+          <p class="is-size-4 has-text-link">
+            <a href="tel:{{ phoneNumbers.motorClaims }}">
+              <span>
+                <i class="fa fa-phone"></i>
+              </span> {{ phoneNumbers.motorClaims }}
+            </a>
+          </p>
+        </div>
+        <div class="column ">
+          <div class="columns is-multiline is-gapless is-mobile">
+            <div class="column is-half">Mon to Fri</div>
+            <div class="column is-half">8am - 8pm</div>
+            <div class="column is-half">Sat</div>
+            <div class="column is-half">9am - 5pm</div>
+            <div class="column is-half">Sun</div>
+            <div class="column is-half">Closed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>If you've had an accident outside of these hours and your car isn't driveable, please call our 24-hour accident
+    recovery line on
+    <a href="tel:{{ phoneNumbers.motorClaims24 }}">
+      {{ phoneNumbers.motorClaims24 }}.
+    </a>
+  </p>
+
+  <h3 class="title is-4 has-text-weight-bold">Questions we'll ask</h3>
+
+  <ul>
+    <li> What is your car's registration number?</li>
+    <li> Where did the incident take place?</li>
+    <li> What are the names, addresses, phone numbers, and registration numbers of the people involved? This can be the
+      other driver and includes witnesses.
+    </li>
+  </ul>
+  <p> Don't worry if you don't have all of this information, it's important to call us as soon as you're safe, that way
+    we can guide you through the claims process and provide the necessary support. </p>
+
+  <p> Once your claim has been registered, we'll arrange the recovery of your car, the repair at one of our recommended
+    garages, and give it a clean before returning it to you. </p>
+
+  <h2 class="is-size-3">Windscreen claims</h2>
+  <p>If your windscreen is chipped or cracked you can make a claim online, with Autoglass or call them using the number
+    below.</p>
+  <div class="message">
+    <div class="message-body">
+      <div class="columns">
+        <div class="column">
+          <h3 class="title is-4 has-text-weight-bold">Autoglass (open 24-hours)</h3>
+          <p class="is-size-4 has-text-link">
+            <a href="tel:{{ phoneNumbers.motorWindscreen }}">
+            <span>
+              <i class="fa fa-phone"></i>
+            </span> {{ phoneNumbers.motorWindscreen }}
+            </a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <h2 class="is-size-3">Additional phone numbers</h2>
+  <p> If you have bought any of our Optional Extras and need to make a claim their numbers can be found below. </p>
+  <div class="message">
+    <div class="message-body">
+      <h3 class="title is-4 has-text-weight-bold">Accident Recovery (open 24-hours)</h3>
+      <p class="is-size-4 has-text-link">
+        <a href="tel:{{ phoneNumbers.motorAccidentRecovery }}">
+          <span>
+            <i class="fa fa-phone"></i>
+          </span> {{ phoneNumbers.motorAccidentRecovery }}
+        </a>
+      </p>
+      <h3 class="title is-4 has-text-weight-bold">Breakdown Assistance (open 24-hours)</h3>
+      <p class="is-size-4 has-text-link">
+        <a href="tel:{{ phoneNumbers.motorBreakdown }}">
+          <span>
+            <i class="fa fa-phone"></i>
+          </span> {{ phoneNumbers.motorBreakdown }}
+        </a>
+      </p>
+      <h3 class="title is-4 has-text-weight-bold">Motoring Legal Protection</h3>
+      <p class="is-size-4 has-text-link">
+        <a href="tel:{{ phoneNumbers.motorLegal }}">
+          <span>
+            <i class="fa fa-phone"></i>
+          </span> {{ phoneNumbers.motorLegal }}
+        </a>
+      </p>
+      <h3 class="title is-4 has-text-weight-bold">Car Key Cover</h3>
+      <p class="is-size-4 has-text-link">
+        <a href="tel:{{ phoneNumbers.motorKey }}">
+          <span>
+            <i class="fa fa-phone"></i>
+          </span> {{ phoneNumbers.motorKey }}
+        </a>
+      </p>
+      <h3 class="title is-4 has-text-weight-bold">Misfuelling Cover</h3>
+      <p class="is-size-4 has-text-link">
+        <a href="tel:{{ phoneNumbers.motorMisfuel }}">
+          <span>
+            <i class="fa fa-phone"></i>
+          </span> {{ phoneNumbers.motorMisfuel }}
+        </a>
+      </p>
+    </div>
+  </div>
+  <p> If you have a hearing or speech impairment, you can also contact us by specialised text phone. Simply add the
+    prefix 18001 to any of our telephone numbers to use the Text Relay service. </p>
+  <p class="is-size-7"> Calls to 0345 numbers cost the same as a call to a normal home or business landline. </p>
+</div>
+
+<div class="content" *ngIf="policy.type ==='home'">
+  <p>Call our claims helpline, and your personal claims handler will take your details over the phone, so you don't have
+    to spend your time filling out a form. </p>
+
+  <div class="message">
+    <div class="message-body">
+      <div class="columns">
+        <div class="column">
+          <h3 class="title is-4 has-text-weight-bold">Call home claims</h3>
+          <p class="is-size-4 has-text-link">
+            <a href="tel:{{ phoneNumbers.homeClaims }}">
+              <span>
+                <i class="fa fa-phone"></i>
+              </span> {{ phoneNumbers.homeClaims }}
+            </a>
+          </p>
+        </div>
+        <div class="column">
+          <div class="columns is-multiline is-gapless is-mobile">
+            <div class="column is-half">Mon to Fri</div>
+            <div class="column is-half">8am - 8pm</div>
+            <div class="column is-half">Sat</div>
+            <div class="column is-half">9am - 5pm</div>
+            <div class="column is-half">Sun</div>
+            <div class="column is-half">Closed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2 class="is-size-3">Additional phone numbers</h2>
+  <p> If you have bought any of our Optional Extras and need to make a claim their numbers can be found below. </p>
+  <div class="message">
+    <div class="message-body">
+      <div class="column is-12 is-6-tablet">
+        <h3 class="title is-4 has-text-weight-bold">Home Emergency Cover (open 24-hours)</h3>
+        <p class="is-size-4 has-text-link">
+          <a href="tel:{{ phoneNumbers.homeEmergency }}">
+            <span>
+              <i class="fa fa-phone"></i>
+            </span> {{ phoneNumbers.homeEmergency }}
+          </a>
+        </p>
+        <h3 class="title is-4 has-text-weight-bold">Pests Cover (open 24-hours)</h3>
+        <p class="is-size-4 has-text-link">
+          <a href="tel:{{ phoneNumbers.homePest }}">
+            <span>
+              <i class="fa fa-phone"></i>
+            </span> {{ phoneNumbers.homePest }}
+          </a>
+        </p>
+        <h3 class="title is-4 has-text-weight-bold">Family Legal Protection (open 24-hours)</h3>
+        <p class="is-size-4 has-text-link">
+          <a href="tel:{{ phoneNumbers.homeLegal }}">
+            <span>
+              <i class="fa fa-phone"></i>
+            </span> {{ phoneNumbers.homeLegal }}
+          </a>
+        </p>
+        <h3 class="title is-4 has-text-weight-bold">Travel Claim Line (Mon-Fri 8am-6pm)</h3>
+        <p class="is-size-4 has-text-link">
+          <a href="tel:{{ phoneNumbers.homeTravel }}">
+            <span>
+              <i class="fa fa-phone"></i>
+            </span> {{ phoneNumbers.homeTravel }}
+          </a>
+        </p>
+        <h3 class="title is-4 has-text-weight-bold">Travel Insurance Emergency Helpline (open 24-hours)</h3>
+        <p class="is-size-4 has-text-link">
+          <a href="tel:{{ phoneNumbers.homeTravelEmergency }}">
+            <span>
+              <i class="fa fa-phone"></i>
+            </span> {{ phoneNumbers.homeTravelEmergency }}
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p>If you have a hearing or speech impairment, you can also contact us by specialised text phone. Simply add the
+    prefix 18001 to any of our telephone numbers to use the Text Relay service.</p>
+  <p class="is-size-7">Calls to 0345 numbers cost the same as a call to a normal home or business landline. </p>
+</div>
+
+<es-data-layer [vars]="{ 'pageName': 'Portal Policy Claims (' + policy.type + ')' }"></es-data-layer>

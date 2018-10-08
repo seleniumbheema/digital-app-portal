@@ -1,0 +1,242 @@
+<div id="mta" class="columns">
+  <div class="column" [class.is-10-tablet]="!changeFormSent">
+    <ng-container *ngIf="!changeFormSent; else confirmation">
+      <h2 class="is-size-3">Quote to change your car</h2>
+
+      <div *ngIf="!showChangeCarForm; else carChangeForm">
+        <p>Submit this form and we'll usually send you a quote in a few minutes.</p>
+        <p>Before you start, can we just check...</p>
+
+        <form [formGroup]="screeningForm" (ngSubmit)="submitScreening()">
+
+          <es-radio
+            class="field-wrapper"
+            [parentFormGroup]="screeningForm"
+            negative="mta-registration-known-negative"
+            affirmative="mta-registration-known-affirmative"
+            controlName="registrationKnown"
+            [submitted]="screeningFormSubmitted"
+            label="Do you know the registration number?"></es-radio>
+
+          <es-radio
+            *ngIf="registrationKnownControl.value === 'Y'"
+            class="field-wrapper"
+            [parentFormGroup]="screeningForm"
+            negative="mta-owner-negative"
+            affirmative="mta-owner-affirmative"
+            controlName="owner"
+            [submitted]="screeningFormSubmitted"
+            label="Will you (the policyholder) be the registered owner and keeper of the car?"></es-radio>
+
+          <ng-container
+            *ngIf="ownerControl.value === 'Y' && registrationKnownControl.value === 'Y'">
+            <es-radio
+              (emitClickIcon)="modsHelp.toggleHelpText()"
+              class="field-wrapper"
+              [parentFormGroup]="screeningForm"
+              negative="mta-modified-negative"
+              affirmative="mta-modified-affirmative"
+              controlName="modified"
+              [submitted]="screeningFormSubmitted"
+              label="Has your car been modified?"
+              rightText="i"></es-radio>
+            <es-help-text #modsHelp [helpIcon]="true">
+              A modification is any alteration or change to the manufacturer’s standard
+              specification for the car, including optional extras fitted to the car when new by
+              the vehicle manufacturer or dealer, which improves its value, performance,
+              appearance or attractiveness to thieves. This includes, but is not restricted to,
+              changes to the engine, engine management or exhaust system, changes to the wheels or
+              suspension system, changes to the bodywork, such as spoilers or body kits,
+              paintwork or changes to the windows, such as tinting.
+            </es-help-text>
+          </ng-container>
+
+          <div *ngIf="isShowCallUsMessage()" id="call-msg" class="message is-danger">
+            <div class="message-body">
+              Sorry, we'll need to speak to you over the phone about this. Please call us
+              on <a href="tel:{{ phoneNumbers.motorMtaChangeCar }}">{{
+              phoneNumbers.motorMtaChangeCar }}</a> for a quote.
+            </div>
+          </div>
+
+          <div class="columns is-mobile">
+            <div class="column is-half">
+              <a class="button is-rounded is-outlined is-link" routerLink="../">Back</a>
+            </div>
+            <div class="column has-text-right">
+              <button id="submitScreening"
+                class="continue button is-link is-rounded is-success is-tooltip-bottom-mobile is-tooltip-left"
+                [class.tooltip]="!screeningForm.valid && !isShowCallUsMessage()"
+                [class.es-is-disabled]="!screeningForm.valid || isShowCallUsMessage() || disableSubmit"
+                data-tooltip="Please check form fields are valid">Continue</button>
+            </div>
+          </div>
+
+        </form>
+
+        <es-data-layer [vars]="{ 'pageName': 'Portal MTA Change Car Page 1' }">
+        </es-data-layer>
+      </div>
+
+      <ng-template #carChangeForm>
+          <p>Now we need a little more about the new car</p>
+
+          <form id="change-car-form" [formGroup]="changeForm" (ngSubmit)="foundCar ? submitChanges() : findCar()">
+            <es-global-messages [messages]="messages"></es-global-messages>
+
+            <ng-container *ngIf="!foundCar">
+              <es-vehicle-reg-field
+                (emitClickIcon)="regHelp.toggleHelpText()"
+                class="field-wrapper"
+                [parentFormGroup]="changeForm"
+                [submitted]="changeFormSubmitted"
+                controlName="registration"
+                label="Registration Number"
+                rightText="i"></es-vehicle-reg-field>
+              <es-help-text #regHelp [helpIcon]="true">
+                The Vehicle Registration Number (number plate) of the car you want a quote for
+              </es-help-text>
+
+              <div *ngIf="changeFormCarFound === false" class="message is-danger">
+                <div class="message-body">
+                  <p>Details for the registration number you've entered can't be found. Please try
+                    again.</p>
+                  <p>If you can't find the details of the car from the registration number you'll
+                    need to call us on
+                    <a href="tel:{{ phoneNumbers.motorMtaChangeCar }}">{{
+                      phoneNumbers.motorMtaChangeCar }}</a> for a quote.</p>
+                </div>
+              </div>
+            </ng-container>
+
+            <div id="found-car" class="columns" *ngIf="foundCar">
+              <div class="column">
+                <div class="message is-success">
+                  <div class="message-header">
+                    We've found your car
+                  </div>
+
+                  <div class="message-body">
+                      <div class="columns is-mobile">
+                        <div class="column">Make</div>
+                        <div class="column has-text-weight-light">{{ foundCar.make }}</div>
+                      </div>
+
+                      <div class="columns is-mobile">
+                        <div class="column">Model</div>
+                        <div class="column has-text-weight-light">{{ foundCar.model }}</div>
+                      </div>
+
+                      <div class="columns is-mobile">
+                        <div class="column">Registration</div>
+                        <div class="column has-text-weight-light">{{ foundCar.registration }}</div>
+                      </div>
+
+                      <div class="columns is-mobile">
+                        <div class="column">Registration Date</div>
+                        <div class="column has-text-weight-light">
+                          {{ foundCar.registrationDate | date:'EEE d, MMM y, HH:mm' }}
+                        </div>
+                      </div>
+
+                      <div class="columns is-mobile">
+                        <div class="column">Transmission</div>
+                        <div class="column has-text-weight-light">{{ foundCar.transmission }}</div>
+                      </div>
+
+                    <div class="has-text-right">
+                      <a id="incorrect-car-button" class="button is-link is-rounded"
+                         (click)="incorrectCar()">Not your
+                        car?</a>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ng-container *ngIf="foundCar">
+              <es-number-field (emitClickIcon)="valueHelp.toggleHelpText()" rightText="i"
+                              class="field-wrapper" [parentFormGroup]="changeForm"
+                              [submitted]="changeFormSubmitted"
+                              controlName="valuation" label="Estimated value"></es-number-field>
+              <es-help-text #valueHelp [helpIcon]="true">
+                This is the cost of replacing your car with another of the same make, model, age,
+                condition, mileage and specification. If you're not sure exactly how much the car
+                is worth, an approximate value is fine.
+              </es-help-text>
+
+              <es-radio (change)="updatePurchaseDateValidator()"
+                        class="field-wrapper"
+                        [parentFormGroup]="changeForm"
+                        negative="mta-purchased-negative"
+                        affirmative="mta-purchased-affirmative"
+                        controlName="purchased"
+                        [submitted]="changeFormSubmitted"
+                        label="Have you bought the car yet?"></es-radio>
+
+              <es-date-field
+                prependInputId="purchased"
+                (emitClickIcon)="dateBoughtHelp.toggleHelpText()"
+                *ngIf="isShowPurchaseDate()" class="field-wrapper"
+                [parentFormGroup]="purchaseDateGroup"
+                [submitted]="changeFormSubmitted" controlName="Day-Month-Year"
+                label="Date of Purchase" autocomplete="purchased"
+                rightText="i"></es-date-field>
+              <es-help-text #dateBoughtHelp [helpIcon]="true">
+                The date you bought the car.
+              </es-help-text>
+            </ng-container>
+
+            <div class="columns is-mobile">
+              <div class="column is-half">
+                <a (click)="backToScreening()" id="back-to-screening-button"
+                   class="button is-rounded is-outlined is-link">Back</a>
+              </div>
+              <div class="column has-text-right">
+                <button *ngIf="foundCar" type="submit" id="submit-button"
+                  class="button is-link is-rounded is-success is-tooltip-bottom-mobile is-tooltip-left"
+                  [class.tooltip]="!changeForm.valid"
+                  [class.es-is-disabled]="!changeForm.valid || disableSubmit"
+                  data-tooltip="Please check form fields are valid">Submit</button>
+
+
+                <ng-container *ngIf="!foundCar">
+                  <button type="button" id="find-car-button"
+                          class="button is-link is-rounded is-tooltip-bottom-mobile is-tooltip-left"
+                          [class.tooltip]="!registrationControl.valid"
+                          [class.es-is-disabled]="!registrationControl.valid"
+                          (click)="findCar()"
+                          data-tooltip="Please enter a valid registration">Find Car
+                  </button>
+                </ng-container>
+              </div>
+            </div>
+
+          </form>
+
+        <es-data-layer [vars]="{ 'pageName': 'Portal MTA Change Car Page 2' }">
+        </es-data-layer>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #confirmation>
+      <h2 class="is-size-3">Thank you</h2>
+
+      <div class="message is-success mta-conf">
+        <div class="message-body">
+          If you submitted this form before 8pm (or 6pm weekends) then you'll receive a quote in a
+          few minutes. Otherwise you'll get it first thing tomorrow morning.
+        </div>
+      </div>
+
+      <div class="has-text-right">
+        <a class="button is-link is-rounded" routerLink="../../">Back to your policy</a>
+      </div>
+
+      <es-data-layer [vars]="{ 'pageName': 'Portal MTA Change Car Confirmation' }">
+      </es-data-layer>
+    </ng-template>
+
+  </div>
+</div>

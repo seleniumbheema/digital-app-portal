@@ -1,0 +1,26 @@
+es-info {
+  background-color: $base;
+  display: block;
+  padding-bottom: 2rem;
+}
+
+.hero.accident {
+  @include tablet {
+    background-image: url('../public/common/img/accident.jpg');
+    background-position: right;
+    background-repeat: no-repeat;
+  }
+}
+
+.s-a-m {
+  h3 {
+    margin-bottom: 2.5rem;
+  }
+  .column {
+    background-color: $white;
+    border: 1px solid $brand-secondary;
+  }
+  .column:first-child {
+    background-color: $primary;
+  }
+}

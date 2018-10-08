@@ -1,0 +1,64 @@
+<div class="content">
+
+  <es-global-messages [messages]="messages"></es-global-messages>
+
+  <div *ngIf="!documents.length" class="notification messages-container is-info">
+    <p>Currently there are no documents available.</p>
+  </div>
+
+  <div id="documents" *ngIf="documents.length">
+
+    <p>
+      All of your documents can be found here. Please take the time to read them and make sure everything is correct.
+      If you notice something isn't quite right, please get in touch with us straight away. Or, if any of your details have changed,
+      again let us know, as it could affect your premium, and if we can still insure you.
+      <ng-container *ngIf="policySummary.renewable">
+        Any changes we make to your insurance can be found in your renewal update.
+      </ng-container>
+    </p>
+
+    <ng-container *ngFor="let policyYearTransaction of documents">
+
+      <ng-container *ngFor="let transaction of policyYearTransaction.documentTransactions">
+
+        <h2 *ngIf="transaction.heading" class="is-size-3">{{ transaction.heading }} policy documents</h2>
+
+        <div class="card documents">
+          <header class="card-header" (click)="transaction.expanded = !transaction.expanded">
+            <p class="card-header-title has-text-weight-normal">
+              Period of cover: &nbsp;
+              <span class="has-text-weight-semibold is-hidden-mobile">{{ transaction.startDate | date:'d MMMM yyyy' }} - {{ transaction.endDate | date:'d MMMM yyyy' }}</span>
+              <span class="has-text-weight-semibold is-hidden-tablet"> <span class="is-inline-block">{{ transaction.startDate | date:'d MMM yyyy' }} -</span> <span class="is-inline-block">{{ transaction.endDate | date:'d MMM yyyy' }}</span></span>
+            </p>
+            <a class="card-header-icon">
+              <span class="icon">
+                <i class="fa fa-plus" aria-hidden="true" *ngIf="!transaction.expanded"></i>
+                <i class="fa fa-minus" aria-hidden="true" *ngIf="transaction.expanded"></i>
+              </span>
+            </a>
+          </header>
+          <div class="card-content" *ngIf="transaction.expanded">
+            <div class="content">
+                <div class="columns is-gapless is-mobile" *ngFor="let doc of transaction.docs">
+                  <div class="column is-half-mobile">
+                    {{ doc.documentType || 'Unknown Document' }}
+                  </div>
+                  <div class="column has-text-weight-semibold">
+                    <a (click)="downloadDocument(doc.policyNumber, doc.documentId, doc.documentType)">
+                      <span class="icon is-medium">
+                        <i class="fa fa-download"></i>
+                      </span>
+                      Download
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<es-data-layer [vars]="{ 'pageName': 'Portal Policy Documents (' + policy.type + ')' }">
+</es-data-layer>

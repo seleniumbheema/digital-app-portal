@@ -1,0 +1,38 @@
+es-portal-policy-card .policy-card {
+  margin-bottom: .5rem;
+  .column {
+    .column {
+      margin-bottom: .5rem;
+    }
+  }
+  .details .columns {
+    border-top: 1px solid $grey-lighter;
+    margin-bottom: 0;
+    padding-top: .5rem;
+  }
+  .title {
+    font-family: $body-family;
+  }
+  .policy-identifier {
+    margin-bottom: 1rem;
+    color: $body-color;
+  }
+  .policy-number {
+    @include mobile {
+      margin-bottom: $gap / 2;
+    }
+    margin-bottom: $gap;
+  }
+}
+
+a.button {
+
+  &.is-text {
+    text-align: left;
+    display: block;
+    text-decoration: none;
+    margin-bottom: .5rem;
+  }
+}
+
+

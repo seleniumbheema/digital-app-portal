@@ -1,0 +1,46 @@
+<div id="{{ controlName }}-container" class="field" [formGroup]="parentFormGroup">
+  <label class="label">{{ label }}</label>
+  <div class="field" [class.has-addons]="leftText || rightText">
+
+    <div *ngIf="leftText" class="control">
+      <a class="button is-static">{{ leftText }}</a>
+    </div>
+
+    <div id="{{ controlName }}" class="columns is-gapless control radios is-expanded" [ngClass]="{ 'is-mobile': !longLabels }">
+
+      <div class="column is-6-tablet" [ngClass]="{ 'is-12-mobile': longLabels }">
+        <input
+          id="{{ affirmative }}"
+          class="is-checkradio"
+          type="radio"
+          name="{{ controlName }}"
+          value="{{ affirmativeValue }}"
+          formControlName="{{ controlName }}">
+        <label for="{{ affirmative }}">{{ affirmativeLabel }}</label>
+      </div>
+
+      <div class="column is-6-tablet" [ngClass]="{ 'is-12-mobile': longLabels }">
+        <input
+          id="{{ negative }}"
+          class="is-checkradio"
+          type="radio"
+          name="{{ controlName }}"
+          value="{{ negativeValue }}"
+          formControlName="{{ controlName }}">
+        <label for="{{ negative }}">{{ negativeLabel }}</label>
+      </div>
+
+    </div>
+
+    <div *ngIf="rightText" class="control">
+      <a (click)="clickedIcon()" class="button help-icon" title="Help">{{ rightText }}</a>
+    </div>
+
+  </div>
+
+  <div *ngIf="(submitted && !radioControl.valid) || (!radioControl.valid && radioControl.dirty && radioControl.touched)">
+    <p class="help is-danger">We do need this information to progress. Please check you have entered the details correctly for us to continue</p>
+  </div>
+</div>
+
+

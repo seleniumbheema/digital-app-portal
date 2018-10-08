@@ -1,0 +1,54 @@
+<footer [ngClass]="{'login': login}">
+  <div class="columns">
+    <div class="column">
+      <ul>
+        <li>
+          <a class="is-size-7-mobile" href="{{ '/privacy' | esBrandUrl }}" rel="noopener" target="_blank">
+            Security &amp; Privacy
+          </a>
+        </li>
+        <li>
+          <a class="is-size-7-mobile" href="{{ '/legal' | esBrandUrl }}" rel="noopener" target="_blank">Legal</a>
+        </li>
+        <li>
+          <a class="is-size-7-mobile" href="{{ '/accessibility' | esBrandUrl }}" rel="noopener" target="_blank">
+            Accessibility
+          </a>
+        </li>
+        <li>
+          <a class="is-size-7-mobile" href="{{ '/cookies-policy' | esBrandUrl }}" rel="noopener" target="_blank">
+            Cookies
+          </a>
+        </li>
+      </ul>
+
+      <ng-container [ngSwitch]="brandCode">
+        <ng-container *ngSwitchCase="'ES'">
+          <p>esure Car and Home Insurance is arranged and administered by esure Services Limited, who are registered in England
+            and Wales no.2135610 at The Observatory, Reigate, Surrey, RH2 0SG and who are authorised and regulated by the Financial
+            Conduct Authority, register no. 312063. The insurance is underwritten by esure Insurance Limited who are authorised by
+            the Prudential Regulation Authority and regulated by the Financial Conduct Authority and the Prudential Regulation
+            Authority, number 203350. The core elements of Travel Insurance are underwritten by AWP P&amp;C SA (Financial Services
+            Register no. 534384). Insurance is not available in Northern Ireland or the Channel Islands and is subject to normal
+            acceptance criteria.</p>
+        </ng-container>
+        <ng-container *ngSwitchCase="'SW'">
+          <p>Sheilas’ Wheels Car and Home Insurance is arranged and administered by esure Services Limited, who are registered in England
+            and Wales no.2135610 at The Observatory, Reigate, Surrey, RH2 0SG and who are authorised and regulated by the Financial
+            Conduct Authority, register no. 312063. The insurance is underwritten by esure Insurance Limited who are authorised by the
+            Prudential Regulation Authority and regulated by the Financial Conduct Authority and the Prudential Regulation Authority,
+            number 203350. The core elements of Travel Insurance are underwritten by AWP P&amp;C SA (Financial Services Register no.
+            534384). Insurance is not available in Northern Ireland or the Channel Islands and is subject to normal acceptance criteria.</p>
+        </ng-container>
+        <ng-container *ngSwitchCase="'FA'">
+          <p>First Alternative Car Insurance is arranged and administered by esure Services Limited, who are registered in England and
+            Wales no.2135610 at The Observatory, Reigate, Surrey, RH2 0SG and who are authorised and regulated by the Financial Conduct
+            Authority, register no. 312063. The insurance is underwritten by esure Insurance Limited who are authorised by the
+            Prudential Regulation Authority and regulated by the Financial Conduct Authority and the Prudential Regulation Authority,
+            number 203350. Insurance is not available in Northern Ireland or the Channel Islands and is subject to normal acceptance
+            criteria.</p>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</footer>

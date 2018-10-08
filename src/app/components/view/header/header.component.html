@@ -1,0 +1,34 @@
+<button *ngIf="!login" class="hamburger-btn is-radiusless" (click)="customerDataService.sideBar.toggle()" value="menu" title="menu">
+  <div class="hamburger hamburger--spin" [ngClass]="{'is-active': customerDataService.sideBar.opened}">
+    <div class="hamburger-box">
+      <div class="hamburger-inner">Menu</div>
+    </div>
+  </div>
+</button>
+
+<header class="columns is-mobile" [ngClass]="{'login': login, 'invert': !login}">
+  <div class="column"
+       [@.disabled]="customerDataService.animationsDisabled">
+    <a href="{{ '/' | esBrandUrl }}" [@fadeIn] title="{{ brandName }}">
+      <div class="logo">{{ brandName }}</div>
+    </a>
+  </div>
+
+  <div class="column is-half-desktop has-text-right login-status" *ngIf="!login">
+    <div class="columns is-mobile is-gapless bd-notification">
+      <div class="column customer-greet" [class.visibility-hidden]="!customerDataService.customer">
+        Good {{ greeting }} {{ customerDataService.customer?.firstName }}
+      </div>
+      <!--<div class="column is-narrow">-->
+        <!--<a class="account-icon has-icon" routerLink="/account" routerLinkActive="active"-->
+           <!--(click)="closeNavBarIfMobileView(window.innerWidth)">-->
+          <!--<svg class="icon is-large">-->
+            <!--<title>My Account</title>-->
+            <!--<use xlink:href="./img/web-icons.svg#icon-login-iv"></use>-->
+          <!--</svg>-->
+        <!--</a>-->
+      <!--</div>-->
+    </div>
+  </div>
+
+</header>

@@ -1,0 +1,25 @@
+<div id="{{ controlName }}-container" class="field" [formGroup]="parentFormGroup">
+  <label class="label" for="{{ controlName }}">{{ label }}</label>
+  <div class="control has-icons-right">
+    <input id="{{ controlName }}" class="input" [class.is-success]="lastname.valid" [class.is-danger]="lastname.dirty && lastname.touched && !lastname.valid"
+      type="text" placeholder="{{ label }}" maxlength="40" autocomplete="{{ autocomplete }}" formControlName="{{ controlName }}">
+    <span class="icon is-small is-right" [class.is-success]="lastname.dirty || !lastname.pristine" *ngIf="lastname.valid">
+      <i class="fa fa-check"></i>
+    </span>
+    <span class="icon is-small is-right" [class.is-danger]="lastname.dirty || !lastname.pristine" *ngIf="lastname.dirty && lastname.touched && !lastname.valid">
+      <i class="fa fa-times"></i>
+    </span>
+  </div>
+
+  <ng-container *ngIf="(submitted && !lastname.valid) || (!lastname.valid && lastname.dirty && lastname.touched)">
+    <div [hidden]="!lastname.hasError('required')">
+      <p class="help is-danger">We do need this information to progress. Please check you have entered the details correctly for us to continue.</p>
+    </div>
+    <div [hidden]="!lastname.hasError('rangeLength')">
+      <p class="help is-danger">Please enter at least 2 characters</p>
+    </div>
+    <div [hidden]="!lastname.hasError('pattern') || lastname.hasError('rangeLength')">
+      <p class="help is-danger">Last name is not correct, it should only contain letters, point, single apostrophe, dashes and space</p>
+    </div>
+  </ng-container>
+</div>

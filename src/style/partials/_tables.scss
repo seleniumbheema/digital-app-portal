@@ -1,0 +1,20 @@
+.content {
+  table thead {
+    tr {
+      background-color: lighten($primary, 20%);
+      &:hover {
+        background-color: lighten($primary, 20%);
+      }
+      th {
+        vertical-align: middle;
+        padding: 12px;
+        span, a {
+          color: $white;
+        }
+        &+ th {
+          text-align: right;
+        }
+      }
+    }
+  }
+}

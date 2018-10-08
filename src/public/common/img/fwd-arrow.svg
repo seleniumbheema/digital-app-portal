@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>fwd-arrow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="web-icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="fwd-arrow" stroke="#FEFEFE" stroke-width="5">
+            <g id="Group" transform="translate(29.000000, 33.000000)">
+                <g id="fwd-arrow" transform="translate(21.000000, 0.000000)">
+                    <path d="M-5,6.4 L9.27375316,25.1491695 L9.27375316,25.1491695 C9.94283398,26.028035 11.1976924,26.1980992 12.076558,25.5290183 C12.2098734,25.4275252 12.3299066,25.3096816 12.4338366,25.178257 L27,6.75862069" id="Path-3" transform="translate(11.000000, 16.800000) rotate(-90.000000) translate(-11.000000, -16.800000) "></path>
+                </g>
+                <g id="fwd-arrow">
+                    <path d="M-5,6.4 L9.27375316,25.1491695 L9.27375316,25.1491695 C9.94283398,26.028035 11.1976924,26.1980992 12.076558,25.5290183 C12.2098734,25.4275252 12.3299066,25.3096816 12.4338366,25.178257 L27,6.75862069" id="Path-3" transform="translate(11.000000, 16.800000) rotate(-90.000000) translate(-11.000000, -16.800000) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

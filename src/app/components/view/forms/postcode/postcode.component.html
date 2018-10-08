@@ -1,0 +1,26 @@
+<div id="{{ controlName }}-container" class="field postcode" [formGroup]="parentFormGroup">
+  <label class="label" for="{{ controlName }}">Postcode</label>
+  <p class="help static">For example: B28 0NN</p>
+  <div class="control has-icons-right">
+    <input id="{{ controlName }}" class="input is-uppercase" [class.is-success]="postcode.valid" [class.is-danger]="postcode.dirty && postcode.touched && !postcode.valid"
+      type="text" placeholder="Postcode" maxlength="8" autocomplete="postal-code" formControlName="{{ controlName }}">
+    <span class="icon is-small is-right" [class.is-success]="postcode.dirty || !postcode.pristine" *ngIf="postcode.valid">
+      <i class="fa fa-check"></i>
+    </span>
+    <span class="icon is-small is-right" [class.is-danger]="postcode.dirty || !postcode.pristine" *ngIf="postcode.dirty && postcode.touched && !postcode.valid">
+      <i class="fa fa-times"></i>
+    </span>
+  </div>
+
+  <ng-container *ngIf="(submitted && !postcode.valid) || (!postcode.valid && postcode.dirty && postcode.touched)">
+    <div [hidden]="!postcode.hasError('required')">
+      <p class="help is-danger">Postcode is required</p>
+    </div>
+    <div [hidden]="!postcode.hasError('rangeLength')">
+      <p class="help is-danger">Please enter between 5 and 8 characters</p>
+    </div>
+    <div [hidden]="!postcode.hasError('pattern') || postcode.hasError('rangeLength')">
+      <p class="help is-danger">The postcode is not correct, please check and try again</p>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,268 @@
+<div class="content">
+  <div class="column">
+    <div class="content">
+      <h1 class="title is-1 is-size-2-mobile has-text-weight-bold">My details</h1>
+      <p class="subtitle is-4">View or edit your contact details</p>
+    </div>
+
+    <div class="box">
+
+      <div class="columns">
+        <div *ngIf="showChangeEmailForm; then changeEmailFormTmp"></div>
+        <div *ngIf="showChangePasswordForm; then changePassFormTmp"></div>
+        <div *ngIf="showChangePasswordForm == false
+          && showChangeEmailForm == false; then updated">
+      </div>
+
+      <ng-template #updated>
+        <div class="column is-10-tablet">
+
+          <div class="change-email-section">
+            <div class="field">
+              <label class="label">Email address</label>
+              <div class="control">
+                <p class="current-email">{{ customerDataService.customer?.email }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns is-mobile">
+            <div class="column has-text-right">
+              <button type="button"
+                      id="changeEmail"
+                      class="button is-link is-rounded is-success"
+                      (click)="showChangeEmail()">Change email
+              </button>
+            </div>
+          </div>
+
+
+          <hr>
+
+          <es-global-messages [messages]="messages"></es-global-messages>
+
+          <div class="change-password-section">
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <p class="current-password">************</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns is-mobile">
+            <div class="column has-text-right">
+              <button type="button"
+                      id="changePass"
+                      class="button is-link is-rounded is-success"
+                      (click)="showChangePassword()">Change password
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <es-data-layer [vars]="{ 'pageName': 'Portal My Details' }"></es-data-layer>
+      </ng-template>
+
+      <!--<ng-template #changeEmailFormTmp>&lt;!&ndash; TODO: remove one &ndash;&gt;-->
+        <!--<div class="column is-10-tablet">-->
+
+          <!--<h2 class="is-size-3">For security, please enter your password</h2>-->
+
+          <!--<form id="acc-change-email" [formGroup]="changeEmailForm" (ngSubmit)="onEmailSubmit()">-->
+            <!--<es-global-messages [messages]="messages"></es-global-messages>-->
+
+            <!--<es-password class="field-wrapper" [parentFormGroup]="changeEmailForm"-->
+                         <!--[submitted]="submitted" controlName="verifyPassword"-->
+                         <!--label="Password"></es-password>-->
+
+            <!--<hr>-->
+
+            <!--<h2 class="is-size-3">Change your email address</h2>-->
+
+            <!--<label class="label">Current email addresss</label>-->
+            <!--<p class="is-bold">{{ customerDataService.customer?.email }}</p>-->
+
+            <!--<p>Please enter your new email address below</p>-->
+
+            <!--<es-email class="field-wrapper"-->
+                      <!--[parentFormGroup]="changeEmailForm"-->
+                      <!--[submitted]="submitted"-->
+                      <!--controlName="newEmail"-->
+                      <!--label="New email address"-->
+            <!--&gt;</es-email>-->
+
+            <!--<es-email class="field-wrapper"-->
+                      <!--[parentFormGroup]="changeEmailForm"-->
+                      <!--[submitted]="submitted"-->
+                      <!--controlName="confirmEmail"-->
+                      <!--label="Confirm new email address"-->
+            <!--&gt;</es-email>-->
+
+            <!--<div class="columns is-mobile">-->
+              <!--<div class="column is-half">-->
+                <!--<button class="button is-rounded is-outlined is-link" type="button"-->
+                        <!--id="cancelChangeEmail"-->
+                        <!--(click)="hideChangeEmail()">-->
+                  <!--<span>Cancel</span>-->
+                <!--</button>-->
+              <!--</div>-->
+              <!--<div class="column has-text-right">-->
+                <!--<button id="setEmail" type="submit"-->
+                        <!--data-tooltip="Please check form fields are valid"-->
+                        <!--[class.tooltip]="!changeEmailForm.valid"-->
+                        <!--[class.es-is-disabled]="!changeEmailForm.valid || disableSubmit"-->
+                        <!--class="button is-link is-rounded is-success is-tooltip-bottom-mobile is-tooltip-left">-->
+                  <!--Save-->
+                <!--</button>-->
+              <!--</div>-->
+            <!--</div>-->
+
+          <!--</form>-->
+        <!--</div>-->
+
+        <!--<es-data-layer [vars]="{ 'pageName': 'Portal My Details Change Email' }">-->
+        <!--</es-data-layer>-->
+      <!--</ng-template>-->
+
+      <ng-template #changeEmailFormTmp><!-- TODO: remove one -->
+        <div class="column is-10-tablet">
+
+          <h2 class="is-size-3">Change your email address</h2>
+
+          <form id="acc-change-email" [formGroup]="changeEmailForm" (ngSubmit)="onEmailSubmit()">
+            <es-global-messages [messages]="messages"></es-global-messages>
+
+            <!--<label class="label">Current email addresss</label>-->
+            <!--<p class="has-text-weight-bold">{{ customerDataService.customer?.email }}</p>-->
+
+            <!--<hr>-->
+
+            <p>Please enter your new email address below</p>
+
+            <input type="email" class="is-hidden" name="username"
+                   value="{{ customerDataService.customer?.email }}" autocomplete="username email"
+                   readonly="readonly"/>
+
+            <es-email class="field-wrapper"
+                      [parentFormGroup]="changeEmailForm"
+                      [submitted]="submitted"
+                      controlName="newEmail"
+                      label="New email address"
+                      [customErrorMessage]="emailFormErrorMessages?.newEmail"
+                      (change)="clearChangeEmailNewEmailError()"
+            ></es-email>
+
+            <es-email class="field-wrapper"
+                      [parentFormGroup]="changeEmailForm"
+                      [submitted]="submitted"
+                      controlName="confirmEmail"
+                      label="Confirm new email address"
+                      equalToMessage="The email addresses do not match. Please try again."
+                      [customErrorMessage]="emailFormErrorMessages?.confirmEmail"
+            ></es-email>
+
+            <hr>
+
+            <p>For security, please enter your password</p>
+
+            <es-password class="field-wrapper" [parentFormGroup]="changeEmailForm"
+                         [submitted]="submitted" controlName="verifyPassword"
+                         label="Password"
+                         [customErrorMessage]="emailFormErrorMessages?.verifyPassword"
+                         (change)="clearChangeEmailVerifyPasswordError()"></es-password>
+
+            <div class="columns is-mobile">
+              <div class="column is-half">
+                <button class="button is-rounded is-outlined is-link" type="button"
+                        id="cancelChangeEmail"
+                        (click)="hideChangeEmail()">
+                  <span>Cancel</span>
+                </button>
+              </div>
+              <div class="column has-text-right">
+                <button id="setEmail" type="submit"
+                        data-tooltip="Please check form fields are valid"
+                        [class.tooltip]="!changeEmailForm.valid"
+                        [class.es-is-disabled]="!changeEmailForm.valid || disableSubmit"
+                        class="button is-link is-rounded is-success is-tooltip-bottom-mobile is-tooltip-left">
+                  Save
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <es-data-layer [vars]="{ 'pageName': 'Portal My Details Change Email' }">
+        </es-data-layer>
+      </ng-template>
+
+      <ng-template #changePassFormTmp>
+        <div class="column is-10-tablet">
+
+          <h2 class="is-size-3">Change password</h2>
+          <p>Complete this form to change your password.</p>
+          <form id="acc-change-pass" [formGroup]="changePassForm" (ngSubmit)="onPassSubmit()">
+            <es-global-messages [messages]="messages"></es-global-messages>
+
+            <!--
+              Hidden username field to help assist password managers
+              https://www.chromium.org/developers/design-documents/create-amazing-password-forms
+              -->
+            <input type="email" class="is-hidden" name="username"
+                   value="{{ customerDataService.customer?.email }}" autocomplete="username email"
+                   readonly="readonly"/>
+
+            <es-password class="field-wrapper" [parentFormGroup]="changePassForm"
+                         [submitted]="submitted" controlName="newPassword" label="New Password"
+                         autocomplete="new-password"
+                         notEqualMessage="New password cannot be the same as the current password."
+                         helpMessage="Your new password must contain a minimum of 8 characters,
+                          including at least one upper and one lowercase letter, plus a number."></es-password>
+
+            <es-password class="field-wrapper" [parentFormGroup]="changePassForm"
+                         [submitted]="submitted" controlName="confirmPassword"
+                         label="Confirm Password"
+                         equalToMessage="The passwords don't match. Please try again."
+                         autocomplete="new-password"></es-password>
+
+            <hr>
+
+            <p>For security, please enter your current password</p>
+
+            <es-password class="field-wrapper" [parentFormGroup]="changePassForm"
+                         [submitted]="submitted" controlName="oldPassword"
+                         label="Current Password"></es-password>
+
+
+
+            <div class="columns is-mobile">
+              <div class="column is-half">
+                <button class="button is-rounded is-outlined is-link" type="button"
+                        id="cancelChangePass"
+                        (click)="hideChangePassword()">
+                  <span>Cancel</span>
+                </button>
+              </div>
+              <div class="column has-text-right">
+                <button id="setPass" type="submit"
+                        data-tooltip="Please check form fields are valid"
+                        [class.tooltip]="!changePassForm.valid"
+                        [class.es-is-disabled]="!changePassForm.valid || disableSubmit"
+                        class="button is-link is-rounded is-success is-tooltip-bottom-mobile is-tooltip-left">
+                  Save
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+        <es-data-layer [vars]="{ 'pageName': 'Portal My Details Change Password' }">
+        </es-data-layer>
+      </ng-template>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+// Global Message
+es-global-messages .notification {
+  margin-bottom: 1.5rem;
+  p a:not(.button):not(.tag) {
+    text-decoration: none;
+    border-bottom: 1px solid;
+    display: -moz-inline-box; //Fixes line not showing in FF windows 10
+    &:hover {
+      border-bottom: 2px solid;
+    }
+  }
+}
+
+.message-header {
+  background-color: $primary;
+}
+
+// Modal
+.seconds-count {
+  display: inline-block;
+  width: 25px;
+}
+
+// Bulma Modal style-overrides
+.modal.is-active {
+  flex-direction: column;
+}
+.modal-background {
+  background-color: $black;
+  opacity: .7;
+}
+
+// Accident Support
+
+.accident-support {
+  .has-text-link {
+    color: $brand-secondary !important;
+  }
+
+  @include mobile {
+    background-position: calc(100% + 60px) 20px;
+    background-size: auto 126px;
+    .columns:first-child .column {
+      min-height: 132px;
+    }
+  }
+  background-repeat: no-repeat;
+  background-position: calc(100% + 80px);
+  background-size: auto 160px;
+  min-height: 192px;
+}

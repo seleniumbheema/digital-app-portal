@@ -1,0 +1,805 @@
+[
+  {
+    "description": "  As a customer\n  I need to login to My Account\n  So that I can keep up to date with all the goings on",
+    "keyword": "Feature",
+    "name": "Login",
+    "line": 2,
+    "id": "login",
+    "tags": [
+      {
+        "name": "@Login",
+        "line": 1
+      }
+    ],
+    "uri": "src/e2e/features/login.feature",
+    "elements": [
+      {
+        "id": "login;failed-login",
+        "keyword": "Scenario",
+        "line": 14,
+        "name": "Failed login",
+        "tags": [
+          {
+            "name": "@Login",
+            "line": 1
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the login page",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1586000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 9,
+            "name": "I type 'one@esmock.com' into the email field and 'Password99' into the password field",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 408000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 10,
+            "name": "I should see error message about failed login",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 387000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:37"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "node_modules/protractor-cucumber-framework/lib/resultsCapturer.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "login;failed-login",
+        "keyword": "Scenario",
+        "line": 15,
+        "name": "Failed login",
+        "tags": [
+          {
+            "name": "@Login",
+            "line": 1
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "I am on the login page",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1429000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 9,
+            "name": "I type 'on@esmock.com' into the email field and 'Customer1' into the password field",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 492000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 10,
+            "name": "I should see error message about failed login",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 113000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:37"
+            },
+            "result": {
+              "status": "passed"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "node_modules/protractor-cucumber-framework/lib/resultsCapturer.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "login;successful-login",
+        "keyword": "Scenario",
+        "line": 24,
+        "name": "Successful login",
+        "tags": [
+          {
+            "name": "@Login",
+            "line": 1
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 18,
+            "name": "I am on the login page",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1306000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "I type 'one@esmock.com' into the email field and 'Customer1' into the password field",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 341000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "I should successfully login and see my policies page",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 422000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:37"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "node_modules/protractor-cucumber-framework/lib/resultsCapturer.js:26"
+            },
+            "result": {
+              "status": "passed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "login;successful-login",
+        "keyword": "Scenario",
+        "line": 25,
+        "name": "Successful login",
+        "tags": [
+          {
+            "name": "@Login",
+            "line": 1
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 16000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 18,
+            "name": "I am on the login page",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1408000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "I type 'two@esmock.com' into the email field and 'Customer2' into the password field",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 307000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "I should successfully login and see my policies page",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 337000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:37"
+            },
+            "result": {
+              "status": "passed"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "node_modules/protractor-cucumber-framework/lib/resultsCapturer.js:26"
+            },
+            "result": {
+              "status": "passed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "login;user-login-with-fraudelent-device",
+        "keyword": "Scenario",
+        "line": 27,
+        "name": "User login with fraudelent device",
+        "tags": [
+          {
+            "name": "@Login",
+            "line": 1
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 26000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 28,
+            "name": "I am on the login page",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1346000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 29,
+            "name": "I type \"fraud@esmock.com\" into the email field and \"userfraud1\" into the password field",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 341000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 30,
+            "name": "I should be navigated to the \"/auth/login/unavailable\" page",
+            "match": {
+              "location": "src/e2e/step_definitions/helper.steps.ts:10"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 48000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:37"
+            },
+            "result": {
+              "status": "passed"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "node_modules/protractor-cucumber-framework/lib/resultsCapturer.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "login;user-login-who-is-barred",
+        "keyword": "Scenario",
+        "line": 32,
+        "name": "User login who is barred",
+        "tags": [
+          {
+            "name": "@Login",
+            "line": 1
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 33,
+            "name": "I am on the login page",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1407000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 34,
+            "name": "I type \"barred@esmock.com\" into the email field and \"userbarred1\" into the password field",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 350000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 35,
+            "name": "I should be navigated to the \"/auth/login/unavailable\" page",
+            "match": {
+              "location": "src/e2e/step_definitions/helper.steps.ts:10"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 41000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:37"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "node_modules/protractor-cucumber-framework/lib/resultsCapturer.js:26"
+            },
+            "result": {
+              "status": "passed"
+            }
+          }
+        ]
+      },
+      {
+        "id": "login;user-login-who-is-locked",
+        "keyword": "Scenario",
+        "line": 37,
+        "name": "User login who is locked",
+        "tags": [
+          {
+            "name": "@Login",
+            "line": 1
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 38,
+            "name": "I am on the login page",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1368000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 39,
+            "name": "I type \"locked@esmock.com\" into the email field and \"userlocked1\" into the password field",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 327000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 40,
+            "name": "I should be navigated to the \"/auth/login/suspended\" page",
+            "match": {
+              "location": "src/e2e/step_definitions/helper.steps.ts:10"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 30000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:37"
+            },
+            "result": {
+              "status": "passed"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "node_modules/protractor-cucumber-framework/lib/resultsCapturer.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "login;user-login-who-is-disabled",
+        "keyword": "Scenario",
+        "line": 42,
+        "name": "User login who is disabled",
+        "tags": [
+          {
+            "name": "@Login",
+            "line": 1
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 43,
+            "name": "I am on the login page",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1337000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 44,
+            "name": "I type \"disabled@esmock.com\" into the email field and \"userdisabled1\" into the password field",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 342000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 45,
+            "name": "I should be navigated to the \"/auth/login/unavailable\" page",
+            "match": {
+              "location": "src/e2e/step_definitions/helper.steps.ts:10"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 37000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:37"
+            },
+            "result": {
+              "status": "passed"
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "node_modules/protractor-cucumber-framework/lib/resultsCapturer.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "login;user-login-with-temporary-password",
+        "keyword": "Scenario",
+        "line": 47,
+        "name": "User login with temporary password",
+        "tags": [
+          {
+            "name": "@Login",
+            "line": 1
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 48,
+            "name": "I am on the login page",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2681000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 49,
+            "name": "I type \"newpass@esmock.com\" into the email field and \"newpassword1\" into the password field",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 330000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 50,
+            "name": "I fill out the set password page with new password of \"Newpassword2\"",
+            "match": {
+              "location": "src/e2e/step_definitions/login.steps.ts:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 343000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 51,
+            "name": "I should be navigated to the \"/portal/policies/welcome\" page",
+            "match": {
+              "location": "src/e2e/step_definitions/helper.steps.ts:10"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 339000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "src/e2e/support/hooks.ts:37"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "node_modules/protractor-cucumber-framework/lib/resultsCapturer.js:26"
+            },
+            "result": {
+              "status": "passed"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

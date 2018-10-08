@@ -1,0 +1,40 @@
+// font-awesome
+@import '~font-awesome/css/font-awesome.css';
+// Import Bulma initial variables
+// @import '~bulma/sass/utilities/initial-variables';
+// Override initial variables is settings_<brand>
+@import './modules/settings_sheilaswheels';
+@import './modules/settings_shared';
+@import './modules/mixins';
+// Fonts
+@import './fonts/sw/fonts.css';
+// Bulma all
+@import '~bulma/bulma';
+@import '~bulma-tooltip';
+@import 'partials_shared';
+
+// Jank
+.logo {
+  @include svg-bg('../public/brand/sheilaswheels/images/logos/logo_alt');
+  height: 50px;
+  width: 154px;
+  background-size: 100%;
+}
+
+.invert, .info {
+  .logo {
+    @include svg-bg('../public/brand/sheilaswheels/images/logos/logo');
+    height: 50px;
+    width: 154px;
+    background-size: 100%;
+    margin-top: 7px;
+  }
+}
+
+header.info {
+  background-color: $base;
+}
+
+.accident-support {
+  background-image: url('../public/brand/sheilaswheels/images/sw_BumpCar_PaleBlue.png');
+}

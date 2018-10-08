@@ -1,0 +1,32 @@
+<div *ngIf="showWarningBanner" class="column">
+  <div class="box notification is-warning">
+
+    <div class="columns is-mobile is-multiline">
+      <div class="column is-10-mobile is-11-tablet is-11-desktop">
+        <h3 class="title is-3">Your browser isn't supported</h3>
+      </div>
+      <div class="column">
+        <button class="delete is-info" (click)="customerDataService.updateBrowserWarningBar()"></button>
+      </div>
+    </div>
+
+    <div class="columns is-mobile is-multiline">
+      <div class="column is-12-mobile is-12-tablet is-12-desktop">
+        <!--
+
+        <p>
+          It seems your browser <span *ngIf="browserDetect.mobile"> {{ browserDetect.osname }} </span> {{
+          browserDetect.name }} isn't supported. To get the full My Account experience try using one of these browsers
+          instead. </p>
+
+        -->
+
+        <p>We can't provide a good experience on this browser. To use this site please upgrade to the latest version of
+           Chrome, Firefox, Safari or Internet Explorer</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

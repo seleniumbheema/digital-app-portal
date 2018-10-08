@@ -1,0 +1,12 @@
+<p *ngIf="!helpIcon"><a (click)="toggleHelpText()">
+  <i class="icon is-small fa fa-caret-down" aria-hidden="true" *ngIf="!showHide"></i>
+  <i class="icon is-small fa fa-caret-up" aria-hidden="true" *ngIf="showHide"></i> What does this mean?</a>
+</p>
+
+<article class="message is-help" *ngIf="showHide" [class.help-icon]="helpIcon">
+  <div class="message-body">
+    <ng-content></ng-content>
+  </div>
+</article>
+
+

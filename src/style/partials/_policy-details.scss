@@ -1,0 +1,44 @@
+// Section descriptions
+.title:not(.is-spaced)+p.subtitle {
+  margin-top: -1rem;
+}
+
+// Excess
+.table-head {
+  color: $white;
+  background-color: $primary;
+  border-bottom: 0;
+  font-weight: 700;
+}
+
+.excess {
+  margin-bottom: 0 !important;
+  border-bottom: 1px solid $grey-lighter;
+  &:last-of-type {
+    margin-bottom: $gap !important;
+  }
+  .driver, .excess-type {
+    @include mobile {
+      background-color: $primary !important;
+      color: $white;
+    }
+  }
+
+  .column {
+    @include mobile {
+      padding: .75rem .75rem .2rem;
+    }
+    p {
+      padding: 1rem;
+    }
+  }
+  @include mobile {
+    background-color: $white;
+  }
+}
+
+.back-button {
+  font-size: 1rem;
+  padding-bottom: .5rem;
+}
+

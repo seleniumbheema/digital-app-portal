@@ -1,0 +1,24 @@
+<div id="{{ controlName }}-container" class="field" [formGroup]="parentFormGroup">
+  <label class="label" for="{{ controlName }}">{{ label }}</label>
+  <div class="control has-icons-right">
+    <input id="{{ controlName }}" class="input" [class.is-success]="email.valid" [class.is-danger]="email.dirty && email.touched && !email.valid || customErrorMessage"
+      type="email" formControlName="{{ controlName }}" maxlength="128" autocomplete="{{ autocomplete }}"
+    />
+
+    <span class="icon is-small is-right is-success" *ngIf="email.valid && !customErrorMessage">
+      <i class="fa fa-check"></i>
+    </span>
+    <span class="icon is-small is-right is-danger" *ngIf="(email.dirty && email.touched && !email.valid) || customErrorMessage">
+      <i class="fa fa-times"></i>
+    </span>
+  </div>
+
+    <div *ngIf="(submitted && !email.valid) || (email.dirty && email.touched && !email.valid)">
+      <p *ngIf="!email.hasError('equalTo')" class="help is-danger">{{ requiredMessage }}</p>
+      <p *ngIf="email.hasError('equalTo')" class="help is-danger">{{ equalToMessage }}</p>
+    </div>
+
+    <div *ngIf="customErrorMessage">
+      <p class="help is-danger">{{ customErrorMessage }}</p>
+    </div>
+</div>

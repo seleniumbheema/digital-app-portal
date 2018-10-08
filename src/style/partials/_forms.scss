@@ -1,0 +1,188 @@
+/** Don't text transform the input placeholders */
+::placeholder {
+  text-transform: none;
+}
+
+form {
+  .field {
+    .columns {
+      &.is-gapless {
+        margin-bottom: .5rem;
+      }
+    }
+  }
+  .help.static {
+      position: relative;
+      top: -8px;
+    }
+}
+
+.has-addons {
+  .control {
+    a.button {
+      height: 2.5rem;
+    }
+  }
+}
+
+.es-is-disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.input, .textarea, .select select {
+  border-radius: 2px;
+}
+
+.field.has-addons .control:first-child .input {
+  border-radius: 2px;
+}
+
+select.ng-valid.is-success,
+.ng-valid .completer-holder .completer-input.ng-dirty.ng-valid {
+  border-color: $success;
+  border-radius: 2px;
+  &:focus {
+    border-color: $success;
+    box-shadow: $form-success-shadow;
+  }
+}
+
+.input.ng-invalid.is-danger,
+.textarea.ng-invalid.is-danger,
+select.ng-invalid.is-danger,
+.ng-invalid > .completer-holder .completer-input.ng-dirty.ng-valid {
+  border-color: $danger;
+  &:focus {
+    box-shadow: $form-danger-shadow;
+  }
+}
+
+.messages-container {
+  &.notification {
+    padding: 1rem 1.5rem;
+  }
+  .delete {
+    font-size: 1rem;
+  }
+}
+
+.field-wrapper > .field {
+  margin-bottom: 1.2rem;
+}
+
+.label {
+  &.is-danger {
+    color: $danger;
+  }
+}
+
+.control.has-icons-right {
+  .icon {
+    &.is-right {
+      &.is-danger {
+        color: $danger;
+      }
+      &.is-success {
+        color: $success;
+      }
+    }
+  }
+}
+
+.radios {
+  input[type='radio'] {
+    opacity: 0;
+    position: absolute;
+  }
+  input[type='radio']:checked + label {
+    @include svg-bg('../public/common/img/radio-checked');
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-color: $primary;
+    border: 1px solid $primary;
+    color: $base;
+  }
+  .column {
+    margin-bottom: 0 !important;
+    label {
+      @include svg-bg('../public/common/img/radio-unchecked');
+      background-size: 25px 25px;
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-color: $grey-lighter;
+      border: 1px solid $grey-light;
+      color: $black-font;
+      cursor: pointer;
+      display: inline-block;
+      padding: 10px 45px 10px 10px;
+      width: 100%;
+    }
+  }
+}
+
+.has-addons .button.is-static {
+  border: 1px solid $grey-light;
+}
+
+.date-input {
+  .columns {
+    > span {
+      padding-top: 25px;
+    }
+  }
+  &:first-child {
+    margin-bottom: 20px;
+  }
+  .column {
+    @include mobile {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+    padding-bottom: 0;
+    &:first-child {
+      padding-left: 16px;
+    }
+    @include mobile {
+      &:last-child {
+        padding-right: 16px;
+      }
+    }
+  }
+}
+
+.field-body .columns:last-child {
+  margin-bottom: 0;
+}
+
+// ng-completer needs important for some reason
+.completer-dropdown {
+  width: 100% !important;
+  padding: 6px 0 !important;
+  height: 400px !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+}
+
+.completer-row {
+  width: 100% !important;
+}
+
+.completer-selected-row {
+  background-color: $primary !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

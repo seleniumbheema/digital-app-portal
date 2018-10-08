@@ -1,0 +1,40 @@
+<div class="column">
+  <div class="box">
+    <h1 class="title is-1">My Account</h1>
+
+    <div class="columns is-multiline is-divided">
+      <div class="column" [ngClass]="{ 'is-6-tablet': !hideRegister, 'is-9-tablet': hideRegister }">
+        <es-auth-login [hideRegister]="hideRegister"></es-auth-login>
+      </div>
+
+      <div *ngIf="!hideRegister" class="column is-6-tablet">
+        <h2 class="title is-2">Bought your policy before 20th May 2018?</h2>
+        <p class="block">From 20th May 2018 we've upgraded My Account, bringing you new features and benefits to improve how
+          you manage your policy online. To get access you'll need to update your password, or create a new one if you haven't set up an account before.</p>
+
+        <div class="field">
+          <a class="button is-rounded is-outlined is-link is-fullwidth is-large create-account" routerLink="/auth/register">
+            <span>Continue</span>
+          </a>
+        </div>
+        <ul class="checklist">
+          <li>Get your questions about your policy answered</li>
+          <li>View your policy summary</li>
+          <li>Save and print your documents</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="column" *ngIf="offers.length > 0">
+  <div class="box">
+    <div class="columns is-multiline">
+      <ng-container *ngFor="let offer of offers; last as last;">
+        <es-special-offer [offer]="offer" [showDetailLinks]="false" *ngIf="offer.enabled" class="column" [class.is-one-third]="!last"></es-special-offer>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<es-data-layer [vars]="{ 'pageName': pageName }"></es-data-layer>
+

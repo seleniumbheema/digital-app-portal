@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>radio-checked</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="web-icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="radio-checked">
+            <g id="Group" transform="translate(1.000000, 1.000000)">
+                <g id="Group-2">
+                    <path d="M23.9285714,47.8571429 C37.1439565,47.8571429 47.8571429,37.1439565 47.8571429,23.9285714 C47.8571429,10.7131863 37.1439565,7.81597009e-14 23.9285714,7.81597009e-14 C10.7131863,7.81597009e-14 -1.49213975e-13,10.7131863 -1.49213975e-13,23.9285714 C-1.49213975e-13,37.1439565 10.7131863,47.8571429 23.9285714,47.8571429 Z" id="Oval-2" fill="#979797" fill-rule="nonzero"></path>
+                    <path d="M26.2736842,34.8631579 L32.634559,34.8631579 L32.634559,7.57894737 L25.5608748,7.57894737 L25.5608748,27.8393182 L16.1684211,27.8393182 L16.1684211,34.9130024 L26.2736842,34.9130024 L26.2736842,34.8631579 Z" id="Combined-Shape" fill="#FFFFFF" transform="translate(24.401490, 21.245975) rotate(44.000000) translate(-24.401490, -21.245975) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

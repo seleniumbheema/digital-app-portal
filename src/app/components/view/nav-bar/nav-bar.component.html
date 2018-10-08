@@ -1,0 +1,57 @@
+<div [@.disabled]="customerDataService.animationsDisabled">
+  <a href="{{ '/' | esBrandUrl }}" [@fadeIn]>
+    <div class="logo">{{ brandName }}</div>
+  </a>
+
+
+  <ul [@fadeInStagger] role="navigation">
+    <li class="stagger-in">
+      <a id="nav-policies" routerLink="policies" routerLinkActive="active" (click)="customerDataService.sideBar.toggle()"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <svg class="icon">
+          <use xlink:href="./img/web-icons.svg#icon-documents"></use>
+        </svg>
+        <span>My policies</span>
+      </a>
+    </li>
+
+    <!-- DAI-44 -->
+    <!-- <li class="stagger-in">
+      <a id="nav-account" routerLink="account" routerLinkActive="active" (click)="customerDataService.sideBar.toggle()">
+        <svg class="icon">
+          <use xlink:href="./img/core-icons.svg#icon-avatar"></use>
+        </svg>
+        <span>My details</span>
+      </a>
+    </li> -->
+    <!--<li>-->
+    <!--<a routerLink="#" routerLinkActive="active" (click)="customerDataService.sideBar.toggle()">-->
+    <!--<svg class="icon"><use xlink:href="./img/core-icons.svg#icon-alarm_clock"></use></svg>-->
+    <!--<span>Notifications</span>-->
+    <!--&lt;!&ndash;<span class="badge">1</span>&ndash;&gt;-->
+    <!--</a>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a routerLink="#" routerLinkActive="active" (click)="customerDataService.sideBar.toggle()">-->
+    <!--<svg class="icon"><use xlink:href="./img/web-icons.svg#icon-make-claim"></use></svg>-->
+    <!--<span>Make a claim</span>-->
+    <!--</a>-->
+    <!--</li>-->
+    <li class="stagger-in" *ngIf="brandCode !== 'FA'">
+      <a id="nav-offers" routerLink="offers" routerLinkActive="active" (click)="customerDataService.sideBar.toggle()">
+        <svg class="icon">
+          <use xlink:href="./img/web-icons.svg#icon-special-offers"></use>
+        </svg>
+        <span>Offers</span>
+      </a>
+    </li>
+    <li class="stagger-in">
+      <a id="nav-logout" href="javascript:void(0)" (click)="authService.logout(true)">
+        <svg class="icon">
+          <use xlink:href="./img/web-icons.svg#icon-log-out"></use>
+        </svg>
+        <span>Sign out</span>
+      </a>
+    </li>
+  </ul>
+</div>

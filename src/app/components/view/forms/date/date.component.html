@@ -1,0 +1,77 @@
+<div id="{{ controlName }}-container" class="field date-input" [formGroup]="parentFormGroup">
+  <label class="label" for="{{ dayControlName }}">{{ label }}</label>
+  <div class="field" [class.has-addons]="leftText || rightText">
+
+    <div *ngIf="leftText" class="control">
+      <a class="button is-static">{{ leftText }}</a>
+    </div>
+
+    <p class="help static" *ngIf="helpText">{{ helpText }}</p>
+    <div class="field-body">
+      <div class="columns is-mobile">
+        <div class="column is-one-quarter">
+          <div class="control field">
+            <input id="{{ prependInputId }}-{{ dayControlName }}" class="input" [class.is-success]="parentFormGroup.valid"
+                   [class.is-danger]="isDangerClassActive()"
+                   type="tel" placeholder="DD" maxlength="2" autocomplete="{{ autocomplete }}-day"
+                   formControlName="{{ dayControlName }}">
+          </div>
+        </div>
+
+        <span class="is-hidden-mobile">/</span>
+
+        <div class="column is-one-quarter">
+          <div class="control field">
+            <input id="{{ prependInputId }}-{{ monthControlName }}" class="input" [class.is-success]="parentFormGroup.valid"
+                   [class.is-danger]="isDangerClassActive()"
+                   type="tel" placeholder="MM" maxlength="2" autocomplete="{{ autocomplete }}-month"
+                   formControlName="{{ monthControlName }}">
+          </div>
+        </div>
+
+        <span class="is-hidden-mobile">/</span>
+
+        <div class="column">
+          <div class="control field has-icons-right">
+            <input id="{{ prependInputId }}-{{ yearControlName }}" class="input" [class.is-success]="parentFormGroup.valid"
+                   [class.is-danger]="isDangerClassActive()"
+                   type="tel" placeholder="YYYY" maxlength="4" autocomplete="{{ autocomplete }}-year"
+                   formControlName="{{ yearControlName }}">
+
+            <span class="icon is-small is-right" [class.is-success]="parentFormGroup.dirty || !parentFormGroup.pristine"
+                  *ngIf="parentFormGroup.valid">
+            <i class="fa fa-check"></i>
+            </span>
+            <span class="icon is-small is-right" [class.is-danger]="parentFormGroup.dirty || !parentFormGroup.pristine"
+                  *ngIf="parentFormGroup.dirty && parentFormGroup.touched && !parentFormGroup.valid">
+            <i class="fa fa-times"></i>
+          </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="rightText" class="control">
+      <a (click)="clickedIcon()" class="help-icon button" title="Help">{{ rightText }}</a>
+    </div>
+  </div>
+
+  <ng-container *ngIf="(submitted && !parentFormGroup.valid) || isShowErrorMessage()">
+    <div>
+      <p *ngIf="parentFormGroup.hasError('dateInvalidAgainstOther')" class="help is-danger">
+        {{ compareToOtherDateMessage ? compareToOtherDateMessage : requiredMessage }}
+      </p>
+      <p *ngIf="parentFormGroup.hasError('dateAfter')" class="help is-danger">
+        {{ maxMessage ? maxMessage : requiredMessage }}
+      </p>
+      <p *ngIf="parentFormGroup.hasError('dateBefore')" class="help is-danger">
+        {{ minMessage ? minMessage : requiredMessage }}
+      </p>
+      <p *ngIf="!parentFormGroup.hasError('dateInvalidAgainstOther') && !parentFormGroup.hasError('dateAfter')
+        && !parentFormGroup.hasError('dateBefore')" class="help is-danger">
+        {{ requiredMessage }}
+      </p>
+    </div>
+  </ng-container>
+</div>

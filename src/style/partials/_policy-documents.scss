@@ -1,0 +1,19 @@
+#documents {
+  .sub-sections {
+    border-bottom: 1px solid $grey-light;
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+  width: 100%;
+  a.button {
+    @include tablet {
+      margin-bottom: 0;
+    }
+    @include mobile {
+      margin-bottom: 0;
+    }
+    display: inline-block;
+    border: 0;
+  }
+}

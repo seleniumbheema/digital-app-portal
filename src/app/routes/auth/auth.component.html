@@ -1,0 +1,19 @@
+<div id="container">
+  <es-cookie-bar *ngIf="!customerDataService.cookieBarHidden"></es-cookie-bar>
+
+  <div class="container">
+    <es-browser-warning-bar *ngIf="!customerDataService.browserWarningHidden"></es-browser-warning-bar>
+    <es-portal-header id="header" login="true"
+                       [ngClass]="{'login': login}"></es-portal-header>
+  </div>
+
+  <main>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <div class="container">
+    <es-portal-footer login="true"></es-portal-footer>
+  </div>
+</div>

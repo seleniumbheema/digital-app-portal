@@ -1,0 +1,6 @@
+# The CODEOWNERS file defines the individuals and/or teams with responsiblity for checking code into `master`.
+# The Digital-Apps team use this file to ensure that only QA (and Admin) can check 'done' code into master.
+
+# More information on the CODEOWNERS file can be found here: https://help.github.com/articles/about-codeowners/
+
+* @esure-dev/digital-apps-qa-team

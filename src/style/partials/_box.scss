@@ -1,0 +1,6 @@
+.box {
+  @include mobile {
+    padding: $gap / 2;
+  }
+  position: relative;
+}

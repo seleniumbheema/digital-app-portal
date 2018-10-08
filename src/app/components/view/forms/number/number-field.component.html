@@ -1,0 +1,35 @@
+<div id="{{ controlName }}-container" class="field" [formGroup]="parentFormGroup">
+  <label class="label" for="{{ controlName }}">{{ label }}</label>
+  <div class="field" [class.has-addons]="leftText || rightText">
+
+    <div *ngIf="leftText" class="control">
+      <a class="button is-static">{{ leftText }}</a>
+    </div>
+
+    <div class="control has-icons-right is-expanded is-fullwidth">
+      <input id="{{ controlName }}" class="input" [class.is-success]="numberControl.valid" [class.is-danger]="numberControl.dirty && numberControl.touched && !numberControl.valid"
+             type="tel" placeholder="{{ label }}" autocomplete="{{ autocomplete }}" maxlength="{{ maxlength }}" formControlName="{{ controlName }}">
+      <span class="icon is-small is-right" [class.is-success]="numberControl.dirty || !numberControl.pristine" *ngIf="numberControl.valid">
+        <i class="fa fa-check"></i>
+      </span>
+      <span class="icon is-small is-right" [class.is-danger]="numberControl.dirty || !numberControl.pristine" *ngIf="numberControl.dirty && numberControl.touched && !numberControl.valid">
+        <i class="fa fa-times"></i>
+      </span>
+
+    </div>
+
+    <div *ngIf="rightText" class="control">
+      <a (click)="clickedIcon()" class="button help-icon" title="Help">{{ rightText }}</a>
+    </div>
+  </div>
+
+  <div *ngIf="(submitted && !numberControl.valid) || (!numberControl.valid && numberControl.dirty && numberControl.touched)">
+     <p *ngIf="numberControl.hasError('required')" class="help is-danger">
+        {{ requiredMessage }}
+    </p>
+    <p *ngIf="!numberControl.hasError('required')" class="help is-danger">
+        {{ validationMessage ? validationMessage : requiredMessage }}
+    </p>
+  </div>
+
+</div>

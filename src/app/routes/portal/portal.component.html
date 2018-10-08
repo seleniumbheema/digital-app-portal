@@ -1,0 +1,38 @@
+<ng-sidebar-container>
+
+  <ng-sidebar [autoFocus]="false"
+              [(opened)]="customerDataService.sideBar.opened"
+              [mode]="customerDataService.sideBar.navStyle"
+              [showBackdrop]="true"
+              [closeOnClickBackdrop]="true"
+  >
+    <es-nav-bar></es-nav-bar>
+  </ng-sidebar>
+
+  <!-- Main content -->
+  <div es-scrollTop ng-sidebar-content id="scroll-container">
+    <div id="scroll-anchor"></div>
+
+    <es-portal-header></es-portal-header>
+
+    <main class="columns" [@.disabled]="customerDataService.animationsDisabled"
+          role="main">
+      <div class="container" [@routerTransition]="getRouterOutletState(o)" (@routerTransition.start)="customerDataService.onRouterAnimationStart()"
+      (@routerTransition.done)="customerDataService.onRouterAnimationDone()">
+        <router-outlet #o="outlet"></router-outlet>
+      </div>
+    </main>
+    <div class="container">
+      <es-portal-footer></es-portal-footer>
+    </div>
+
+    <a (click)="backToTop()" title="Back to top" id="back-to-top"
+       class="button is-large is-primary is-hidden-desktop"
+       [class.hide-scroll]="customerDataService.mobileScrollHidden">
+      <span class="icon is-large">
+        <i class="fa fa-angle-up fa-3x"></i>
+      </span>
+    </a>
+
+  </div>
+</ng-sidebar-container>

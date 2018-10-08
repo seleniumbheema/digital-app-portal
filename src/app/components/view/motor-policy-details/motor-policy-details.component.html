@@ -1,0 +1,464 @@
+<h3 class="title is-3 policy-identifier" [textContent]="policy.vehicle.make + ' ' + policy.vehicle.model"></h3>
+
+<div class="columns is-mobile">
+  <div class="column">
+    Vehicle registration
+  </div>
+  <div class="column vehicle-reg has-text-weight-light" [textContent]="policy.vehicle.reg"></div>
+</div>
+
+<div class="columns is-multiline is-mobile">
+  <div class="column">No Claim Discount</div>
+  <div class="column has-text-weight-light ncd-years">
+    {{ policy.mainDriver.ncdLevel }} years
+  </div>
+  <es-help-text>
+    <p>These are the number of claim free years you have.</p>
+  </es-help-text>
+</div>
+<hr>
+
+<h3 class="is-size-4 has-text-weight-bold">Your cover dates</h3>
+<div class="columns is-mobile">
+  <div class="column">Cover start date</div>
+  <div class="column start-date has-text-weight-light">{{ policy.startDate | date:'EEE d, MMM y' }}</div>
+</div>
+<div class="columns is-mobile">
+  <div class="column">Cover end date</div>
+  <div class="column end-date has-text-weight-light">{{ policy.endDate | date:'EEE d, MMM y' }}</div>
+</div>
+
+<hr>
+
+<h3 class="is-size-4 has-text-weight-bold">Who's covered</h3>
+<div class="columns is-mobile" *ngFor="let driver of policy.drivers; let i = index">
+  <div class="column main-driver" *ngIf="i === 0">
+    Main driver
+  </div>
+  <div class="column named-driver" *ngIf="i > 0">Named driver {{ i }}</div>
+  <div class="column has-text-weight-light">
+    {{ driver.forename }} {{ driver.surname }}
+  </div>
+</div>
+
+<hr><h3 class="is-size-4 has-text-weight-bold">What's covered</h3>
+<div class="columns is-multiline is-mobile">
+  <div class="column">
+    Type of cover
+  </div>
+  <div class="column policy-cover-type has-text-weight-light">{{ policy.mainDriver.coverTypeDescription }}</div>
+  <es-help-text *ngIf="policy.mainDriver.coverTypeDescription === 'Comprehensive'">
+    <p>Comprehensive insurance (also known as fully comp) is the highest level of cover you can buy. It covers all the
+      things Third Party, and Third Party Fire and Theft insurance would, but also protects you as a driver and would
+      pay out for the damage done to your own car too.</p>
+  </es-help-text>
+  <es-help-text *ngIf="policy.mainDriver.coverTypeDescription === 'Third Party Fire and Theft'">
+    <p>Third Party Fire and Theft insurance covers you for the damage you cause to other people and their property, as
+      well as protecting your own car against theft and damage caused by fire.</p>
+  </es-help-text>
+  <es-help-text *ngIf="policy.mainDriver.coverTypeDescription === 'Third Party Only'">
+    <p>Third Party insurance covers you for the damage you cause to other people and their property.</p>
+  </es-help-text>
+</div>
+<div class="columns is-multiline is-mobile">
+  <div class="column is-half">
+    Class of use
+  </div>
+  <div class="column use-class has-text-weight-light ">{{ policy.mainDriver.classOfUseShortDescription }}</div>
+  <es-help-text>
+    <!--<p>You can find the level of usage you chose in your insurance schedule.</p>-->
+
+
+    <p><span class="has-text-weight-bold"> Social, Domestic, and Pleasure (SD&P) </span> <br/> You’re covered for
+      day-to-day driving, for example shopping. You’re not covered for commuting. </p>
+
+    <p><span class="has-text-weight-bold"> Social, Domestic, Pleasure, and Commuting (SDP&C) </span> <br/> You’re
+      covered for day-to-day driving plus commuting to a single permanent place of work. </p>
+
+    <p><span class="has-text-weight-bold"> Social, Domestic, Pleasure, and Business Use (Class 1) </span> <br/> You’re
+      covered for day-to-day driving, commuting, and travelling to places connected with your work, for example off-site
+      meetings. </p>
+
+    <p><span class="has-text-weight-bold"> Social, Domestic, Pleasure, and Business Use (Class 1A) </span> <br/> You and
+      your partner are covered for day-to-day driving, as well as travelling to places connected with your work, for
+      example off-site meetings. </p>
+
+    <p><span class="has-text-weight-bold"> Social, Domestic, Pleasure, and Business Use (Class 2) </span> <br/> You and
+      any driver connected to your business are covered for day-to-day driving as well as travelling to places connected
+      with your work, for example off-site meetings. </p>
+
+    <p>
+      <span
+        class="has-text-weight-bold"> Social, Domestic, Pleasure, Business Use, and Commercial Travelling (Class 3) </span>
+      <br/> You and any driver connected to your business are covered for day-to-day driving as well as travelling to
+      places connected with your work, for example off-site meetings. You’re also covered for commuting to and from a
+      permanent place of work. </p>
+
+    <p><span class="has-text-weight-bold"> Social, Domestic, Pleasure, and Business Use (Class 1S) </span> <br/> You,
+      your partner/spouse, and any driver connected to your business are covered for day-to-day driving as well as
+      travelling to places connected with your work, for example off-site meetings. </p>
+  </es-help-text>
+
+</div>
+<div class="columns is-multiline is-mobile">
+  <div class="column">
+    Driving other cars
+  </div>
+  <div class="column other-vehicle has-text-weight-light">
+    {{ policy.mainDriver.driveOtherCarsInd }}
+  </div>
+
+  <es-help-text *ngIf="policy.mainDriver.driveOtherCarsInd === 'Yes'">
+    <p>Driving other cars is covered to a Third Party level and is only applicable to the policyholder who is at least
+      25 years old. The car must not be owned by the policyholder or hired, or leased under a hire purchase, or leasing
+      agreement, or hired or rented to the policyholder under a car hire or rental agreement. Subject to eligibility,
+      please check your Insurance Schedule to see if you have this cover.</p>
+  </es-help-text>
+
+</div>
+<div class="columns is-multiline is-mobile">
+  <div class="column">Estimated annual mileage</div>
+  <div class="column est-mileage has-text-weight-light">{{ policy.vehicle.mileage }}</div>
+  <es-help-text>
+    <p>Your estimated annual mileage reflects the amount of miles you think you drive in a year. Underestimating your
+      mileage could affect your policy.</p>
+  </es-help-text>
+</div>
+<div class="columns is-multiline is-mobile">
+  <div class="column">European Travel Cover</div>
+  <div class="column has-text-weight-light eu-cover">{{ policy.mainDriver.coverTypeDescription === 'Comprehensive' ?
+    'Yes' : 'No' }}
+  </div>
+  <es-help-text>
+    <p>European Travel Cover is included to a Third Party level. If you have a Comprehensive policy you can top up your
+      cover to match what you have in the UK. Please note a small charge will apply.</p>
+  </es-help-text>
+</div>
+
+<div class="columns is-multiline is-mobile">
+  <div class="column">No Claim Discount Protection</div>
+  <div class="column has-text-weight-light ncd-years" *ngIf="policy.mainDriver.ncdProtection">Yes</div>
+  <div class="column has-text-weight-light ncd-years" *ngIf="!policy.mainDriver.ncdProtection">No</div>
+  <es-help-text>
+    <p>
+      Your No Claim Discount is protected even when you have to make many claims during the year.</p>
+    <p *ngIf="!policy.mainDriver.ncdProtection">
+      If you have 4 or more years No Claim Discount you could be eligible to buy our protected No Claim Discount
+      add-on. To add No Claim Discount Protection to your policy please
+      call <a href="tel:{{ phoneNumbers.motorRenewals }}">{{ phoneNumbers.motorRenewals }}</a>.</p>
+    <p *ngIf="!policy.mainDriver.ncdProtection">Lines are open Mon to Fri 8am&ndash;8pm,
+      Sat 9am&ndash;5pm, Sun 9am&ndash;2pm</p>
+  </es-help-text>
+</div>
+
+
+<div *ngIf="policy.addOns">
+  <hr>
+  <h3 class="is-size-4 has-text-weight-bold">Your Optional Extras</h3>
+</div>
+
+<div class="columns addons is-mobile is-multiline is-mobile" *ngFor="let addon of policy.addOns">
+  <ng-container *ngIf="isBreakdownAddon(addon.code) && isCarEligibleForBreakdownCover(addon.purchased)">
+    <div class="column is-three-fifths-mobile">
+      {{ getBreakdownDescription(addon.code) }}
+    </div>
+    <div class="column purchased bkc has-text-weight-light" *ngIf="addon.purchased">
+      <i class="fa fa-check has-text-success" aria-hidden="true"></i> Cover included
+    </div>
+    <div class="column not-purchased bkc has-text-weight-light" *ngIf="!addon.purchased">
+      <i class="fa fa-times has-text-danger" aria-hidden="true"></i> Not taken, add cover
+    </div>
+    <es-help-text>
+      <span [innerHTML]="getBreakdownHelpText(addon.code)"></span>
+    </es-help-text>
+  </ng-container>
+  <ng-container *ngIf="addon.code === 'KYC'">
+    <div class="column is-three-fifths-mobile">
+      Key Cover
+    </div>
+    <div class="column purchased kyc has-text-weight-light" *ngIf="addon.purchased ">
+      <i class="fa fa-check has-text-success" aria-hidden="true"></i> Cover included
+    </div>
+    <div class="column not-purchased kyc has-text-weight-light" *ngIf="!addon.purchased ">
+      <i class="fa fa-times has-text-danger" aria-hidden="true"></i> Not taken, add cover
+    </div>
+    <es-help-text>
+      <p>If you’ve lost, or had your car or garage keys stolen, all you have to do is contact our partner the RAC who
+        will help you out as soon as possible.</p>
+      <p *ngIf="!addon.purchased">To add Key Cover to your policy please
+        call <a href="tel:{{ phoneNumbers.motorRenewals }}">{{ phoneNumbers.motorRenewals }}</a>.</p>
+      <p *ngIf="!addon.purchased">Lines are open Mon to Fri 8am&ndash;8pm,
+        Sat 9am&ndash;5pm, Sun 9am&ndash;2pm</p>
+    </es-help-text>
+  </ng-container>
+
+  <ng-container *ngIf="addon.code === 'MFC'">
+    <div class="column is-three-fifths-mobile">
+      Misfuelling Cover
+    </div>
+    <div class="column purchased mfs has-text-weight-light" *ngIf="addon.purchased ">
+      <i class="fa fa-check has-text-success" aria-hidden="true"></i> Cover included
+    </div>
+    <div class="column not-purchased mfs has-text-weight-light" *ngIf="!addon.purchased ">
+      <i class="fa fa-times has-text-danger" aria-hidden="true"></i> Not taken, add cover
+    </div>
+    <es-help-text>
+      <p>
+        If you put the wrong fuel in your car – providing you don’t turn on the engine, all you have to do is call the
+        RAC and they will arrange to drain the fuel from your engine. esure will reimburse you for the fuel you
+        mistakenly put in your car, providing you have a receipt.</p>
+      <p *ngIf="!addon.purchased">To add Misfuelling Cover to your policy please call
+        <a href="tel:{{ phoneNumbers.motorRenewals }}">{{ phoneNumbers.motorRenewals }}</a>.</p>
+      <p *ngIf="!addon.purchased">Lines are open Mon to Fri 8am&ndash;8pm,
+        Sat 9am&ndash;5pm, Sun 9am&ndash;2pm</p>
+    </es-help-text>
+  </ng-container>
+
+  <ng-container *ngIf="addon.code === 'LGL'">
+    <div class="column is-three-fifths-mobile">
+      Motor Legal Protection
+    </div>
+    <div class="column purchased mlp has-text-weight-light" *ngIf="addon.purchased ">
+      <i class="fa fa-check has-text-success" aria-hidden="true"></i> Cover included
+    </div>
+    <div class="column not-purchased mlp has-text-weight-light" *ngIf="addon.code === 'LGL' && !addon.purchased ">
+      <i class="fa fa-times has-text-danger" aria-hidden="true"></i> Not taken, add cover
+    </div>
+    <es-help-text>
+      <p>Motor Legal Protection (MLP) – MLP will help fund up to &pound;100,000 worth of legal costs to help you recover the
+        uninsured losses from the at-fault driver. This includes money for loss of income, if you couldn’t get to your
+        job after the accident, or expenses for travelling when you had to make trips without your car. If we think you
+        could take your claim to court and win, MLP can be used to cover your legal costs up to &pound;100,000. Also, if
+        you’re summoned to court to be prosecuted for a legal motoring offence, MLP can be used to pay for your
+        defence.</p>
+      <p *ngIf="!addon.purchased">To add Motor Legal Protection to your policy please
+        call <a href="tel:{{ phoneNumbers.motorRenewals }}">{{ phoneNumbers.motorRenewals }}</a>.</p>
+      <p *ngIf="!addon.purchased">Lines are open Mon to Fri 8am&ndash;8pm,
+        Sat 9am&ndash;5pm, Sun 9am&ndash;2pm</p>
+    </es-help-text>
+
+  </ng-container>
+
+  <ng-container *ngIf="addon.code === 'CHC'">
+    <div class="column is-three-fifths-mobile">
+      Car Hire
+    </div>
+    <div class="column purchased chc has-text-weight-light" *ngIf="addon.purchased ">
+      <i class="fa fa-check has-text-success" aria-hidden="true"></i> Cover included
+    </div>
+    <div class="column not-purchased chc has-text-weight-light" *ngIf="!addon.purchased ">
+      <i class="fa fa-times has-text-danger" aria-hidden="true"></i> Not taken, add cover
+    </div>
+    <es-help-text>
+      <p>If your car is a total loss, or stolen and not recovered you might have to wait a while for your claim to be
+        settled – and during that time you won’t have a car. With Car Hire Benefit we’ll pick you up from either your
+        home or work and take you to your hire car, which you could have for up to 21 days while we settle your claim.
+        When your claim is settled, we’ll collect the car within 48 hours.</p>
+      <p *ngIf="!addon.purchased">To add Car Hire to your policy please
+        call <a href="tel:{{ phoneNumbers.motorRenewals }}">{{ phoneNumbers.motorRenewals }}</a>.</p>
+      <p *ngIf="!addon.purchased">Lines are open Mon to Fri 8am&ndash;8pm,
+        Sat 9am&ndash;5pm, Sun 9am&ndash;2pm</p>
+    </es-help-text>
+  </ng-container>
+
+  <ng-container *ngIf="addon.code === 'PIB'">
+    <div class="column is-three-fifths-mobile">
+      Personal Injury Cover
+    </div>
+    <div class="column purchased pib has-text-weight-light" *ngIf="addon.purchased ">
+      <i class="fa fa-check has-text-success" aria-hidden="true"></i> Cover included
+    </div>
+    <div class="column not-purchased pib has-text-weight-light" *ngIf="!addon.purchased ">
+      <i class="fa fa-times has-text-danger" aria-hidden="true"></i> Not taken, add cover
+    </div>
+    <es-help-text>
+      <p>If you’re injured as an at-fault driver you get minimal cover for your injuries. Personal Injury Benefit
+        increases the amount of cover you get so you’re more protected if you sustain life-changing injuries.</p>
+      <p *ngIf="!addon.purchased">To add Personal Injury Cover to your policy please
+        call <a href="tel:{{ phoneNumbers.motorRenewals }}">{{ phoneNumbers.motorRenewals }}</a>.</p>
+      <p *ngIf="!addon.purchased">Lines are open Mon to Fri 8am&ndash;8pm,
+        Sat 9am&ndash;5pm, Sun 9am&ndash;2pm</p>
+    </es-help-text>
+  </ng-container>
+
+  <ng-container *ngIf="addon.code === 'EPC' && addon.purchased">
+    <div class="column is-three-fifths-mobile">
+      Excess Protection Cover
+    </div>
+    <div class="column purchased epc has-text-weight-light">
+      <i class="fa fa-check has-text-success" aria-hidden="true"></i> Cover included
+    </div>
+    <es-help-text>
+      <p>
+        We'll cover the combined voluntary, compulsory and driver specific excesses if the main driver, or any named
+        driver on the policy makes a claim – up to a maximum of &pound;1000.</p>
+      <ul>
+        <li>We cover the excess payable by the main driver</li>
+        <li>Excess Protection allows for 1 claim per policy year</li>
+        <li>Covers all drivers on the policy</li>
+        <li>Cost of repairing the damage must be greater than the applicable excess</li>
+        <li>Excludes windscreen only claims</li>
+      </ul>
+
+    </es-help-text>
+  </ng-container>
+
+</div>
+
+
+<h3 class="is-size-4 has-text-weight-bold">Your excess</h3>
+
+<p class="subtitle is-5">Your excess is the amount you must pay towards a claim. See below for a breakdown of your
+  excesses. You can also find out more in your insurance schedule.</p>
+
+<div>
+
+  <h4 class="title is-5 has-text-weight-bold">Accidental damage excesses</h4>
+
+  <div class="columns excess is-multiline is-gapless is-hidden-mobile table-head">
+
+    <div class="column">
+      <p>Driver</p>
+    </div>
+
+    <div class="column">
+      <p>Voluntary</p>
+    </div>
+
+    <div class="column">
+      <p>Compulsory</p>
+    </div>
+
+    <div class="column">
+      <p>Driver specific</p>
+    </div>
+
+    <div class="column ">
+      <p>Total</p>
+    </div>
+  </div>
+
+
+  <div class="columns excess is-multiline is-gapless" *ngFor="let driver of policy.drivers">
+
+    <div class="column">
+      <div class="columns is-multiline is-mobile is-gapless">
+        <div class="column is-12">
+          <p class="driver ">{{ driver.forename + " " + driver.surname }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="columns is-multiline is-mobile is-gapless">
+        <div class="column is-three-quarters-mobile is-hidden-tablet">
+          <p>Voluntary</p>
+        </div>
+        <div class="column is-one-quarter-mobile is-12-tablet">
+          <p class="voluntary-ex">{{ policy.mainDriver.voluntaryExcess | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="columns is-multiline is-mobile is-gapless">
+        <div class="column is-three-quarters-mobile is-hidden-tablet">
+          <p>Compulsory</p>
+        </div>
+        <div class="column is-one-quarter-mobile is-12-tablet">
+          <p class="compulsory-ex">{{ (policy.mainDriver.compulsoryExcess + policy.mainDriver.uwAdExcess) | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="columns is-multiline is-mobile is-gapless">
+        <div class="column is-three-quarters-mobile is-hidden-tablet">
+          <p>Driver specific</p>
+        </div>
+        <div class="column is-one-quarter-mobile is-12-tablet">
+          <p class="specific-ex">{{ driver.driverSpecificXs | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="columns is-multiline is-mobile is-gapless">
+        <div class="column is-three-quarters-mobile is-hidden-tablet">
+          <p>Total</p>
+        </div>
+        <div class="column is-one-quarter-mobile is-12-tablet">
+          <p class="total-ex">{{ (policy.mainDriver.voluntaryExcess + policy.mainDriver.compulsoryExcess + policy.mainDriver.uwAdExcess +
+            driver.driverSpecificXs) | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<h4 class="title is-5 has-text-weight-bold">Other excesses</h4>
+
+<div class="columns excess is-multiline is-gapless is-hidden-mobile table-head">
+
+  <div class="column">
+    <p>Excess type</p>
+  </div>
+  <div class="column">
+    <p>Compulsory</p>
+  </div>
+  <div class="column ">
+    <p>Total</p>
+  </div>
+</div>
+
+<div>
+  <div class="columns excess is-multiline is-gapless is-mobile">
+    <div class="column">
+      <p class="">Fire</p>
+    </div>
+    <div class="column">
+      <p class=" fire-ex">{{ policy.mainDriver.fireExcess | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+    </div>
+    <div class="column is-hidden-mobile">
+      <p class=" total-ex">{{ policy.mainDriver.fireExcess | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+    </div>
+  </div>
+
+  <div class="columns excess is-multiline is-gapless is-mobile">
+    <div class="column">
+      <p class="">Theft</p>
+    </div>
+
+    <div class="column">
+      <p class=" theft-ex">{{ policy.mainDriver.theftExcess | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+    </div>
+
+    <div class="column is-hidden-mobile">
+      <p class=" total-ex">{{ policy.mainDriver.theftExcess | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+    </div>
+  </div>
+  <div class="columns excess is-multiline is-gapless is-mobile">
+    <div class="column">
+      <p class="">Windscreen Repair</p>
+    </div>
+    <div class="column">
+      <p class="windscreen-ex">{{ policy.vehicle.windscreenRepairExcess | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+    </div>
+    <div class="column is-hidden-mobile">
+      <p class=" total-ex">{{ policy.vehicle.windscreenRepairExcess | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+    </div>
+  </div>
+
+  <div class="columns excess is-multiline is-gapless is-mobile">
+    <div class="column">
+      <p class="">Windscreen Replacement</p>
+    </div>
+    <div class="column">
+      <p class="windscreen-ex">{{ policy.vehicle.windscreenReplacementExcess | currency:'GBP':'symbol-narrow':'1.0' }}</p>
+    </div>
+    <div class="column is-hidden-mobile">
+      <p class=" total-ex">{{ policy.vehicle.windscreenReplacementExcess| currency:'GBP':'symbol-narrow':'1.0' }}</p>
+    </div>
+  </div>
+</div>

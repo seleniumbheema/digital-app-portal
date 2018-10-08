@@ -1,0 +1,125 @@
+<es-global-messages [messages]="messages"></es-global-messages>
+
+<!-- Renewals/MTA has its own es global messages as we are using ng-content and don't want to pollute the other normal messages -->
+<es-global-messages [messages]="renewalOrMtaMessages">
+  <ng-container [ngSwitch]="policySummary.renewalNotificationCode">
+    <ng-container *ngSwitchCase="'RENEWAL_AUTO'">
+      Your {{ policySummary.type }} insurance will automatically renew on {{ policySummary.renewalDate | date:'EEE d, MMM y' }}
+      <a routerLink="../documents">View Documents</a>
+    </ng-container>
+    <ng-container *ngSwitchCase="'RENEWAL_NOT_DONE'">
+      Your {{ policySummary.type }} insurance will end on {{ policySummary.endDate | date:'EEE d, MMM y' }}
+      <a routerLink="../documents">View Documents</a>
+    </ng-container>
+    <ng-container *ngSwitchCase="'RENEWAL_DONE'">
+      Your {{ policySummary.type }} insurance will renew on {{ policySummary.renewalDate | date:'EEE d, MMM y' }}
+      <a routerLink="../documents">View Documents</a>
+    </ng-container>
+    <ng-container *ngSwitchCase="'RENEWAL_DECLINED'">
+      Unfortunately we are unable to renew your {{ policySummary.type }} insurance and it will end on {{ policySummary.endDate
+      | date:'EEE d, MMM y' }}
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="policySummary.mtaNotificationCode">
+    The change you've made to your policy will come into effect on {{ policySummary.mtaStartDate | date:'EEE d, MMM y' }}
+    <a routerLink="../documents">View Documents</a>
+  </ng-container>
+</es-global-messages>
+
+<es-motor-policy-details *ngIf="policy.isMotor" [policy]="policy"></es-motor-policy-details>
+
+<es-home-policy-details *ngIf="policy.isHome" [policy]="policy"></es-home-policy-details>
+
+<h3 class="title is-5 has-text-weight-bold">Total annual premium (includes insurance premium tax, and interest where applicable)
+</h3>
+
+<h4 class="title total-cost is-3 has-text-weight-bold">{{ policy.cost | currency:'GBP' }}
+  <span class="is-size-6"> / per year</span>
+</h4>
+
+<p> For a more detailed breakdown of the cost of your insurance please refer to your Insurance Schedule, which can be found in <a routerLink="../documents">My documents</a>. </p>
+
+<es-data-layer [vars]="{ 'pageName': 'Portal Policy Details (' + policy.type + ')' }">
+</es-data-layer>
+
+<!-- DD && CC info could well be reinstated later
+
+<ng-container *ngIf="policy.ccPayment != null ">-->
+<!--<div class="columns is-gapless">-->
+<!--<div class="column">-->
+<!--Cardholder name-->
+<!--</div>-->
+<!--<div class="column card-holder has-text-weight-semibold">-->
+<!--{{ policy.ccPayment.cardholderName }}-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="columns is-gapless">-->
+
+<!--<div class="column">-->
+<!--Card number-->
+<!--</div>-->
+<!--<div class="column card-last-digits has-text-weight-semibold">-->
+<!--**** **** **** {{ policy.ccPayment.cardLastDigits }}-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="columns is-gapless">-->
+<!--<div class="column">-->
+<!--Expiry date-->
+<!--</div>-->
+<!--<div class="column card-expiry-date has-text-weight-semibold">-->
+<!--{{ policy.ccPayment.expiryDate | date:'MM/yy' }}-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="columns is-gapless">-->
+<!--<div class="column">-->
+<!--Amount paid-->
+<!--</div>-->
+<!--<div class="column amount-paid has-text-weight-semibold">-->
+<!--£{{ policy.ccPayment.amountPaid }}-->
+<!--£{{ policy.cost }}-->
+<!--</div>-->
+<!--</div>-->
+
+<!--</ng-container>-->
+
+<!--<ng-container *ngIf="policy.ddPayment != null ">-->
+<!--<ng-container *ngIf="policy.ddPayment.installments != 1">-->
+<!--<div class="columns is-gapless">-->
+<!--<div class="column">-->
+<!--Initial deposit-->
+<!--</div>-->
+<!--<div class="column initial-payment has-text-weight-semibold">-->
+<!--£{{ policy.ddPayment.initialAmount }}-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="columns is-gapless">-->
+<!--<div class="column">-->
+<!--{{ policy.ddPayment.installments }} monthly payments of-->
+<!--</div>-->
+<!--<div class="column monthly-payment has-text-weight-semibold">-->
+<!--£{{ policy.ddPayment.installmentAmount }}-->
+<!--</div>-->
+<!--</div>-->
+
+<!--</ng-container>-->
+<!--<ng-container *ngIf="policy.ddPayment.installments === 1">-->
+
+<!--<div class="columns is-gapless">-->
+<!--<div class="column annual-payment">-->
+<!--One annual payment of-->
+<!--</div>-->
+<!--<div class="column has-text-weight-semibold">-->
+<!--£{{ policy.ddPayment.installmentAmount }}-->
+<!--</div>-->
+<!--</div>-->
+
+<!--</ng-container>-->
+<!--<div class="columns is-gapless">-->
+<!--<div class="column">-->
+<!--Total cost-->
+<!--</div>-->
+<!--<div class="column total-cost has-text-weight-semibold">-->
+<!--£{{ policy.ddPayment.totalCost }}-->
+<!--</div>-->
+<!--</div>-->
+<!--</ng-container>-->

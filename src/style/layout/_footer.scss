@@ -1,0 +1,60 @@
+es-portal-footer {
+  display: block;
+  margin-bottom: 50px;
+}
+
+es-portal {
+  footer {
+    ul {
+      @include mobile {
+        li {
+          border-bottom: 1px solid $grey-light;
+        }
+      }
+    }
+  }
+}
+
+footer {
+  color: $secondary;
+  padding:  0 2rem 1rem;
+  background-color: $base;
+  ul {
+    color: inherit;
+    padding: 0;
+    list-style-type: none;
+    li {
+      display: inline-block;
+    }
+    @include mobile {
+      li {
+        display: block;
+        text-align: center;
+        border-bottom: 1px solid $white;
+        &:last-child {
+          margin-bottom: 2rem;
+        }
+      }
+    }
+    a {
+      color: inherit;
+      font-family: $family-primary;
+      font-size: .75rem;
+      display: block;
+      padding: 0 1rem .5rem 0;
+      text-decoration: none;
+      &:hover {
+        color: inherit;
+        text-decoration: underline;
+      }
+    }
+  }
+  p {
+    font-size: .75rem;
+  }
+  &.login {
+    background-color: $primary;
+    color: $white;
+  }
+}
+

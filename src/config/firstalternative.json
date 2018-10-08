@@ -1,0 +1,33 @@
+{
+  "companyCode": "F",
+  "brandName": "First Alternative",
+  "brandUrl": "firstalternative.com",
+  "brandCode": "FA",
+  "motorProductType": "MOTOR",
+  "motorProductCode": "FA",
+  "tileColor": "#f8f3ed",
+  "themeColor": "#f8f3ed",
+  "backgroundColor": "#f8f3ed",
+  "maskIconColor": "#7d1873",
+  "fontColor": "#7d1873",
+  "phoneNumbers": {
+    "motorCustomerService": "0345 607 0417",
+    "motorAccidentRecovery": "0800 028 8292",
+    "motorClaims": "0345 607 7280",
+    "motorClaims24": "0800 028 8292",
+    "motorWindscreen": "0800 085 8459",
+    "motorLegal": "0345 607 7280",
+    "motorBreakdown": "0800 051 0649",
+    "motorKey": "0800 783 1468",
+    "motorMisfuel": "0800 783 1469",
+    "motorRenewals": "0345 607 0418",
+    "motorMtaChangeReg": "0345 607 0417",
+    "motorMtaChangeCar": "0345 607 0417",
+    "motorMtaAddConviction": "0345 607 0417",
+    "motorMtaAddDriver": "0345 607 0417"
+  },
+  "urls": {
+    "proofOfNoClaims": "",
+    "travelQuote": ""
+  }
+}

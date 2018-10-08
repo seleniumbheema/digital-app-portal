@@ -1,0 +1,17 @@
+<div class="modal" [class.is-active]="showTimeoutWarning">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">You're about to be signed out of My Account</p>
+    </header>
+    <section class="modal-card-body">
+      We will sign you out of My Account in
+      <span class="seconds-count has-text-centered has-text-weight-semibold">{{ countSeconds }}</span> seconds. Do you
+      want to continue your session?
+    </section>
+    <footer class="modal-card-foot">
+      <button [disabled]="buttonsClicked" class="button is-success is-rounded" (click)="continueSession()">Continue session</button>
+      <button [disabled]="buttonsClicked" class="button is-rounded" (click)="endSession()">End session now</button>
+    </footer>
+  </div>
+</div>

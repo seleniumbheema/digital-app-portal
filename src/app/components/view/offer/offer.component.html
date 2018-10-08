@@ -1,0 +1,32 @@
+<article class="media {{ offer.class }}">
+  <div class="media-content">
+    <div [ngClass]="offer.icon === true ? 'column is-multiline offer-icon' : 'columns is-multiline offer_image'">
+      <!-- For offer icons -->
+      <div *ngIf="offer.icon" class="icon-container">
+        <svg *ngIf="offer.icon" [ngClass]="icon?.classes" class="image is-128x128">
+          <use [attr.xlink:href]="icon?.path"></use>
+        </svg>
+      </div>
+      <!-- For offer images -->
+      <div *ngIf="!offer.icon" [ngClass]="totalOffers === 1 ? 'is-4' : 'is-12'" class="column">
+        <img *ngIf="!offer.icon" src="./img/cross-sell/{{ offer.class }}.jpg" alt="{{ offer.class }}-offer-image">
+      </div>
+      <div class="column" [ngClass]="totalOffers === 1 ? 'is-8' : 'is-12 multi-offers'">
+        <div class="content">
+          <h3 class="is-6">{{ offer.heading }}</h3>
+          <p>
+            {{ offer.content }}
+          </p>
+        </div>
+        <div class="field is-grouped">
+          <p class="control">
+            <a href="{{ offer.url }}" class="button is-link is-rounded get-quote" rel="noopener" target="_blank">Get a quote</a>
+          </p>
+          <p class="control" *ngIf="showDetailLinks">
+            <a href="{{ offer.info }}" class="button is-text more-details" rel="noopener" target="_blank">More Details</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta data-buildtime="<%= htmlWebpackPlugin.options.buildTime %>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= htmlWebpackPlugin.options.indexPageTitle %>
+  </title>
+  <link rel="apple-touch-icon" sizes="180x180" href="./<%= htmlWebpackPlugin.options.brand %>/images/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./<%= htmlWebpackPlugin.options.brand %>/images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./<%= htmlWebpackPlugin.options.brand %>/images/favicons/favicon-16x16.png">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="mask-icon" href="./<%= htmlWebpackPlugin.options.brand %>/images/favicons/safari-pinned-tab.svg"
+    color="<%= htmlWebpackPlugin.options.maskIconColor %>">
+  <link rel="shortcut icon" href="./<%= htmlWebpackPlugin.options.brand %>/images/favicons/favicon.ico">
+  <!-- loading screens for iOS on as standalone app -->
+  <link href="./<%= htmlWebpackPlugin.options.brand %>/images/splash/launch_2048x2732.png"
+        sizes="2048x2732" rel="apple-touch-startup-image" />
+  <link href="./<%= htmlWebpackPlugin.options.brand %>/images/splash/launch_1668x2224.png"
+        sizes="1668x2224" rel="apple-touch-startup-image" />
+  <link href="./<%= htmlWebpackPlugin.options.brand %>/images/splash/launch_1536x2048.png"
+        sizes="1536x2048" rel="apple-touch-startup-image" />
+  <link href="./<%= htmlWebpackPlugin.options.brand %>/images/splash/launch_1125x2436.png"
+        sizes="1125x2436" rel="apple-touch-startup-image" />
+  <link href="./<%= htmlWebpackPlugin.options.brand %>/images/splash/launch_1242x2208.png"
+        sizes="1242x2208" rel="apple-touch-startup-image" />
+  <link href="./<%= htmlWebpackPlugin.options.brand %>/images/splash/launch_750x1334.png"
+        sizes="750x1334" rel="apple-touch-startup-image" />
+  <link href="./<%= htmlWebpackPlugin.options.brand %>/images/splash/launch_640x1136.png"
+        sizes="640x1136" rel="apple-touch-startup-image" />
+
+  <meta name="msapplication-config" content="./browserconfig.xml">
+  <meta name="theme-color" content="<%= htmlWebpackPlugin.options.themeColor %>">
+  <meta name="format-detection" content="telephone=no">
+
+  <base href="<%= htmlWebpackPlugin.options.baseHref %>">
+
+  <script src="./scripts/esure-env.js"></script>
+
+  <script type="text/javascript">
+    var esureDataLayer = {};
+    esureDataLayer.logToConsole = false;
+    esureDataLayer.referrer = document.referrer;
+    esureDataLayer.companyCode = '<%= htmlWebpackPlugin.options.companyCode %>';
+    esureDataLayer.brand = '<%= htmlWebpackPlugin.options.brand %>';
+    esureDataLayer.siteCatAccount = window['esure-env'].SITE_CAT_ACCOUNT || '';
+    esureDataLayer.siteCatChannel = 'Portal';
+
+    // Iovation settings
+    var io_install_flash = false; // do not install Flash
+    var io_install_stm = false; // do not install Active X
+    var io_enable_rip = true; // collect Real IP information
+    var io_exclude_stm = 12; // do not run Active X
+  </script>
+
+</head>
+
+<body>
+  <es-app></es-app>
+
+  <div id="pre-bootstrap-container">
+
+    <!--
+      In this approach, rather than putting the pre-bootstrap content inside
+      the <my-app> component content, we're leaving it external to the Angular 2
+      application entirely. This way, the content is not automatically removed when
+      the root component template is rendered. Instead, we'll leave this overlay in
+      place until the "appready" event bubbles up to the document, at which point,
+      we can gracefully fade it out of view.
+    -->
+
+    <script type="text/javascript">
+      // I handle the "appready" event and teardown the loading screen.
+      function handleAppReady(event) {
+        var preBootstrapContainer = document.getElementById("pre-bootstrap-container");
+        var preBootstrap = document.getElementById("pre-bootstrap");
+        // Add the class-name to initiate the transitions.
+        preBootstrap.className = "loaded";
+        // Remove the bootstrap container after the transition has
+        // completed (based on the known transition time).
+        setTimeout(
+          function removeLoadingScreen() {
+            clearTimeout(refreshTimeout);
+            preBootstrapContainer
+              .parentNode
+              .removeChild(preBootstrapContainer);
+          },
+          500
+        );
+      }
+
+      // Refresh timeout, assigned a variable so that it can be cancelled once the app loads ok
+      // Set to 6 seconds, should be plenty of time for the app to have loaded
+      var refreshTimeout = setTimeout(
+        function displayRefreshMessage() {
+          var refreshMessage = document.getElementById("refreshMessage");
+          if (refreshMessage) {
+            refreshMessage.style.opacity = 1;
+          }
+        },
+        6000
+      );
+
+      // Refreshes the app by reloading the current URL, passing true forces a reload from the server.
+      function refreshApp() {
+        window.location.reload(true);
+      }
+
+       // Checks for support of history API
+       function supportsHistoryApi() {
+        return !!(window.history && history.pushState);
+      }
+
+      // Checks for support of URL which is needed by JWT library, can't login without it
+      function supportsURL() {
+        return !!(window.URL);
+      }
+
+      if (!supportsHistoryApi() || !supportsURL()) {
+        var path = window.location.pathname;
+        var unsupportedPage = '/unsupported.html';
+        if (path.lastIndexOf('/my-account', 0) === 0) {
+          unsupportedPage = '/my-account' + unsupportedPage;
+        }
+        window.location.replace(unsupportedPage);
+      } else {
+        // Listen for the "appready" event, which will be emitted by the application
+        // and bubble up (as far as we know) to the document root.
+        document.addEventListener("appready", handleAppReady);
+      }
+    </script>
+
+    <style type="text/css">
+      #pre-bootstrap {
+        background-color: #3d3d3b;
+        bottom: 0;
+        left: 0;
+        opacity: 1;
+        position: fixed;
+        right: 0;
+        top: 0;
+        transition: all linear 500ms;
+        -webkit-transition: all linear 500ms;
+        z-index: 999999;
+        overflow: hidden !important;
+      }
+
+      #pre-bootstrap .box-spin {
+        position: relative;
+        margin: 0 auto;
+        top: 45%;
+      }
+
+      #pre-bootstrap.loaded {
+        opacity: 0;
+      }
+
+      #refreshMessage {
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        -webkit-transition: opacity 1s ease-in-out;
+        color: #FFF;
+        text-align: center;
+        font-size: 1.1em;
+        font-family: Helvetica, Arial, sans-serif;
+        padding: 10px;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a,
+      a:hover,
+      a:visited,
+      a:active,
+      a:focus {
+        color: #FFF;
+        text-decoration: underline;
+      }
+
+      .spinner {
+        margin: 0 auto;
+        width: 80px;
+        text-align: center;
+      }
+
+      .spinner>div {
+        width: 22px;
+        height: 22px;
+        background-color: #fdf9f5;
+
+        border-radius: 100%;
+        display: inline-block;
+        -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+      }
+
+      .spinner .bounce1 {
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+      }
+
+      .spinner .bounce2 {
+        -webkit-animation-delay: -0.16s;
+        animation-delay: -0.16s;
+      }
+
+      @-webkit-keyframes sk-bouncedelay {
+        0%,
+        80%,
+        100% {
+          -webkit-transform: scale(0)
+        }
+        40% {
+          -webkit-transform: scale(1.0)
+        }
+      }
+
+      @keyframes sk-bouncedelay {
+        0%,
+        80%,
+        100% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        40% {
+          -webkit-transform: scale(1.0);
+          transform: scale(1.0);
+        }
+      }
+    </style>
+
+    <div id="pre-bootstrap">
+      <div class="box-spin">
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+        <p id="refreshMessage">
+          My Account will finish loading shortly. If this problem persists, please <a href="javascript:;" onclick="refreshApp();">refresh</a> your browser.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
